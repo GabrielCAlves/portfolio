@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-red: #ff0000;    /* Vermelho mais intenso */
+  --primary-blue: #0055ff;   /* Azul mais intenso */
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  overflow-x: hidden;
+}
+
+.section-transition {
+  background: linear-gradient(to right, var(--primary-red) 0%, var(--primary-red) 25%, var(--primary-blue) 80%, var(--primary-blue) 90%);
+}
+
+/* Scroll suave */
+html {
+  scroll-behavior: smooth;
+}
+
+/* NO global.css - ADICIONE */
+@media (max-width: 480px) {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  
+  .home {
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  
+  /* Melhorar toques em mobile */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}

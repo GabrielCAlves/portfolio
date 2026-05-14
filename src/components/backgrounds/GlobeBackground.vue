@@ -589,25 +589,25 @@ onBeforeUnmount(() => {
 
 /* 🔥 RESPONSIVIDADE - Ajusta posição dos controles em telas menores */
 @media (max-width: 1024px) {
-  .globe-controls {
+  /* .globe-controls {
     top: 15px;
     left: 15px;
     padding: 10px 16px;
     min-width: 180px;
     transform: scale(0.95);
     transform-origin: top left;
-  }
+  } */
 }
 
 @media (max-width: 768px) {
-  .globe-controls {
+  /* .globe-controls {
     top: 10px;
     left: 10px;
     padding: 8px 12px;
     min-width: 160px;
     transform: scale(0.9);
     transform-origin: top left;
-  }
+  } */
   
   .control-group {
     gap: 6px;
@@ -647,7 +647,7 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 480px) {
-  .globe-controls {
+  /* .globe-controls {
     top: 8px;
     left: 8px;
     padding: 6px 10px;
@@ -655,7 +655,7 @@ onBeforeUnmount(() => {
     transform: scale(0.85);
     transform-origin: top left;
     gap: 8px;
-  }
+  } */
   
   .control-group {
     gap: 4px;
@@ -880,7 +880,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 @media (max-width: 700px) {
-  .globe-controls { padding: 10px 14px; top: 12px; left: 12px; min-width: 180px; gap: 10px; }
+  /* .globe-controls { padding: 10px 14px; top: 12px; left: 12px; min-width: 180px; gap: 10px; } */
   .control-group { gap: 8px; }
   button { padding: 5px 12px; font-size: 10px; }
   .slider-container label { font-size: 10px; }
@@ -894,5 +894,86 @@ input[type="range"]::-webkit-slider-thumb {
   inset: 0;
   z-index: 1;
   pointer-events: auto;
+}
+
+@media (max-width: 1200px) {
+  .globe-controls {
+    top: 0;
+    margin-top: 65px;
+    padding: 4px 10px;
+    gap: 3px;
+  }
+}
+
+@media (min-width: 548px) and (max-width: 1042px) {
+  .globe-controls {
+    top: 0;
+    margin-top: 60px;
+    padding: 4px 10px;
+    gap: 3px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 547px) {
+  .globe-controls {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 70px;
+    padding: 4px 10px;
+    gap: 3px;
+    min-width: 400px;
+  }
+}
+
+@media (min-width: 423px) and (max-width: 480px) {
+  .globe-controls {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 60px;
+    padding: 7px 10px;
+    gap: 5px;
+    min-width: 400px;
+  }
+}
+
+@media (max-width: 422px) {
+  .globe-controls{
+    top: 0px ;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 50px;
+    padding: 14px 10px;
+    flex-direction: row;
+    min-width: 220px;
+  }
+
+  .slider-container {
+    width: 150px !important;
+    height: 90px !important; 
+    /* flex-direction: column;
+    align-items: stretch; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background: rgba(0,0,0,0.5);
+    padding: 6px 7px;
+    border-radius: 40px;
+    flex: 1;
+  }
+
+  .globe-controls .control-group:first-of-type {
+    width: 130px;
+  }
+
+  .control-group .slider-container #pontoSlider{
+    max-height: 20px !important;
+  }
+
+  .control-group {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 </style>

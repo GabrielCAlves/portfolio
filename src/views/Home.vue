@@ -1,5 +1,6 @@
 <template>
   <div class="homePage">
+    <NavigationBar class="navigationbar" :active-section="currentSection" @section-change="changeSection" />
     <!-- Seção 1: Hero com Carousel 3D -->
     <section class="hero-section">
       <!-- Primeira imagem de fundo -->
@@ -56,7 +57,7 @@
 
     <!-- 🔥 MUDANÇA RADICAL: REMOVER SISTEMA DE ALTURA FIXA -->
     <section class="main-section section-transition">
-      <NavigationBar class="navigationbar" :active-section="currentSection" @section-change="changeSection" />
+      <!-- <NavigationBar class="navigationbar" :active-section="currentSection" @section-change="changeSection" /> -->
       
       <!-- 🔥 CONTAINER SIMPLES SEM ALTURA FIXA -->
       <div class="sections-container">

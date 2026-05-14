@@ -1,5 +1,6 @@
 <template>
   <section class="section">
+    <h2 class="section-title" :key="forceUpdate">{{ $t('contacts') }}</h2>
     <div class="contacts-container">
       <div class="contacts-grid">
         <a 
@@ -42,9 +43,20 @@ const contacts = [
   width: 100%;
   height: 100%;
   min-height: 500px;
+
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+
   align-items: center;
+}
+
+.section-title {
+  font-size: 3rem;
+  text-align: center;
+  color: white;
+
+  width: 100%;
+  margin-top: 0.5rem;
 }
 
 .contact-item {
@@ -53,10 +65,13 @@ const contacts = [
 
 .contacts-container {
   display: flex;
-  justify-content: center;
-  align-items: center !important;
-  width: auto;
-  margin-right: 5%;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 20px;
+
+  width: 100%;
+  padding-right: 5%;
+  flex: 1;
 }
 
 .contacts-grid {
@@ -100,8 +115,7 @@ const contacts = [
 
 @media (max-width: 1200px) {
   .contacts-container {
-    margin-right: 4%;
-    margin-top: 2%;
+    padding-right: 4%;
   }
   
   .contacts-grid {
@@ -125,18 +139,19 @@ const contacts = [
 
 @media (min-width: 548px) and (max-width: 1042px) {
   .section {
-    justify-content: center;
-    align-items: flex-end;
-    padding-bottom: 10px;
+    align-items: center;
     min-height: 500px;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
   }
   
   .contacts-container {
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 0px;
     width: 100% !important;
     justify-content: center;
+    align-items: end;
+    padding-right: 0;
   }
   
   .contacts-grid {
@@ -174,17 +189,15 @@ const contacts = [
 
 @media (min-width: 481px) and (max-width: 547px) {
   .section {
-    justify-content: center; /* 🔥 CENTRALIZADO */
-    align-items: flex-end;
-    padding-bottom: 20px;
+    align-items: center;
     min-height: 550px;
   }
   
   .contacts-container {
-    margin-right: 0;
-    margin-top: 0;
     width: 100% !important;
     justify-content: center;
+    align-items: end;
+    padding-right: 0;
   }
   
   .contacts-grid {
@@ -192,7 +205,7 @@ const contacts = [
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 1rem !important;
     width: 90% !important;
-    max-width: 315px !important;
+    max-width: 255px !important;
     min-width: auto;
   }
   
@@ -200,7 +213,7 @@ const contacts = [
     display: flex !important;
     flex-direction: column !important;
     padding: 1rem !important;
-    width: 150px !important;
+    width: 120px !important;
     height: auto !important;
     gap: 0.5rem !important;
   }
@@ -218,15 +231,19 @@ const contacts = [
 
 @media (max-width: 480px) {
   .section {
-    justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     min-height: 850px;
-    padding-bottom: 20px;
+  }
+
+  .section-title {
+    font-size: 2rem;
   }
   
   .contacts-container {
-    width: 500px !important;
-    margin-right: 0;
+    width: 100% !important;
+    justify-content: center;
+    align-items: end;
+    padding-right: 0;
   }
   
   .contacts-grid {
@@ -259,15 +276,14 @@ const contacts = [
 
 @media (max-width: 360px) {
   .section {
-    justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     min-height: 650px;
-    padding-bottom: 20px;
   }
   
   .contacts-container {
-    width: 300px;
-    margin-right: 0;
+    width: 100%;
+    justify-content: center;
+    padding-right: 0;
   }
 
   .contacts-grid {

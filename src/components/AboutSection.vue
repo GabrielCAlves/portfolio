@@ -2,7 +2,7 @@
   <section class="section">
     <h2 class="section-title" :key="forceUpdate">{{ $t('aboutMe') }}</h2>
     <div class="about-content">
-      <div class="left-column">
+      <div class="left-column project">
         <img :src="profileImage" alt="Profile" class="profile-image" />
         <div class="flags">
           <img 
@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <div class="right-column">
+      <div class="right-column project">
         <div class="description-container">
           <p class="description" :key="forceUpdate">{{ $t('aboutDescription') }}</p>
           <p class="description" :key="forceUpdate">{{ $t('aboutDescription2') }}</p>
@@ -520,5 +520,14 @@ onUnmounted(() => {
   .download-buttons {
     flex-direction: column;
   }
+}
+
+.project {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 2rem;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  position: relative;
+  height: fit-content;
 }
 </style>

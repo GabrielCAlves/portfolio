@@ -11,13 +11,13 @@
         <p :key="forceUpdate">{{ $t('exploreOtherProjects') }}</p>
         <div class="project-links">
           <button @click="goToSection('personal-work')" class="project-link-btn">
-            🎮 <span :key="forceUpdate">{{ $t('personalProjects') }}</span>
+            🎮 <strong><span :key="forceUpdate">{{ $t('personalProjects') }}</span></strong>
           </button>
           <button @click="goToSection('web')" class="project-link-btn">
-            🌐 <span :key="forceUpdate">{{ $t('webProjects') }}</span>
+            🌐 <strong><span :key="forceUpdate">{{ $t('webProjects') }}</span></strong>
           </button>
           <button @click="goToSection('mobile')" class="project-link-btn">
-            📱 <span :key="forceUpdate">{{ $t('mobileProjects') }}</span>
+            📱 <strong><span :key="forceUpdate">{{ $t('mobileProjects') }}</span></strong>
           </button>
         </div>
       </div>
@@ -45,7 +45,7 @@ const goToSection = (section) => {
 <style scoped>
 .section {
   padding: 2rem;
-  color: white;
+  color: black;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,7 +63,7 @@ const goToSection = (section) => {
   text-align: center;
   max-width: 600px;
   padding: 3rem 2rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.9);
   border-radius: 15px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -85,7 +85,7 @@ const goToSection = (section) => {
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 2rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 1);
 }
 
 .empty-actions {
@@ -94,7 +94,7 @@ const goToSection = (section) => {
 
 .empty-actions p {
   margin-bottom: 1.5rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 1);
 }
 
 .project-links {
@@ -105,9 +105,9 @@ const goToSection = (section) => {
 }
 
 .project-link-btn {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 1);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
+  color: black;
   padding: 0.8rem 1.5rem;
   border-radius: 8px;
   cursor: pointer;
@@ -117,7 +117,8 @@ const goToSection = (section) => {
 }
 
 .project-link-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.5);
+  color: white;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }

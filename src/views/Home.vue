@@ -60,23 +60,40 @@
       
       <!-- 🔥 CONTAINER SIMPLES SEM ALTURA FIXA -->
       <div class="sections-container">
+        <!-- About Section -->
         <div class="section-content" :class="{ 'active': currentSection === 0 }">
-          <AboutSection ref="aboutRef" />
+          <CompassFieldFlow />
+          <AboutSection />
         </div>
+        
+        <!-- Personal Work -->
         <div class="section-content" :class="{ 'active': currentSection === 1 }">
-          <PersonalWork ref="personalRef" />
+          <ParticleGalaxyAnimation />
+          <PersonalWork />
         </div>
+        
+        <!-- Professional Work -->
         <div class="section-content" :class="{ 'active': currentSection === 2 }">
-          <ProfessionalWork ref="professionalRef" />
+          <GaltonPegboards />
+          <ProfessionalWork />
         </div>
+        
+        <!-- Web Section -->
         <div class="section-content" :class="{ 'active': currentSection === 3 }">
-          <WebSection ref="webRef" />
+          <MatrixFallingCodeAnimation />
+          <WebSection />
         </div>
+        
+        <!-- Mobile Section -->
         <div class="section-content" :class="{ 'active': currentSection === 4 }">
-          <MobileSection ref="mobileRef" />
+          <BlackholeBackground />
+          <MobileSection />
         </div>
+        
+        <!-- Contacts Section -->
         <div class="section-content" :class="{ 'active': currentSection === 5 }">
-          <ContactsSection ref="contactsRef" />
+          <GlobeBackground />
+          <ContactsSection />
         </div>
       </div>
     </section>
@@ -95,6 +112,14 @@ import WebSection from '@/components/WebSection.vue'
 import MobileSection from '@/components/MobileSection.vue'
 import ContactsSection from '@/components/ContactsSection.vue'
 import FooterSection from '@/components/FooterSection.vue'
+
+import CompassFieldFlow from '@/components/backgrounds/CompassFieldFlow.vue'
+import ParticleGalaxyAnimation from '@/components/backgrounds/ParticleGalaxyAnimation.vue'
+import GaltonPegboards from '@/components/backgrounds/GaltonPegboards.vue'
+import MatrixFallingCodeAnimation from '@/components/backgrounds/MatrixFallingCodeAnimation.vue'
+import BlackholeBackground from '@/components/backgrounds/BlackholeBackground.vue'
+import GlobeBackground from '@/components/backgrounds/GlobeBackground.vue'
+
 import { cloudinaryUrls } from '@/services/cloudinary'
 
 const currentSection = ref(0)
@@ -949,5 +974,68 @@ onUnmounted(() => {
     height: 40px;
     font-size: 1.5rem;
   }
+}
+
+/* Garantir que as seções tenham tamanho definido */
+.section-content {
+  position: relative;
+  min-height: 500px;
+  overflow: hidden;
+}
+
+/* Forçar os containers dos backgrounds a terem tamanho */
+.blackhole-container,
+.globe-container {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0 !important;
+  pointer-events: auto !important;
+}
+
+/* Garantir que o canvas do Three.js ocupe todo o espaço */
+.blackhole-container canvas,
+.globe-container canvas {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Conteúdo das seções fica acima */
+.section-content > :not(.blackhole-container):not(.globe-container):not(.compass-field-canvas):not(.galaxy-canvas):not(.galton-container):not(.matrix-canvas) {
+  position: relative;
+  z-index: 10;
+}
+
+/*Novo*/ 
+/* Todos os backgrounds devem permitir que os cliques passem através */
+.compass-field-canvas,
+.galaxy-canvas,
+.galton-container,
+.matrix-canvas,
+.blackhole-container/*,
+.globe-container*/ {
+  pointer-events: none !important;
+}
+
+/* MAS os elementos interativos DENTRO dos backgrounds (como botões do globo) precisam capturar eventos */
+.globe-container button,
+.globe-container input,
+.globe-container .globe-controls {
+  pointer-events: auto !important;
+}
+
+/* Para o blackhole, apenas o canvas não deve receber eventos, mas os textos informativos podem */
+.blackhole-container canvas {
+  pointer-events: none !important;
+}
+
+.blackhole-container .blackhole-info,
+.blackhole-container .blackhole-controls-note {
+  pointer-events: none !important;
 }
 </style>

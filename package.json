@@ -10,27 +10,31 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "firebase": "^12.4.0",
-    "vue": "^3.2.13",
+    "three": "^0.184.0",
+    "vue": "^3.5.34",
     "vue-class-component": "^8.0.0-0",
-    "vue-router": "^4.0.3",
-    "vuex": "^4.0.0"
+    "vue-router": "^4.6.4",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
+    "@babel/plugin-transform-class-static-block": "^7.28.6",
     "@types/node": "^18.0.0",
     "@types/vue-router": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
+    "@vitejs/plugin-vue": "^4.5.0",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
-    "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-plugin-typescript": "~5.0.0",
+    "@vue/cli-plugin-unit-jest": "~5.0.0",
     "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "@vue/eslint-config-typescript": "^9.1.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
     "lint-staged": "^11.1.2",
-    "typescript": "^4.9.0"
+    "typescript": "^4.9.0",
+    "vite": "^5.0.0"
   },
   "eslintConfig": {
     "root": true,

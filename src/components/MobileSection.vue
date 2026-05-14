@@ -1,7 +1,15 @@
 <template>
-  <section class="section">
+  <section class="section mobile-section" :class="{ 'content-hidden': !showContent, 'no-interaction': !showContent }">
+    <!-- 🔥 BOTÃO NO CANTO SUPERIOR ESQUERDO -->
+    <div class="toggle-button-container">
+      <button @click="toggleContent" class="toggle-visibility-btn">
+        {{ showContent ? $t('mobile.hidecontent') : $t('mobile.showcontent') }}
+      </button>
+    </div>
+    
     <h2 class="section-title" :key="forceUpdate">{{ $t('mobile') }}</h2>
-    <div class="projects-container">
+    
+    <div class="projects-container" v-if="showContent">
       <div v-for="project in projects" :key="project.id" class="project">
         <h3 class="project-title">{{ project.title }}</h3>
         <div class="project-content">
@@ -33,7 +41,6 @@
                 <strong>{{ $t('myResponsibilities') }}</strong> 
                 {{ project.responsibilities }}
               </li>
-              <!-- 🔥 NOVA SEÇÃO: ABOUT DO PROJETO -->
               <li :key="forceUpdate" class="about-item">
                 <div class="about-header">
                   <strong>{{ $t('projectAbout') }}</strong>
@@ -63,7 +70,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, nextTick } from 'vue'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '@/services/firebase'
 import { cloudinaryUrls } from '@/services/cloudinary'
@@ -73,6 +80,25 @@ import { useTranslations } from '@/composables/useTranslations'
 const { $t, forceUpdate, currentLanguage } = useTranslations()
 
 const projects = ref([])
+const showContent = ref(true)
+
+// 🔥 FUNÇÃO PARA ALTERNAR CONTEÚDO
+const toggleContent = async () => {
+  showContent.value = !showContent.value
+  
+  await nextTick()
+  
+  // 🔥 FORÇA O REDIMENSIONAMENTO DO BACKGROUND
+  window.dispatchEvent(new Event('resize'))
+  
+  // Dispara múltiplas vezes para garantir
+  setTimeout(() => {
+    window.dispatchEvent(new Event('resize'))
+  }, 50)
+  setTimeout(() => {
+    window.dispatchEvent(new Event('resize'))
+  }, 150)
+}
 
 // Função para obter projetos estáticos com traduções atualizadas
 const loadStaticProjects = () => {
@@ -157,14 +183,12 @@ const loadProjects = async () => {
   }
 }
 
-// 🔥 FUNÇÃO PARA ABRIR GITHUB
 const openGithub = (url) => {
   if (url) {
     window.open(url, '_blank', 'noopener,noreferrer')
   }
 }
 
-// Watch para recarregar projetos quando o idioma mudar
 watch(currentLanguage, () => {
   loadStaticProjects()
 })
@@ -178,12 +202,50 @@ onMounted(() => {
 .section {
   padding: 2rem;
   color: white;
+  position: relative;
+  transition: height 0.3s ease;
+}
+
+/* 🔥 QUANDO CONTEÚDO ESTÁ ESCONDIDO, ALTURA FIXA */
+.section.content-hidden {
+  height: 1000px !important;
+  min-height: 1000px !important;
 }
 
 .section-title {
   font-size: 3rem;
   text-align: center;
   margin-bottom: 2rem;
+}
+
+/* 🔥 ESTILOS DO BOTÃO - CANTO SUPERIOR ESQUERDO */
+.toggle-button-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+}
+
+.toggle-visibility-btn {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toggle-visibility-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .projects-container {
@@ -193,10 +255,12 @@ onMounted(() => {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  position: relative;
+  z-index: 10;
 }
 
 .project {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.5);
   padding: 2rem;
   border-radius: 10px;
   backdrop-filter: blur(10px);
@@ -226,7 +290,6 @@ onMounted(() => {
   line-height: 1.6;
 }
 
-/* 🔥 CORREÇÃO: BOTÕES GITHUB ALINHADOS */
 .github-btn {
   background: #333;
   color: white;
@@ -250,7 +313,6 @@ onMounted(() => {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* 🔥 CORREÇÃO: ÍCONES SVG */
 .icon {
   width: 16px;
   height: 16px;
@@ -258,18 +320,13 @@ onMounted(() => {
   flex-shrink: 0;
 }
 
-.github-btn .icon {
-  filter: brightness(0) invert(1);
-}
-
-/* 🔥 CORREÇÃO: ESTRUTURA DE TECNOLOGIAS (já tem z-index) */
 .technologies-item {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
-  position: relative; /* 🔥 JÁ DEVE TER */
-  z-index: 10; /* 🔥 JÁ DEVE TER */
+  position: relative;
+  z-index: 10;
 }
 
 .technologies-header {
@@ -328,31 +385,27 @@ onMounted(() => {
   line-height: 1.2;
 }
 
-/* 🔥 CORREÇÃO: MEDIA CAROUSEL COM Z-INDEX MENOR */
 .project-media {
   width: 100%;
   position: relative;
   z-index: 1;
 }
 
-/* 🔥 CORREÇÃO: ITENS DA LISTA COM LAYOUT CORRETO E Z-INDEX */
 .project-info li {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
-  position: relative; /* 🔥 ADICIONE ISSO */
-  z-index: 10; /* 🔥 ADICIONE ISSO */
+  position: relative;
+  z-index: 10;
 }
 
-/* 🔥 CORREÇÃO: LABELS FORTES */
 .project-info li strong {
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-/* 🔥 CORREÇÃO ESPECÍFICA PARA HIGHLIGHTS */
 .project-info li:nth-child(3) {
   align-items: flex-start;
 }
@@ -362,29 +415,6 @@ onMounted(() => {
   margin-top: 0.2rem;
 }
 
-/* 🔥 RESPONSIVIDADE PARA TELAS MENORES */
-@media (max-width: 768px) {
-  .project-tech-grid {
-    gap: 0.4rem;
-  }
-  
-  .project-tech-item {
-    min-width: 70px;
-    min-height: 70px;
-    padding: 0.6rem 0.4rem;
-  }
-  
-  .project-tech-logo {
-    width: 28px;
-    height: 28px;
-  }
-  
-  .project-tech-name {
-    font-size: 0.7rem;
-  }
-}
-
-/* 🔥 ADICIONE ESTES ESTILOS PARA A NOVA SEÇÃO ABOUT */
 .about-item {
   display: flex;
   flex-direction: column;
@@ -410,14 +440,7 @@ onMounted(() => {
   width: 100%;
 }
 
-/* Ajuste o espaçamento dos itens da lista */
-.project-info li {
-  padding: 0.8rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  line-height: 1.6;
-}
-
-/* ADICIONE A TODAS AS SEÇÕES DE PROJETOS */
+/* Responsividade */
 @media (max-width: 968px) {
   .project-content {
     grid-template-columns: 1fr !important;
@@ -425,11 +448,29 @@ onMounted(() => {
   }
   
   .project-media {
-    order: -1; /* Coloca o carousel acima nas telas menores */
+    order: -1;
+  }
+  
+  .section.content-hidden {
+    height: 800px !important;
+    min-height: 800px !important;
   }
 }
 
 @media (max-width: 768px) {
+  .section {
+    padding: 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+  }
+  
+  .section.content-hidden {
+    height: 700px !important;
+    min-height: 700px !important;
+  }
+  
   .project {
     padding: 1.5rem;
   }
@@ -463,16 +504,38 @@ onMounted(() => {
     font-size: 0.7rem;
   }
   
-  .github-btn,
-  .download-btn {
+  .github-btn {
     margin-top: 0.5rem;
     margin-left: 0;
     width: 100%;
     justify-content: center;
   }
+  
+  .toggle-visibility-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .toggle-button-container {
+    top: 10px;
+    left: 10px;
+  }
 }
 
 @media (max-width: 480px) {
+  .section {
+    padding: 1rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .section.content-hidden {
+    height: 600px !important;
+    min-height: 600px !important;
+  }
+  
   .project {
     padding: 0.5rem;
     margin-left: -0.5rem;
@@ -495,7 +558,7 @@ onMounted(() => {
   }
   
   .project-tech-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 colunas fixas */
+    grid-template-columns: repeat(3, 1fr);
   }
   
   .project-tech-item {
@@ -512,5 +575,32 @@ onMounted(() => {
   .project-tech-name {
     font-size: 0.65rem;
   }
+  
+  .toggle-visibility-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+  }
+  
+  .toggle-button-container {
+    top: 8px;
+    left: 8px;
+  }
+}
+
+.section,
+.projects-container,
+.project {
+  position: relative;
+  z-index: 10;
+}
+
+.section {
+  pointer-events: none;
+}
+
+.project,
+button,
+a {
+  pointer-events: auto;
 }
 </style>

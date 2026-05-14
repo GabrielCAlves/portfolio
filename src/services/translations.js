@@ -122,7 +122,6 @@ const translations = {
   pt: 'Ver no GitHub'
 },
 
-// Adicione estas traduções no objeto translations
 'projectAbout': {
   en: 'About the Project:',
   pt: 'Sobre o Projeto:'
@@ -157,7 +156,8 @@ const translations = {
     en: 'Mobile Projects',
     pt: 'Projetos Mobile'
   },
-  // 🔥 TRADUÇÕES PARA CONTEÚDOS DOS PROJETOS PESSOAIS (PERSONAL WORK)
+
+  // PERSONAL WORK
   'personal.astroAdventure.role': {
     en: 'Gameplay Development, Level Design, UI Development, Sound and Animation.',
     pt: 'Desenvolvimento de Gameplay, Design de Níveis, Desenvolvimento de UI, Som e Animação.'
@@ -222,7 +222,7 @@ const translations = {
     en: 'A 4-people 2D brawl platformer game. Choose your kingdom and fight for it against your friends in the war!',
     pt: 'Um jogo de plataforma e briga 2D para 4 pessoas. Escolha seu reino e lute por ele contra seus amigos na guerra!'
   },
-  // 🔥 TRADUÇÕES PARA CONTEÚDOS DOS PROJETOS WEB
+  // PROJETOS WEB
   'web.adotaai.role': {
     en: 'Full-Stack Developer and Debugger.',
     pt: 'Desenvolvedor Full-Stack e Debugger.'
@@ -249,7 +249,15 @@ const translations = {
     pt: 'Sistema de gerenciamento para funcionários de uma casa de repouso. Inclui ferramentas para recuperação de senha, busca e gerenciamento de escalas de trabalho, incidentes, usuários, históricos e geração de relatórios para melhor coordenação dos cuidados.'
   },
 
-  // 🔥 TRADUÇÕES PARA CONTEÚDOS DOS PROJETOS MOBILE
+  // PROJETOS MOBILE
+  'mobile.hidecontent': {
+    en: '👁️‍🗨️ Hide Content',
+    pt: '👁️‍🗨️ Esconder Conteúdo'
+  },
+  'mobile.showcontent': {
+    en: '👁️ Show Content',
+    pt: '👁️ Mostrar Conteúdo'
+  },
   'mobile.consultasqx.role': {
     en: 'Full-Stack Developer and Debugger.',
     pt: 'Desenvolvedor Full-Stack e Debugger.'
@@ -287,6 +295,27 @@ const translations = {
   'mobile.feiraonordeste.description': {
     en: 'An app to list your shopping items and have them always at hand. Features include user registration, item listing, search filter, price calculation, item and data management, and password recovery.',
     pt: 'Um aplicativo para listar seus itens de compra e tê-los sempre à mão. Funcionalidades incluem registro de usuário, listagem de itens, filtro de busca, cálculo de preços, gerenciamento de itens e dados e recuperação de senha.'
+  },
+
+  'contacts.globebackground.color':{
+    en: 'Color',
+    pt: 'Cor'
+  },
+  'contacts.globebackground.usecolor':{
+    en: 'Use Color',
+    pt: 'Usar Cor'
+  },
+  'contacts.globebackground.satellitemap':{
+    en: 'Satellite Map',
+    pt: 'Mapa de Satélite'
+  },
+  'contacts.globebackground.dots':{
+    en: 'Dots',
+    pt: 'Pontos'
+  },
+  'contacts.globebackground.reload':{
+    en: 'Reload',
+    pt: 'Recarregar'
   },
 
   // FOOTER

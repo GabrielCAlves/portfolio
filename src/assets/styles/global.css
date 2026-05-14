@@ -23,6 +23,8 @@ html {
   scroll-behavior: smooth;
 }
 
+
+
 /* NO global.css - ADICIONE */
 @media (max-width: 480px) {
   html, body {

@@ -39,6 +39,7 @@ let animationId = null
 let cleanupFunctions = []
 
 let pontosGloboMesh = null
+let estrelas = null
 let coresOriginaisArray = null
 let usandoCoresOriginais = true
 let corSolidaAtual = null
@@ -61,10 +62,14 @@ const SENSIBILIDADE = 0.006
 
 const initThree = () => {
   const container = containerRef.value
-  const parent = container?.parentElement
-  if (!container || !parent) return
+  // const parent = container?.parentElement
+  // if (!container || !parent) return
   
-  const rect = parent.getBoundingClientRect()
+  // const rect = parent.getBoundingClientRect()
+  if (!container) return
+
+  const rect = container.getBoundingClientRect()
+
   const width = rect.width
   const height = rect.height
   
@@ -85,7 +90,8 @@ const initThree = () => {
     
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    // renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
     
     earthGroup = new THREE.Group();
@@ -328,15 +334,15 @@ const initThree = () => {
         }
         starGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(starPositions), 3));
         const starMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.16, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending });
-        const estrelas = new THREE.Points(starGeometry, starMaterial);
+        estrelas = new THREE.Points(starGeometry, starMaterial);
         scene.add(estrelas);
         
-        const animateStars = () => {
-          estrelas.rotation.y += 0.00008;
-          estrelas.rotation.x += 0.00004;
-          requestAnimationFrame(animateStars);
-        };
-        animateStars();
+        // const animateStars = () => {
+        //   estrelas.rotation.y += 0.00008;
+        //   estrelas.rotation.x += 0.00004;
+        //   requestAnimationFrame(animateStars);
+        // };
+        // animateStars();
         
       } catch (error) {
         console.error('Erro ao inicializar globo:', error);
@@ -413,7 +419,7 @@ const initThree = () => {
       });
     }
     
-    window.addEventListener('mousemove', (e) => {
+    const onMouseMove = (e) => {
       if (!isDragging) return;
       const deltaX = e.clientX - lastMouseX;
       const deltaY = e.clientY - lastMouseY;
@@ -425,9 +431,9 @@ const initThree = () => {
       }
       lastMouseX = e.clientX;
       lastMouseY = e.clientY;
-    });
+    };
     
-    window.addEventListener('touchmove', (e) => {
+    const onTouchMove = (e) => {
       if (isDragging && e.touches.length) {
         const deltaX = e.touches[0].clientX - lastMouseX;
         const deltaY = e.touches[0].clientY - lastMouseY;
@@ -439,22 +445,27 @@ const initThree = () => {
         lastMouseY = e.touches[0].clientY;
         e.preventDefault();
       }
-    });
+    };
     
-    window.addEventListener('mouseup', () => {
+    const onMouseUp = () => {
       if (isDragging) {
         isDragging = false;
         if (renderer && renderer.domElement) renderer.domElement.style.cursor = 'default';
         setTimeout(() => { if (!isDragging) autoRotate = true; }, 100);
       }
-    });
+    };
     
-    window.addEventListener('touchend', () => {
+    const onTouchEnd = () => {
       if (isDragging) {
         isDragging = false;
         setTimeout(() => { if (!isDragging) autoRotate = true; }, 100);
       }
-    });
+    };
+
+    window.addEventListener('mousemove', onMouseMove)
+    window.addEventListener('mouseup', onMouseUp)
+    window.addEventListener('touchmove', onTouchMove, { passive: false })
+    window.addEventListener('touchend', onTouchEnd)
 
     // Atualizar o background do seletor quando a cor mudar
     if (corSeletorInput) {
@@ -479,40 +490,88 @@ const initThree = () => {
       colorDisplay.style.background = corSeletorInput.value;
     }
     
-    function animateRotation() {
-      if (autoRotate && !isDragging) {
-        autoRotateAngle += ROTACAO_AUTOMATICA_VEL;
-        targetRotationY = autoRotateAngle;
-      }
+    // function animateRotation() {
+    //   if (autoRotate && !isDragging) {
+    //     autoRotateAngle += ROTACAO_AUTOMATICA_VEL;
+    //     targetRotationY = autoRotateAngle;
+    //   }
       
-      currentRotY += (targetRotationY - currentRotY) * 0.12;
-      currentRotX += (targetRotationX - currentRotX) * 0.12;
+    //   currentRotY += (targetRotationY - currentRotY) * 0.12;
+    //   currentRotX += (targetRotationX - currentRotX) * 0.12;
       
-      if (earthGroup) {
-        earthGroup.rotation.order = 'YXZ';
-        earthGroup.rotation.x = currentRotX;
-        earthGroup.rotation.y = currentRotY;
-        earthGroup.rotation.z = 0;
-      }
+    //   if (earthGroup) {
+    //     earthGroup.rotation.order = 'YXZ';
+    //     earthGroup.rotation.x = currentRotX;
+    //     earthGroup.rotation.y = currentRotY;
+    //     earthGroup.rotation.z = 0;
+    //   }
       
-      requestAnimationFrame(animateRotation);
-    }
-    animateRotation();
+    //   requestAnimationFrame(animateRotation);
+    // }
+    // animateRotation();
     
-    function renderScene() {
-      if (renderer && scene && camera) renderer.render(scene, camera);
-      requestAnimationFrame(renderScene);
+    // function renderScene() {
+    //   if (renderer && scene && camera) renderer.render(scene, camera);
+    //   requestAnimationFrame(renderScene);
+    // }
+    // renderScene();
+    function animate() {
+      animationId = requestAnimationFrame(animate)
+
+      if (autoRotate && !isDragging) {
+        autoRotateAngle += ROTACAO_AUTOMATICA_VEL
+        targetRotationY = autoRotateAngle
+      }
+
+      currentRotY += (targetRotationY - currentRotY) * 0.12
+      currentRotX += (targetRotationX - currentRotX) * 0.12
+
+      if (earthGroup) {
+        earthGroup.rotation.order = 'YXZ'
+        earthGroup.rotation.x = currentRotX
+        earthGroup.rotation.y = currentRotY
+        earthGroup.rotation.z = 0
+      }
+
+      if (estrelas) {
+        estrelas.rotation.y += 0.00008
+        estrelas.rotation.x += 0.00004
+      }
+
+      // if (renderer && scene && camera) {
+      //   renderer.render(scene, camera)
+      // }
+      if (
+        renderer &&
+        scene &&
+        camera &&
+        renderer.domElement.width > 0 &&
+        renderer.domElement.height > 0
+      ) {
+        renderer.render(scene, camera)
+      }
     }
-    renderScene();
+
+    animate()
     
     const handleResize = () => {
-      if (!container || !parent) return
-      const newRect = parent.getBoundingClientRect()
+      // if (!container || !parent) return
+      // const newRect = parent.getBoundingClientRect()
+      if (!container) return
+      const newRect = container.getBoundingClientRect()
+      
       if (camera) {
         camera.aspect = newRect.width / newRect.height
         camera.updateProjectionMatrix()
       }
-      if (renderer) renderer.setSize(newRect.width, newRect.height)
+      // if (renderer) renderer.setSize(newRect.width, newRect.height)
+      if (
+        renderer &&
+        newRect.width > 0 &&
+        newRect.height > 0
+      ) {
+        renderer.setSize(newRect.width, newRect.height)
+      }
     }
     
     window.addEventListener('resize', handleResize)
@@ -521,10 +580,16 @@ const initThree = () => {
     }
     
     inicializarGlobo();
-    console.log('🚀 Globo com cores mais escuras!');
     
     cleanupFunctions.push(() => {
       window.removeEventListener('resize', handleResize)
+      window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('mouseup', onMouseUp)
+      window.removeEventListener('touchmove', onTouchMove)
+      window.removeEventListener('touchend', onTouchEnd)
+      if (renderer && renderer.domElement) {
+        renderer.domElement.removeEventListener('contextmenu', (e) => e.preventDefault())
+      }
     })
     
   }).catch(err => {
@@ -538,12 +603,31 @@ onMounted(() => {
   }, 100)
 })
 
+// onBeforeUnmount(() => {
+//   if (animationId) cancelAnimationFrame(animationId)
+//   cleanupFunctions.forEach(fn => fn())
+//   if (renderer && renderer.domElement && containerRef.value) {
+//     containerRef.value.removeChild(renderer.domElement)
+//   }
+//   renderer = null
+//   scene = null
+//   camera = null
+//   earthGroup = null
+// })
 onBeforeUnmount(() => {
   if (animationId) cancelAnimationFrame(animationId)
+
   cleanupFunctions.forEach(fn => fn())
-  if (renderer && renderer.domElement && containerRef.value) {
-    containerRef.value.removeChild(renderer.domElement)
+
+  const canvas = renderer.domElement
+
+  renderer.dispose()
+  //renderer.forceContextLoss?.()
+
+  if (canvas && containerRef.value?.contains(canvas)) {
+    containerRef.value.removeChild(canvas)
   }
+
   renderer = null
   scene = null
   camera = null

@@ -4,7 +4,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, onUnmounted, nextTick } from 'vue'
 
 const containerRef = ref(null)
 let scene = null
@@ -14,6 +14,8 @@ let controls = null
 let effectComposer = null
 let animationId = null
 let cleanupFunctions = []
+
+let resizeObserver = null
 
 const initThree = () => {
   const container = containerRef.value
@@ -49,7 +51,8 @@ const initThree = () => {
 
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    // renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ReinhardToneMapping;
     renderer.toneMappingExposure = 1.25;
     container.appendChild(renderer.domElement);
@@ -649,23 +652,124 @@ const initThree = () => {
   })
 }
 
-onMounted(() => {
+const updateSize = () => {
+    if (!containerRef.value || !renderer || !camera) return
+
+    // const width = containerRef.value.clientWidth
+    // const height = containerRef.value.clientHeight
+
+    // renderer.setSize(width, height)
+
+    // camera.aspect = width / height
+    // camera.updateProjectionMatrix() 
+    window.dispatchEvent(new Event('resize'))
+  
+    // // Dispara múltiplas vezes para garantir
+    // setTimeout(() => {
+    //     window.dispatchEvent(new Event('resize'))
+    // }, 50)
+    // setTimeout(() => {
+    //     window.dispatchEvent(new Event('resize'))
+    // }, 150)
+}
+
+onMounted(async () => {
+  await nextTick()
+
+  initThree()
+
+  // Resize imediato
+  updateSize()
+
+  // Resize após layout terminar
+  requestAnimationFrame(() => {
+    updateSize()
+  })
+
+  // Resize extra para transições/layouts lentos
   setTimeout(() => {
-    initThree()
+    updateSize()
   }, 100)
+
+  setTimeout(() => {
+    updateSize()
+  }, 300)
+
+  window.addEventListener('resize', updateSize)
+
+  resizeObserver = new ResizeObserver(() => {
+    updateSize()
+  })
+
+  if (containerRef.value) {
+    resizeObserver.observe(containerRef.value)
+  }
 })
 
+// onBeforeUnmount(() => {
+//   if (animationId) cancelAnimationFrame(animationId)
+//   cleanupFunctions.forEach(fn => fn())
+//   if (renderer && renderer.domElement && containerRef.value) {
+//     containerRef.value.removeChild(renderer.domElement)
+//   }
+//   renderer = null
+//   scene = null
+//   camera = null
+//   controls = null
+//   effectComposer = null
+// })
 onBeforeUnmount(() => {
-  if (animationId) cancelAnimationFrame(animationId)
-  cleanupFunctions.forEach(fn => fn())
-  if (renderer && renderer.domElement && containerRef.value) {
-    containerRef.value.removeChild(renderer.domElement)
+  if (animationId) {
+    cancelAnimationFrame(animationId)
   }
+
+  cleanupFunctions.forEach(fn => fn())
+
+  // 🔥 Dispose dos controles
+  if (controls) {
+    controls.dispose()
+  }
+
+  // 🔥 Dispose do EffectComposer
+  if (effectComposer) {
+    effectComposer.dispose?.()
+  }
+
+  if (renderer) {
+    const canvas = renderer.domElement
+
+    renderer.dispose()
+    //renderer.forceContextLoss?.()
+
+    if (canvas && containerRef.value?.contains(canvas)) {
+        containerRef.value.removeChild(canvas)
+    }
+}
+
   renderer = null
   scene = null
   camera = null
   controls = null
   effectComposer = null
+})
+
+onUnmounted(() => {
+//   if (animationId) cancelAnimationFrame(animationId)
+//   cleanupFunctions.forEach(fn => fn())
+//   if (renderer && renderer.domElement && containerRef.value) {
+//     containerRef.value.removeChild(renderer.domElement)
+//   }
+//   renderer = null
+//   scene = null
+//   camera = null
+//   controls = null
+//   effectComposer = null
+    window.removeEventListener('resize', updateSize)
+
+    if (resizeObserver) {
+    resizeObserver.disconnect()
+    resizeObserver = null
+    }
 })
 </script>
 

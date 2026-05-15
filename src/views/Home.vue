@@ -86,13 +86,21 @@
         </div>
         
         <!-- Mobile Section -->
-        <div class="section-content" :class="{ 'active': currentSection === 4 }">
+        <!-- <div class="section-content" :class="{ 'active': currentSection === 4 }">
+          <BlackholeBackground />
+          <MobileSection />
+        </div> -->
+        <div v-if="currentSection === 4" class="section-content active">
           <BlackholeBackground />
           <MobileSection />
         </div>
         
         <!-- Contacts Section -->
-        <div class="section-content" :class="{ 'active': currentSection === 5 }">
+        <!-- <div class="section-content" :class="{ 'active': currentSection === 5 }">
+          <GlobeBackground />
+          <ContactsSection />
+        </div> -->
+        <div v-if="currentSection === 5" class="section-content active">
           <GlobeBackground />
           <ContactsSection />
         </div>

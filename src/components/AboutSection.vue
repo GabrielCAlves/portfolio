@@ -48,7 +48,6 @@
             >
               <span class="scroll-icon">👇</span>
               <span class="scroll-text" :key="forceUpdate">{{ $t('seeProfessionalExperience') }}</span>
-              <span class="scroll-arrow">→</span>
             </button>
           </div>
           
@@ -98,6 +97,7 @@
               >
                 <span>🔗</span>
                 <span :key="forceUpdate">{{ $t('viewPublication') }}</span>
+                <span class="scroll-arrow">→</span>
               </a>
             </div>
           </div>
@@ -921,6 +921,10 @@ onUnmounted(() => {
   color: black;
 }
 
+.academic-link:hover .scroll-arrow {
+  transform: translateX(5px);
+}
+
 .academic-link:active {
   transform: translateY(0);
 }
@@ -1395,7 +1399,7 @@ onUnmounted(() => {
 
 .experience-company {
   font-size: 1rem;
-  color: #ff8787;
+  color: white;
   font-weight: 500;
 }
 

@@ -44,7 +44,8 @@ export const cloudinaryUrls = {
     'Rest APIs': 'https://res.cloudinary.com/dimsi9muz/image/upload/v1762377763/icons8-rest-api-64_clbwal.png',
     'Astah': 'https://res.cloudinary.com/dimsi9muz/image/upload/v1762372926/7nW0NuWp_400x400_vtrbnx.jpg',
     'Figma': 'https://res.cloudinary.com/dimsi9muz/image/upload/v1762372970/figma-icon_mjc8jk.svg',
-    'Adobe XD': 'https://res.cloudinary.com/dimsi9muz/image/upload/v1762372930/adobe-xd-1_uimeoa.svg'
+    'Adobe XD': 'https://res.cloudinary.com/dimsi9muz/image/upload/v1762372930/adobe-xd-1_uimeoa.svg',
+    'Gameplay Programming': 'https://res.cloudinary.com/dimsi9muz/image/upload/v1779057875/gameplayprogramming.png'
   },
 
   // ========== ANGLED SLIDER ==========

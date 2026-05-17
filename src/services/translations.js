@@ -110,13 +110,13 @@ const translations = {
   pt: 'Artigo acadêmico publicado no SBGames 2025'
 },
 'viewPublication': {
-  en: 'View Publication →',
-  pt: 'Ver Publicação →'
+  en: 'View Publication',
+  pt: 'Ver Publicação'
 },
 // Adicione após as outras traduções
 'seeProfessionalExperience': {
-  en: 'See Professional Experience →',
-  pt: 'Ver Experiência Profissional →'
+  en: 'See Professional Experience',
+  pt: 'Ver Experiência Profissional'
 },
 'scrollToExperience': {
   en: 'Scroll to professional experience section',
@@ -169,36 +169,36 @@ const translations = {
   pt: 'Desenvolvimento e manutenção de sistemas web utilizando Vue.js no front-end e Node.js no back-end. Participação ativa em cerimônias ágeis e code reviews.'
 },
 'experience.npi.achievement1': {
-  en: 'Developed a full-stack nursing home management system using Vue.js, Vuetify, TypeScript, Spring Boot, and PostgreSQL',
-  pt: 'Desenvolveu um sistema completo de gestão de casa de repouso usando Vue.js, Vuetify, TypeScript, Spring Boot e PostgreSQL'
+  en: 'Helped to develop a full-stack nursing home management system using Vue.js, Vuetify, TypeScript, Spring Boot, and PostgreSQL',
+  pt: 'Ajudei a desenvolver um sistema completo de gestão de casa de repouso usando Vue.js, Vuetify, TypeScript, Spring Boot e PostgreSQL'
 },
 'experience.npi.achievement2': {
   en: 'Engineered responsive interfaces, implemented form validations, performed CSS/UI improvements across multiple modules and optimized front-end performance',
-  pt: 'Projetou interfaces responsivas, implementou validações de formulários, realizou melhorias de CSS/UI em múltiplos módulos e otimizou o desempenho do front-end'
+  pt: 'Projetei interfaces responsivas, implementei validações de formulários, realizei melhorias de CSS/UI em múltiplos módulos e otimizei o desempenho do front-end'
 },
 'experience.npi.achievement3': {
   en: 'Built and maintained RESTful APIs, managed database relationships, and resolved data integrity issues using Spring Boot and DBeaver',
-  pt: 'Construiu e manteve APIs RESTful, gerenciou relacionamentos de banco de dados e resolveu problemas de integridade de dados usando Spring Boot e DBeaver'
+  pt: 'Construi e manteve APIs RESTful, gerenciei relacionamentos de banco de dados e resolvi problemas de integridade de dados usando Spring Boot e DBeaver'
 },
 'experience.npi.achievement4': {
   en: 'Conducted automated testing with Playwright, resolved HTTP 500 errors and fixed critical bugs, improving system stability and data validation',
-  pt: 'Conduziu testes automatizados com Playwright, resolveu erros HTTP 500 e corrigiu bugs críticos, melhorando a estabilidade do sistema e a validação de dados'
+  pt: 'Conduzi testes automatizados com Playwright, resolvi erros HTTP 500 e corrigi bugs críticos, melhorando a estabilidade do sistema e a validação de dados'
 },
 'experience.npi.achievement5': {
   en: 'Enhanced system performance through pagination, sorting functionalities, and table responsiveness',
-  pt: 'Melhorou o desempenho do sistema através de paginação, funcionalidades de ordenação e responsividade de tabelas'
+  pt: 'Melhorei o desempenho do sistema através de paginação, funcionalidades de ordenação e responsividade de tabelas'
 },
 'experience.npi.achievement6': {
   en: 'Refactored code by improving data typing (varchar → TIME) and replacing inline styles with Vuetify utility classes',
-  pt: 'Refatorou o código melhorando a tipagem de dados (varchar → TIME) e substituindo estilos inline por classes utilitárias do Vuetify'
+  pt: 'Refatorei o código melhorando a tipagem de dados (varchar → TIME) e substituindo estilos inline por classes utilitárias do Vuetify'
 },
 'experience.npi.achievement7': {
   en: 'Collaborated in Scrum-based teams, using GitLab, SonarQube and CI/CD pipelines for version control and quality assurance',
-  pt: 'Colaborou em times baseados em Scrum, usando GitLab, SonarQube e pipelines CI/CD para controle de versão e garantia de qualidade'
+  pt: 'Colaborei em times baseados em Scrum, usando GitLab, SonarQube e pipelines CI/CD para controle de versão e garantia de qualidade'
 },
 'experience.npi.achievement8': {
   en: 'Used Figma and GitLab for task management, UI review, and team collaboration (Miro for spring review)',
-  pt: 'Usou Figma e GitLab para gerenciamento de tarefas, revisão de UI e colaboração em equipe (Miro para revisão de sprint)'
+  pt: 'Usei Figma e GitLab para gerenciamento de tarefas, revisão de UI e colaboração em equipe (Miro para revisão de sprint)'
 },
 
 'programmingLanguages': {

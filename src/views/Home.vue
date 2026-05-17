@@ -70,13 +70,15 @@
         <!-- Personal Work -->
         <div class="section-content" :class="{ 'active': currentSection === 1 }">
           <ParticleGalaxyAnimation />
-          <PersonalWork />
+          <!-- <PersonalWork /> -->
+           <GamesSection />
         </div>
         
         <!-- Professional Work -->
         <div class="section-content" :class="{ 'active': currentSection === 2 }">
           <GaltonPegboards />
-          <ProfessionalWork />
+          <!-- <ProfessionalWork /> -->
+           <ProjectsSection />
         </div>
         
         <!-- Web Section -->
@@ -115,8 +117,10 @@
 import { ref, /*computed,*/ onMounted, onUnmounted/*, nextTick*/ } from 'vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 import AboutSection from '@/components/AboutSection.vue'
-import PersonalWork from '@/components/PersonalWork.vue'
-import ProfessionalWork from '@/components/ProfessionalWork.vue'
+// import PersonalWork from '@/components/PersonalWork.vue'
+// import ProfessionalWork from '@/components/ProfessionalWork.vue'
+import GamesSection from '@/components/GamesSection.vue'
+import ProjectsSection from '@/components/ProjectsSection.vue'
 import WebSection from '@/components/WebSection.vue'
 import MobileSection from '@/components/MobileSection.vue'
 import ContactsSection from '@/components/ContactsSection.vue'
@@ -148,8 +152,10 @@ const carouselItems = ref([])
 
 // Refs para cada seção
 const aboutRef = ref(null)
-const personalRef = ref(null)
-const professionalRef = ref(null)
+// const personalRef = ref(null)
+// const professionalRef = ref(null)
+const gamesRef = ref(null)
+const projectsRef = ref(null)
 const webRef = ref(null)
 const mobileRef = ref(null)
 const contactsRef = ref(null)
@@ -309,14 +315,33 @@ const scrollToProject = (projectIndex) => {
 }
 
 // 🔥 MUDANÇA RADICAL: SIMPLES MUDANÇA DE SEÇÃO SEM CONTROLE DE ALTURA
+// const changeSection = (index) => {
+//   currentSection.value = index
+  
+//   // 🔥 ROLAR PARA O TOPO DA SEÇÃO
+//   setTimeout(() => {
+//     const sectionsContainer = document.querySelector('.sections-container')
+//     if (sectionsContainer) {
+//       sectionsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' })
+//     }
+//   }, 50)
+// }
+// 🔥 MUDANÇA RADICAL: SIMPLES MUDANÇA DE SEÇÃO SEM CONTROLE DE ALTURA
 const changeSection = (index) => {
   currentSection.value = index
   
-  // 🔥 ROLAR PARA O TOPO DA SEÇÃO
+  // 🔥 ROLAR PARA O TOPO DA SEÇÃO COM OFFSET PARA A NAVBAR
   setTimeout(() => {
     const sectionsContainer = document.querySelector('.sections-container')
     if (sectionsContainer) {
-      sectionsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      const navbarHeight = 80 // Altura da navbar em pixels
+      const elementPosition = sectionsContainer.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
     }
   }, 50)
 }
@@ -371,6 +396,8 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-bottom: 5px solid;
+  border-image: linear-gradient(90deg, red 0%, #05f 100%) 1;
 }
 
 .background-image.back-layer {
@@ -556,7 +583,7 @@ onUnmounted(() => {
 }
 
 /* NOVO: Estilos para dourado metálico claro e brilhante */
-.hero-headline {
+/* .hero-headline {
   position: absolute;
   display: inline-block;
   top: 1.5%;
@@ -565,6 +592,31 @@ onUnmounted(() => {
   text-align: center;
   color: white;
   z-index: 1000000 !important;
+  width: 75%;
+  pointer-events: none;
+  padding: 0 20px;
+} */
+
+.hero-section {
+  height: 700px;
+  position: relative; /* 🔥 JÁ DEVE TER ISSO */
+  background: #000;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ALTERE O .hero-headline para ficar relativo à hero-section */
+.hero-headline {
+  position: absolute;
+  display: inline-block;
+  top: 1.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: white;
+  z-index: 100; /* 🔥 REDUZA o z-index (antes era 1000000) */
   width: 75%;
   pointer-events: none;
   padding: 0 20px;
@@ -611,7 +663,7 @@ onUnmounted(() => {
   width: 20px;
   height: 200%;
   background: white;
-  z-index: 9998; /* Um pouco menor que o z-index do texto */
+  z-index: 9997; /* Um pouco menor que o z-index do texto */
   animation: slide-shine 3s ease-in-out infinite;
   pointer-events: none;
   opacity: 0.7;

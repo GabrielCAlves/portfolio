@@ -13,13 +13,13 @@ const translations = {
     en: 'About Me',
     pt: 'Sobre Mim'
   },
-  'personal-work': {
-    en: 'Personal Work', 
-    pt: 'Trabalhos Pessoais'
+  'games': {
+    en: 'Games',
+    pt: 'Jogos'
   },
-  'professional-work': {
-    en: 'Professional Work',
-    pt: 'Trabalhos Profissionais'
+  'projects': {
+    en: 'Projects',
+    pt: 'Projetos'
   },
   'web': {
     en: 'Web',
@@ -52,33 +52,77 @@ const translations = {
     pt: 'Baixar CV (Português)'
   },
   'aboutDescription': {
-    en: `Hi, I'm Gabriel Cavalcanti Alves. Ready to level up your development team with fresh talent and technical skills!`,
-    pt: `Olá, sou Gabriel Cavalcanti Alves. Pronto para elevar seu time de desenvolvimento com talento fresco e habilidades técnicas!`
-  },
-  'aboutDescription2': {
-    en: `Software Engineer/Full-Stack Developer graduated in Software Engineering from the Federal University of Ceará (UFC), in Brazil. I'm 24 years old and have practical experience in developing web applications, mobile apps, and games.`,
-    pt: `Engenheiro de Software/Desenvolvedor Full-Stack formado em Engenharia de Software pela Universidade Federal do Ceará (UFC), no Brasil. Tenho 24 anos e experiência prática no desenvolvimento de aplicações web, mobile e jogos.`
-  },
-  'aboutDescription3': {
+    en: `Hi, I'm Gabriel Cavalcanti Alves. Ready to level up your development team with fresh game development talent and technical skills!`,
+    pt: `Olá, sou Gabriel Cavalcanti Alves. Pronto para elevar seu time de desenvolvimento com talento fresco em jogos e habilidades técnicas!`
+},
+'aboutDescription2': {
+    en: `I'm a Game Developer (Gameplay Programmer) graduated in Software Engineering from the Federal University of Ceará (UFC), in Brazil. I have hands-on experience building complete games in Unity, as well as web and mobile applications.`,
+    pt: `Eu sou um Desenvolvedor de Jogos (Programador de Gameplay) formado em Engenharia de Software pela Universidade Federal do Ceará (UFC), no Brasil. Tenho experiência prática construindo jogos completos em Unity, além de aplicações web e mobile.`
+},
+'aboutDescription3': {
     en: `Relevant experience:`,
     pt: `Experiência relevante:`
-  },
-  'aboutDescription4': {
+},
+'aboutDescription4': {
     en: `1-year internship as a full-stack developer at the Center for Practices and Informatics (NPI)/UFC;`,
     pt: `Estágio de 1 ano como desenvolvedor full-stack no Núcleo de Práticas e Informática (NPI)/UFC;`
-  },
-  'aboutDescription5': {
-    en: `Development of complete academic and personal projects;`,
-    pt: `Desenvolvimento de projetos acadêmicos e pessoais completos;`
-  },
-  'aboutDescription6': {
-    en: `Certifications in Scrum, AWS, Game Design and Unity Development, plus intermediate/advanced English proficiency.`,
-    pt: `Certificações em Scrum, AWS, Game Design e Desenvolvimento Unity, além de inglês em nível intermediário/avançado.`
-  },
-  'aboutDescription7': {
-    en: `I'm currently seeking a professional opportunity in the game development field to apply my technical knowledge to real projects and consolidate my career as a game developer.`,
-    pt: `Atualmente estou atrás de uma oportunidade profissional na área de desenvolvimento de jogos para aplicar meus conhecimentos técnicos em projetos reais e consolidar minha carreira como desenvolvedor de jogos.`
-  },
+},
+'aboutDescription5': {
+    en: `Complete Unity projects: Astro Adventure 3D, 4Kingdoms, Lost in The Stars, Astro Obstacle, MyPong;`,
+    pt: `Projetos completos em Unity: Astro Adventure 3D, 4Kingdoms, Lost in The Stars, Astro Obstacle, MyPong;`
+},
+'aboutDescription6': {
+    en: `Mobile apps registered with INPI: ConsultasQX and Feirão Nordeste; academic paper published at SBGames 2025;`,
+    pt: `Aplicativos mobile registrados no INPI: ConsultasQX e Feirão Nordeste; artigo acadêmico publicado no SBGames 2025;`
+},
+'aboutDescription7': {
+    en: `Certifications in Scrum, AWS, Game Design and Unity Development, plus advanced English proficiency (C1).`,
+    pt: `Certificações em Scrum, AWS, Game Design e Desenvolvimento Unity, além de inglês avançado (C1).`
+},
+'aboutDescription8': {
+    en: `I'm currently seeking a professional opportunity as a Junior Gameplay Programmer to apply my technical knowledge to real projects and consolidate my career in the game industry.`,
+    pt: `Atualmente estou em busca de uma oportunidade profissional como Programador de Gameplay Júnior para aplicar meus conhecimentos técnicos em projetos reais e consolidar minha carreira na indústria de jogos.`
+},
+// Adicione após as outras traduções
+'unityProjects': {
+  en: 'Complete Unity Projects',
+  pt: 'Projetos Completos em Unity'
+},
+'mobileAppsRegistered': {
+  en: 'Mobile Apps Registered with INPI',
+  pt: 'Aplicativos Mobile Registrados no INPI'
+},
+'academicPaper': {
+  en: 'Academic paper published at SBGames 2025',
+  pt: 'Artigo acadêmico publicado no SBGames 2025'
+},
+'certifications': {
+  en: 'Certifications',
+  pt: 'Certificações'
+},
+// Adicione após as outras traduções
+'academicPublication': {
+  en: 'Academic Publication',
+  pt: 'Publicação Acadêmica'
+},
+'academicPaperText': {
+  en: 'Academic paper published at SBGames 2025',
+  pt: 'Artigo acadêmico publicado no SBGames 2025'
+},
+'viewPublication': {
+  en: 'View Publication →',
+  pt: 'Ver Publicação →'
+},
+// Adicione após as outras traduções
+'seeProfessionalExperience': {
+  en: 'See Professional Experience →',
+  pt: 'Ver Experiência Profissional →'
+},
+'scrollToExperience': {
+  en: 'Scroll to professional experience section',
+  pt: 'Rolar para a seção de experiência profissional'
+},
+
   'technologies': {
     en: 'Technologies/Programming Languages:',
     pt: 'Tecnologias/Linguagens de Programação:'
@@ -87,6 +131,105 @@ const translations = {
     en: 'Other Knowledges:',
     pt: 'Outros Conhecimentos:'
   },
+  'professionalExperience': { 
+    en: 'Professional Experience',
+    pt: 'Experiência Profissional'
+  },
+  'period': { 
+    en: 'Period',
+    pt: 'Período'
+  },
+  'location': { 
+    en: 'Location',
+    pt: 'Localização'
+  },
+  'achievements': { 
+    en: 'Achievements',
+    pt: 'Conquistas'
+  },
+  'technologiesUsed': {
+    en: 'Technologies Used',
+    pt: 'Tecnologias Utilizadas'
+  },
+  // EXPERIÊNCIA PROFISSIONAL - NPI
+'experience.npi.role': {
+  en: 'Full Stack Developer (Intern)',
+  pt: 'Desenvolvedor Full Stack (Estagiário)'
+},
+'experience.npi.company': {
+  en: 'Center for Practices and Informatics (NPI)',
+  pt: 'Núcleo de Práticas e Informática (NPI)'
+},
+'experience.npi.location': {
+  en: 'Ceará, CE, Brazil',
+  pt: 'Ceará, CE, Brasil'
+},
+'experience.npi.description': {
+  en: 'Development and maintenance of web systems using Vue.js on the front-end and Node.js on the back-end. Active participation in agile ceremonies and code reviews.',
+  pt: 'Desenvolvimento e manutenção de sistemas web utilizando Vue.js no front-end e Node.js no back-end. Participação ativa em cerimônias ágeis e code reviews.'
+},
+'experience.npi.achievement1': {
+  en: 'Developed a full-stack nursing home management system using Vue.js, Vuetify, TypeScript, Spring Boot, and PostgreSQL',
+  pt: 'Desenvolveu um sistema completo de gestão de casa de repouso usando Vue.js, Vuetify, TypeScript, Spring Boot e PostgreSQL'
+},
+'experience.npi.achievement2': {
+  en: 'Engineered responsive interfaces, implemented form validations, performed CSS/UI improvements across multiple modules and optimized front-end performance',
+  pt: 'Projetou interfaces responsivas, implementou validações de formulários, realizou melhorias de CSS/UI em múltiplos módulos e otimizou o desempenho do front-end'
+},
+'experience.npi.achievement3': {
+  en: 'Built and maintained RESTful APIs, managed database relationships, and resolved data integrity issues using Spring Boot and DBeaver',
+  pt: 'Construiu e manteve APIs RESTful, gerenciou relacionamentos de banco de dados e resolveu problemas de integridade de dados usando Spring Boot e DBeaver'
+},
+'experience.npi.achievement4': {
+  en: 'Conducted automated testing with Playwright, resolved HTTP 500 errors and fixed critical bugs, improving system stability and data validation',
+  pt: 'Conduziu testes automatizados com Playwright, resolveu erros HTTP 500 e corrigiu bugs críticos, melhorando a estabilidade do sistema e a validação de dados'
+},
+'experience.npi.achievement5': {
+  en: 'Enhanced system performance through pagination, sorting functionalities, and table responsiveness',
+  pt: 'Melhorou o desempenho do sistema através de paginação, funcionalidades de ordenação e responsividade de tabelas'
+},
+'experience.npi.achievement6': {
+  en: 'Refactored code by improving data typing (varchar → TIME) and replacing inline styles with Vuetify utility classes',
+  pt: 'Refatorou o código melhorando a tipagem de dados (varchar → TIME) e substituindo estilos inline por classes utilitárias do Vuetify'
+},
+'experience.npi.achievement7': {
+  en: 'Collaborated in Scrum-based teams, using GitLab, SonarQube and CI/CD pipelines for version control and quality assurance',
+  pt: 'Colaborou em times baseados em Scrum, usando GitLab, SonarQube e pipelines CI/CD para controle de versão e garantia de qualidade'
+},
+'experience.npi.achievement8': {
+  en: 'Used Figma and GitLab for task management, UI review, and team collaboration (Miro for spring review)',
+  pt: 'Usou Figma e GitLab para gerenciamento de tarefas, revisão de UI e colaboração em equipe (Miro para revisão de sprint)'
+},
+
+'programmingLanguages': {
+  en: 'Programming Languages',
+  pt: 'Linguagens de Programação'
+},
+'enginesAndIDEs': {
+  en: 'Engines / IDEs',
+  pt: 'Motores / IDEs'
+},
+'specializations': {
+  en: 'Specializations',
+  pt: 'Especializações'
+},
+'versionControl': {
+  en: 'Version Control',
+  pt: 'Controle de Versão'
+},
+'backEnd': {
+  en: 'Back-End Technologies',
+  pt: 'Tecnologias de Back-End'
+},
+'frameworks': {
+  en: 'Frameworks',
+  pt: 'Frameworks'
+},
+'additionalSkills': {
+  en: 'Additional Skills',
+  pt: 'Habilidades Adicionais'
+},
+
 
   // PROJECT SECTIONS
   'technologiesLabel': {

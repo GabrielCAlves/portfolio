@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <h2 class="section-title" :key="forceUpdate">{{ $t('personal-work') }}</h2>
+    <h2 class="section-title" :key="forceUpdate">{{ $t('games') }}</h2>
     <div class="projects-container">
       <div v-for="project in projects" :key="project.id" class="project">
         <h3 class="project-title">{{ project.title }}</h3>
@@ -57,7 +57,7 @@
             </ul>
           </div>
           <div class="project-media">
-            <MediaCarousel :media="project.media" section="personal-work" />
+            <MediaCarousel :media="project.media" section="games" />
           </div>
         </div>
       </div>
@@ -161,7 +161,7 @@ const handleImageError = (event) => {
 
 const loadProjects = async () => {
   try {
-    const querySnapshot = await getDocs(collection(db, 'personal-projects'))
+    const querySnapshot = await getDocs(collection(db, 'games'))
     
     projects.value = querySnapshot.docs.map(doc => {
       const projectData = doc.data()

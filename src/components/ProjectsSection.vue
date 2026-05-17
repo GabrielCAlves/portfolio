@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <h2 class="section-title" :key="forceUpdate">{{ $t('professional-work') }}</h2>
+    <h2 class="section-title" :key="forceUpdate">{{ $t('projects') }}</h2>
     <div class="empty-state">
       <div class="empty-icon">💼</div>
       <h3 class="empty-title" :key="forceUpdate">{{ $t('noProfessionalProjects') }}</h3>
@@ -31,7 +31,7 @@ import { useTranslations } from '@/composables/useTranslations' // 🔥 USAR COM
 const { $t, forceUpdate } = useTranslations()
 
 const goToSection = (section) => {
-  const sections = ['about', 'personal-work', 'professional-work', 'web', 'mobile', 'contacts']
+  const sections = ['about', 'games', 'projects', 'web', 'mobile', 'contacts']
   const sectionIndex = sections.indexOf(section)
   
   if (sectionIndex !== -1) {

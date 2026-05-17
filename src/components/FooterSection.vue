@@ -45,10 +45,10 @@ const contacts = [
 
 <style scoped>
 .footer {
-  background: #1a1a1a;
+  background: #080c16/*#1a1a1a*/;
   color: white;
   padding: 2rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-content {

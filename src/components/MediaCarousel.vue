@@ -1,7 +1,7 @@
 <template>
-  <div class="rotating-card-carousel">
+  <div class="rotating-card-carousel" :class="{ 'vertical-carousel': vertical }">
     <div class="carousel-scene">
-      <div class="carousel-track">
+      <div class="carousel-track" :class="{ 'vertical-track': vertical }">
         <div 
           v-for="(item, index) in media" 
           :key="index"
@@ -15,7 +15,6 @@
           }"
           @click="openModal(index)"
         >
-          <!-- IMAGEM como card -->
           <img 
             v-if="isImage(item)" 
             :src="item" 
@@ -23,7 +22,6 @@
             class="media-element"
           />
           
-          <!-- EMBED (Vimeo/YouTube) com wrapper para proporção fixa -->
           <div v-else-if="isEmbed(item)" class="embed-wrapper">
             <iframe
               :src="getCleanEmbedUrl(item)"
@@ -34,7 +32,6 @@
             ></iframe>
           </div>
 
-          <!-- Fallback para outros tipos -->
           <div v-else class="unknown-media">
             Tipo de mídia não suportado
           </div>
@@ -42,13 +39,11 @@
       </div>
     </div>
 
-    <!-- Controles -->
     <div class="carousel-controls">
       <button @click="prevMedia" class="control-btn prev-btn">‹</button>
       <button @click="nextMedia" class="control-btn next-btn">›</button>
     </div>
 
-    <!-- Indicadores -->
     <div v-if="media.length > 1" 
          class="carousel-indicators"
          :class="[`${section}-indicators`]">
@@ -60,13 +55,11 @@
       />
     </div>
 
-    <!-- 🔥 MODAL FIXO - FORA DO FLUXO NORMAL -->
     <Teleport to="body">
       <div v-if="isModalOpen" class="modal-overlay" @click.self="closeModal">
         <div class="modal-content">
           <button class="modal-close" @click="closeModal">×</button>
           
-          <!-- Conteúdo do modal -->
           <div class="modal-media">
             <img 
               v-if="isImage(selectedMedia)"
@@ -86,7 +79,6 @@
             </div>
           </div>
 
-          <!-- Controles de navegação no modal -->
           <div v-if="media.length > 1" class="modal-controls">
             <button @click="prevMediaModal" class="modal-nav-btn modal-nav-btn-prev">‹</button>
             <span class="modal-counter">{{ modalCurrentIndex + 1 }} / {{ media.length }}</span>
@@ -109,6 +101,10 @@ const props = defineProps({
   section: {
     type: String,
     default: 'default'
+  },
+  vertical: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -117,32 +113,24 @@ const isModalOpen = ref(false)
 const modalCurrentIndex = ref(0)
 const selectedMedia = ref('')
 
-// 🔥 SINGLETON - Garantir que apenas um modal esteja aberto
 let globalModalOpen = false
 
 const openModal = (index) => {
-  // 🔥 IMPEDIR MÚLTIPLOS MODAIS
   if (globalModalOpen) return
   
   globalModalOpen = true
   modalCurrentIndex.value = index
-  // USE A URL LIMPA:
   selectedMedia.value = getCleanEmbedUrl(props.media[index])
   isModalOpen.value = true
-  
-  // 🔥 BLOQUEAR SCROLL DO BODY
   document.body.style.overflow = 'hidden'
 }
 
 const closeModal = () => {
   globalModalOpen = false
   isModalOpen.value = false
-  
-  // 🔥 RESTAURAR SCROLL DO BODY
   document.body.style.overflow = ''
 }
 
-// 🔥 NAVEGAÇÃO NO MODAL
 const nextMediaModal = () => {
   modalCurrentIndex.value = (modalCurrentIndex.value + 1) % props.media.length
   selectedMedia.value = getCleanEmbedUrl(props.media[modalCurrentIndex.value])
@@ -153,24 +141,19 @@ const prevMediaModal = () => {
   selectedMedia.value = getCleanEmbedUrl(props.media[modalCurrentIndex.value])
 }
 
-// 🔥 FECHAR MODAL COM ESC
 const handleKeydown = (event) => {
   if (event.key === 'Escape' && isModalOpen.value) {
     closeModal()
   }
 }
 
-// Adicionar listener para tecla ESC
 window.addEventListener('keydown', handleKeydown)
 
-// 🔥 LIMPEZA
 onUnmounted(() => {
   window.removeEventListener('keydown', handleKeydown)
-  // Garantir que o scroll seja restaurado se o componente for destruído
   document.body.style.overflow = ''
 })
 
-// Funções existentes do carousel...
 const getCardPosition = (index) => {
   const total = props.media.length
   const diff = (index - currentIndex.value + total) % total
@@ -189,17 +172,14 @@ const isImage = (url) => {
 }
 
 const isEmbed = (url) => {
-  // Verifica se é um embed do Vimeo ou YouTube
-  const cleanUrl = url.split('?')[0] // Remove parâmetros da URL
+  const cleanUrl = url.split('?')[0]
   return cleanUrl.includes('player.vimeo.com/video/') || 
          cleanUrl.includes('youtube.com/embed/') || 
          cleanUrl.includes('youtu.be/')
 }
 
-// Função para limpar URL de embed
 const getCleanEmbedUrl = (url) => {
   if (url.includes('player.vimeo.com/video/')) {
-    // Para Vimeo, use apenas o ID do vídeo
     const videoId = url.split('/video/')[1]?.split('?')[0]
     return `https://player.vimeo.com/video/${videoId}`
   }
@@ -222,9 +202,13 @@ const goToSlide = (index) => {
 <style scoped>
 .rotating-card-carousel {
   width: 100%;
-  height: 500px; /* Altura generosa */
+  height: 500px;
   position: relative;
   perspective: 1400px;
+}
+
+.rotating-card-carousel.vertical-carousel {
+  height: 500px;
 }
 
 .carousel-scene {
@@ -241,7 +225,6 @@ const goToSlide = (index) => {
   transform-style: preserve-3d;
 }
 
-/* 🔥 CARD - REMOVER fundo transparente e centralizar melhor */
 .media-card {
   position: absolute;
   top: 50%;
@@ -250,45 +233,17 @@ const goToSlide = (index) => {
   transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   cursor: pointer;
   border-radius: 8px;
-  overflow: visible; /* 🔥 MUDAR para visible */
+  overflow: visible;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent; 
-  /* 🔥 REMOVER qualquer padding/margin extra */
+  background: transparent;
   margin: 0;
   padding: 0;
 }
 
-/* 🔥 IMAGEM - AUMENTAR e centralizar melhor */
-.media-element {
-  display: block;
-  max-width: 500px;  /* 🔥 AUMENTAR largura máxima */
-  max-height: 500px; /* 🔥 AUMENTAR altura máxima */
-  width: auto;
-  height: auto;
-  border-radius: 8px;
-  object-fit: contain; /* Mantém proporção */
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  
-  /* 🔥 GARANTIR que ocupe todo o espaço disponível */
-  flex-shrink: 0;
-}
-
-/* 🔥 WRAPPER PARA IFRAMES - também aumentar */
-.embed-wrapper {
-  width: 500px; /* 🔥 AUMENTAR */
-  height: 281px; /* 🔥 AUMENTAR proporcionalmente (16:9) */
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 🔥 POSIÇÕES 3D - ajustar para os novos tamanhos */
+/* POSIÇÕES HORIZONTAIS */
 .media-card.active {
   transform: translate(-50%, -50%) translateZ(0) rotateY(0deg) scale(1);
   z-index: 5;
@@ -324,19 +279,49 @@ const goToSlide = (index) => {
   filter: brightness(0.6);
 }
 
-/* Esconder cards muito distantes */
+/* 🔥 POSIÇÕES VERTICAIS COM DIÂMETRO REDUZIDO */
+.vertical-carousel .media-card.active {
+  transform: translate(-50%, -50%) translateZ(0) rotateX(0deg) scale(1);
+}
+
+.vertical-carousel .media-card.prev-1 {
+  transform: translate(-50%, -50%) translateY(-180px) translateZ(-100px) rotateX(20deg) scale(0.85);
+  z-index: 4;
+  opacity: 0.7;
+  filter: brightness(0.8);
+}
+
+.vertical-carousel .media-card.prev-2 {
+  transform: translate(-50%, -50%) translateY(-320px) translateZ(-180px) rotateX(35deg) scale(0.7);
+  z-index: 3;
+  opacity: 0.4;
+  filter: brightness(0.6);
+}
+
+.vertical-carousel .media-card.next-1 {
+  transform: translate(-50%, -50%) translateY(180px) translateZ(-100px) rotateX(-20deg) scale(0.85);
+  z-index: 4;
+  opacity: 0.7;
+  filter: brightness(0.8);
+}
+
+.vertical-carousel .media-card.next-2 {
+  transform: translate(-50%, -50%) translateY(320px) translateZ(-180px) rotateX(-35deg) scale(0.7);
+  z-index: 3;
+  opacity: 0.4;
+  filter: brightness(0.6);
+}
+
 .media-card:not(.active):not(.prev-1):not(.prev-2):not(.next-1):not(.next-2) {
   opacity: 0;
   transform: translate(-50%, -50%) translateZ(-500px) scale(0.5);
   z-index: 1;
 }
 
-/* Efeito hover sutil */
 .media-card:hover {
   filter: brightness(1.1);
 }
 
-/* 🔥 ELEMENTO DE MÍDIA - tamanho natural */
 .media-element {
   display: block;
   max-width: 400px;
@@ -348,28 +333,6 @@ const goToSlide = (index) => {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* ✅ CONTAINER FLEXÍVEL PARA IFRAMES */
-.media-embed {
-  width: 400px; /* Largura base */
-  height: 225px; /* Altura base 16:9 */
-  border-radius: 8px;
-  border: none;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-.media-embed {
-  background: transparent;
-}
-
-/* 🔥 VÍDEOS LOCAIS - mantenha consistência */
-video.media-element {
-  width: 400px;
-  height: 225px;
-  max-width: 400px;
-  max-height: 225px;
-}
-
-/* ✅ WRAPPER PARA FORÇAR PROPORÇÃO 16:9 */
 .embed-wrapper {
   width: 400px;
   height: 225px;
@@ -381,7 +344,6 @@ video.media-element {
   justify-content: center;
 }
 
-/* ✅ IFRAME que preenche o wrapper completamente */
 .media-embed {
   width: 100%;
   height: 100%;
@@ -390,8 +352,6 @@ video.media-element {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* Controles */
-/* Resto do CSS permanece igual */
 .carousel-controls {
   position: absolute;
   top: 50%;
@@ -400,12 +360,11 @@ video.media-element {
   transform: translateY(-50%);
   display: flex;
   justify-content: space-between;
-  padding: 0 40px;
+  padding: 0 20px;
   pointer-events: none;
   z-index: 10;
 }
 
-/* 🔥 CORREÇÃO: BOTÕES DE CONTROLE CENTRALIZADOS */
 .control-btn {
   background: rgba(255, 255, 255, 0.9);
   border: none;
@@ -421,9 +380,9 @@ video.media-element {
   justify-content: center;
   pointer-events: all;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  line-height: 1; /* 🔥 ADICIONE ISSO */
-  padding: 0; /* 🔥 ADICIONE ISSO */
-  margin: 0; /* 🔥 ADICIONE ISSO */
+  line-height: 1;
+  padding: 0;
+  margin: 0;
 }
 
 .control-btn:hover {
@@ -448,20 +407,20 @@ video.media-element {
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 6px;
+  gap: 8px;
   z-index: 10;
 }
 
 .carousel-indicators button.indicator {
-  width: 6px !important;
-  height: 6px !important;
-  min-width: 6px !important;
-  min-height: 6px !important;
-  max-width: 6px !important;
-  max-height: 6px !important;
+  width: 8px !important;
+  height: 8px !important;
+  min-width: 8px !important;
+  min-height: 8px !important;
+  max-width: 8px !important;
+  max-height: 8px !important;
   border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.5);
   cursor: pointer;
   transition: all 0.3s ease;
   padding: 0;
@@ -470,15 +429,15 @@ video.media-element {
 
 .carousel-indicators button.indicator.active {
   background: white;
-  transform: scale(1.2);
+  transform: scale(1.3);
 }
 
 .carousel-indicators button.indicator:hover {
-  background: rgba(255, 255, 255, 0.7);
-  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.8);
+  transform: scale(1.2);
 }
 
-/* 🔥 MODAL TELEPORTADO PARA O BODY - CORRIGIDO */
+/* MODAL */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -489,7 +448,7 @@ video.media-element {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10000; /* 🔥 Z-INDEX MUITO ALTO */
+  z-index: 10000;
   animation: fadeIn 0.3s ease;
 }
 
@@ -561,7 +520,6 @@ video.media-element {
   box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8);
 }
 
-/* 🔥 CONTROLES DE NAVEGAÇÃO NO MODAL */
 .modal-controls {
   position: absolute;
   bottom: -70px;
@@ -578,7 +536,6 @@ video.media-element {
   z-index: 10001;
 }
 
-/* 🔥 CORREÇÃO: BOTÕES DO MODAL */
 .modal-nav-btn {
   background: rgba(255, 255, 255, 0.25);
   border: none;
@@ -592,8 +549,8 @@ video.media-element {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  line-height: 1; /* 🔥 ADICIONE ISSO */
-  padding: 0; /* 🔥 ADICIONE ISSO */
+  line-height: 1;
+  padding: 0;
 }
 
 .modal-nav-btn:hover {
@@ -619,18 +576,6 @@ video.media-element {
   text-align: center;
 }
 
-/* No final do arquivo MediaCarousel.vue */
-.control-btn,
-.modal-nav-btn {
-  line-height: 1;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 🔥 ANIMAÇÃO */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -640,120 +585,112 @@ video.media-element {
   }
 }
 
-/* 🔥 RESPONSIVIDADE */
+/* RESPONSIVIDADE */
 @media (max-width: 768px) {
-  .modal-close {
-    top: -50px;
-    right: -10px;
-    width: 40px;
-    height: 40px;
-    font-size: 2rem;
-  }
-  
-  .modal-embed-wrapper {
-    width: 95vw;
-    height: calc(95vw * 9 / 16);
-  }
-  
-  .modal-controls {
-    bottom: -60px;
-    gap: 1rem;
-    padding: 0.8rem 1.5rem;
-  }
-  
-  .modal-nav-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 1.5rem;
+  .rotating-card-carousel,
+  .rotating-card-carousel.vertical-carousel {
+    height: 400px;
   }
 
-  .carousel-indicators {
-    bottom: 12px; /* 🔥 SUBIR mais em tablet */
-    gap: 4px; /* 🔥 MÍNIMO espaçamento */
+  .media-element,
+  .embed-wrapper {
+    max-width: 280px;
+    max-height: 280px;
   }
   
-  /* 🔥 ADICIONE ESTAS REGRAS ESPECÍFICAS POR SEÇÃO */
-  .carousel-indicators.personal-work-indicators {
-    bottom: 70px !important;
-  }
-
-  .carousel-indicators.web-section-indicators {
-    bottom: 80px !important;
-  }
-
-  .carousel-indicators.mobile-section-indicators {
-    bottom: 10px !important;
+  .embed-wrapper {
+    height: 158px;
   }
   
-  .carousel-indicators button.indicator {
-    width: 15px !important;
-    height: 15px !important;
-    max-width: 15px !important;
-    max-height: 15px !important;
+  .media-card.prev-1 {
+    transform: translate(-50%, -50%) translateX(-220px) translateZ(-100px) rotateY(30deg) scale(0.9);
   }
   
-  .indicator.active {
-    transform: scale(1.1); /* 🔥 ESCALA menor */
+  .media-card.prev-2 {
+    transform: translate(-50%, -50%) translateX(-380px) translateZ(-180px) rotateY(45deg) scale(0.8);
+  }
+  
+  .media-card.next-1 {
+    transform: translate(-50%, -50%) translateX(220px) translateZ(-100px) rotateY(-30deg) scale(0.9);
+  }
+  
+  .media-card.next-2 {
+    transform: translate(-50%, -50%) translateX(380px) translateZ(-180px) rotateY(-45deg) scale(0.8);
+  }
+  
+  .vertical-carousel .media-card.prev-1 {
+    transform: translate(-50%, -50%) translateY(-130px) translateZ(-70px) rotateX(20deg) scale(0.85);
+  }
+  
+  .vertical-carousel .media-card.prev-2 {
+    transform: translate(-50%, -50%) translateY(-240px) translateZ(-130px) rotateX(35deg) scale(0.7);
+  }
+  
+  .vertical-carousel .media-card.next-1 {
+    transform: translate(-50%, -50%) translateY(130px) translateZ(-70px) rotateX(-20deg) scale(0.85);
+  }
+  
+  .vertical-carousel .media-card.next-2 {
+    transform: translate(-50%, -50%) translateY(240px) translateZ(-130px) rotateX(-35deg) scale(0.7);
   }
 }
 
 @media (max-width: 480px) {
-  .rotating-card-carousel {
-    height: 350px;
+  .rotating-card-carousel,
+  .rotating-card-carousel.vertical-carousel {
+    height: 320px;
   }
   
-  .media-element {
-    max-width: 250px;
-    max-height: 250px;
+  .media-element,
+  .embed-wrapper {
+    max-width: 220px;
+    max-height: 220px;
   }
   
   .embed-wrapper {
-    width: 250px;
-    height: 141px;
+    height: 124px;
   }
   
   .media-card.prev-1 {
-    transform: translate(-50%, -50%) translateX(-180px) translateZ(-80px) rotateY(30deg) scale(0.9);
+    transform: translate(-50%, -50%) translateX(-160px) translateZ(-70px) rotateY(30deg) scale(0.9);
   }
   
   .media-card.prev-2 {
-    transform: translate(-50%, -50%) translateX(-320px) translateZ(-160px) rotateY(45deg) scale(0.8);
+    transform: translate(-50%, -50%) translateX(-280px) translateZ(-130px) rotateY(45deg) scale(0.8);
   }
   
   .media-card.next-1 {
-    transform: translate(-50%, -50%) translateX(180px) translateZ(-80px) rotateY(-30deg) scale(0.9);
+    transform: translate(-50%, -50%) translateX(160px) translateZ(-70px) rotateY(-30deg) scale(0.9);
   }
   
   .media-card.next-2 {
-    transform: translate(-50%, -50%) translateX(320px) translateZ(-160px) rotateY(-45deg) scale(0.8);
-  }
-
-  .carousel-indicators {
-    gap: 3px; /* 🔥 MÍNIMO espaçamento */
+    transform: translate(-50%, -50%) translateX(280px) translateZ(-130px) rotateY(-45deg) scale(0.8);
   }
   
-  /* 🔥 ADICIONE ESTAS REGRAS ESPECÍFICAS POR SEÇÃO */
-  .carousel-indicators.personal-work-indicators {
-    bottom: 70px !important;
-  }
-
-  .carousel-indicators.web-section-indicators {
-    bottom: 70px !important;
-  }
-
-  .carousel-indicators.mobile-section-indicators {
-    bottom: 10px !important;
-  }
-
-  .carousel-indicators button.indicator {
-    width: 10px !important;
-    height: 10px !important;
-    max-width: 10px !important;
-    max-height: 10px !important;
+  .vertical-carousel .media-card.prev-1 {
+    transform: translate(-50%, -50%) translateY(-100px) translateZ(-50px) rotateX(20deg) scale(0.85);
   }
   
-  .indicator.active {
-    transform: scale(1.1); /* 🔥 ESCALA consistente */
+  .vertical-carousel .media-card.prev-2 {
+    transform: translate(-50%, -50%) translateY(-180px) translateZ(-100px) rotateX(35deg) scale(0.7);
+  }
+  
+  .vertical-carousel .media-card.next-1 {
+    transform: translate(-50%, -50%) translateY(100px) translateZ(-50px) rotateX(-20deg) scale(0.85);
+  }
+  
+  .vertical-carousel .media-card.next-2 {
+    transform: translate(-50%, -50%) translateY(180px) translateZ(-100px) rotateX(-35deg) scale(0.7);
+  }
+  
+  .carousel-controls {
+    padding: 0 10px;
+  }
+  
+  .control-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
   }
 }
 </style>

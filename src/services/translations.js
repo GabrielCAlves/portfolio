@@ -218,8 +218,8 @@ const translations = {
   pt: 'Controle de Versão'
 },
 'backEnd': {
-  en: 'Back-End Technologies',
-  pt: 'Tecnologias de Back-End'
+  en: 'Back-End',
+  pt: 'Back-End'
 },
 'frameworks': {
   en: 'Frameworks',
@@ -252,9 +252,9 @@ const translations = {
     en: 'Want to try? Here:',
     pt: 'Quer experimentar? Aqui:'
   },
-  'download': {
-    en: 'Download',
-    pt: 'Baixar'
+  'playlink': {
+    en: 'Link',
+    pt: 'Link'
   },
 'viewCode': {
   en: 'View Code',
@@ -306,8 +306,8 @@ const translations = {
     pt: 'Desenvolvimento de Gameplay, Design de Níveis, Desenvolvimento de UI, Som e Animação.'
   },
   'personal.astroAdventure.responsibilities': {
-    en: 'Complete game development including mechanics, level design, user interface, sound effects and character animations.',
-    pt: 'Desenvolvimento completo do jogo incluindo mecânicas, design de níveis, interface de usuário, efeitos sonoros e animações de personagens.'
+    en: 'Game Mechanics, Level Design, User Interface, Sound Effects, Character animations.',
+    pt: 'Mecânicas do Jogo, Design de Níveis, Interface de Usuário, Efeitos Sonoros, Animações de Personagens.'
   },
   'personal.astroAdventure.description': {
     en: 'A 3D space adventure game where players need to navigate through a hostile alien environment for the survival.',
@@ -319,8 +319,8 @@ const translations = {
     pt: 'Desenvolvimento de Gameplay, Design de Níveis, Desenvolvimento de UI, Som e Animação.'
   },
   'personal.astroObstacle.responsibilities': {
-    en: 'Development of obstacle mechanics, level design with random platforms, user interface and sound implementation.',
-    pt: 'Desenvolvimento de mecânicas de obstáculos, design de níveis com plataformas aleatórias, interface de usuário e implementação de som.'
+    en: 'Development of Obstacle Mechanics, Level Design with Random Platforms, User Interface, Sound Implementation.',
+    pt: 'Desenvolvimento de Mecânicas de Obstáculos, Design de Níveis com Plataformas Aleatórias, Interface de Usuário e Implementação de Som.'
   },
   'personal.astroObstacle.description': {
     en: 'A 3D challenging finite run obstacle course game. Players must navigate through randomly difficult platforms while avoiding barriers.',
@@ -332,8 +332,8 @@ const translations = {
     pt: 'Desenvolvimento de Gameplay, Design de Níveis, Desenvolvimento de UI, Som e Animação.'
   },
   'personal.lostInTheStars.responsibilities': {
-    en: '2D platformer development including character mechanics, level design, user interface and sound effects.',
-    pt: 'Desenvolvimento de plataforma 2D incluindo mecânicas de personagem, design de níveis, interface de usuário e efeitos sonoros.'
+    en: 'Character Mechanics, Level Design, User Interface, Sound Effects.',
+    pt: 'Mecânicas de Personagem, Design de Níveis, Interface de Usuário, Efeitos Sonoros.'
   },
   'personal.lostInTheStars.description': {
     en: 'A 2D action-platformer game set in space. Finding out what you can do is the key for the victory.',
@@ -345,12 +345,12 @@ const translations = {
     pt: 'Desenvolvimento de Gameplay e Desenvolvimento de UI.'
   },
   'personal.myPong.responsibilities': {
-    en: 'Development of classic Pong mechanics with multiplayer functionality, customizable colors and user interface.',
-    pt: 'Desenvolvimento de mecânicas clássicas do Pong com funcionalidade multiplayer, cores personalizáveis e interface de usuário.'
+    en: 'Development of classic Pong mechanics, Multiplayer Functionality, Customizable Colors, User Interface.',
+    pt: 'Desenvolvimento de Mecânicas Clássicas do Pong, Funcionalidade Multiplayer, Cores Personalizáveis, Interface de Usuário.'
   },
   'personal.myPong.description': {
     en: 'The classic, but here, players can challenge their friends, customize their pads color and identify themselves.',
-    pt: 'O clássico, mas aqui os jogadores podem desafiar seus amigos, personalizar a cor de suas raquetes e se identificar.'
+    pt: 'O clássico, mas aqui, os jogadores podem desafiar seus amigos, personalizar a cor de suas raquetes e se identificar.'
   },
 
   'personal.fourKingdoms.role': {
@@ -358,13 +358,36 @@ const translations = {
     pt: 'Desenvolvimento de Gameplay, Design de Níveis, Desenvolvimento de UI e Animação.'
   },
   'personal.fourKingdoms.responsibilities': {
-    en: 'Development of 4-player brawl mechanics, kingdom-themed level design, user interface and character animations.',
-    pt: 'Desenvolvimento de mecânicas de briga para 4 jogadores, design de níveis temáticos de reinos, interface de usuário e animações de personagens.'
+    en: 'Development of 4-Player Brawl Mechanics, Level Design, User Interface, Character Animations.',
+    pt: 'Desenvolvimento de Mecânicas de Briga para 4 Jogadores, Design de Níveis, Interface de Usuário, Animações de Personagens.'
   },
   'personal.fourKingdoms.description': {
     en: 'A 4-people 2D brawl platformer game. Choose your kingdom and fight for it against your friends in the war!',
     pt: 'Um jogo de plataforma e briga 2D para 4 pessoas. Escolha seu reino e lute por ele contra seus amigos na guerra!'
   },
+
+  // Add these to your translations.js file
+'platform': {
+  en: 'Platform:',
+  pt: 'Plataforma:'
+},
+'playOnline': {
+  en: 'Play Online',
+  pt: 'Jogar Online'
+},
+'downloadGame': {
+  en: 'Download Game',
+  pt: 'Baixar Jogo'
+},
+'noLinkAvailable': {
+  en: 'No link available',
+  pt: 'Nenhum link disponível'
+},
+'noCodeAvailable': {
+  en: 'No code available',
+  pt: 'Nenhum código disponível'
+},
+
   // PROJETOS WEB
   'web.adotaai.role': {
     en: 'Full-Stack Developer and Debugger.',

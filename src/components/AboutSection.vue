@@ -486,17 +486,17 @@ onUnmounted(() => {
   font-size: 3rem;
   text-align: center;
   margin-bottom: 2rem;
-  display: inline-block; /* 🔥 MUDE para inline-block */
-  width: auto; /* 🔥 Largura automática */
-  padding: 0.5rem 2rem; /* 🔥 Adicione padding para espaçamento interno */
+  display: inline-block; 
+  width: auto; 
+  padding: 0.5rem 2rem; 
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-image: linear-gradient(135deg, rgb(204, 139, 0) 0%, white 50%, rgb(204, 139, 0) 100%) 1;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
-  border-radius: 5px; /* 🔥 Opcional: bordas arredondadas */
-  left: 50%; /* 🔥 Para centralizar */
-  position: relative; /* 🔥 Para centralizar */
-  transform: translateX(-50%); /* 🔥 Para centralizar */
+  border-radius: 5px;
+  left: 50%;
+  position: relative;
+  transform: translateX(-50%);
 }
 
 /* Primeira linha: duas colunas */
@@ -1247,6 +1247,15 @@ onUnmounted(() => {
   text-align: center;
   border-bottom: 1px solid rgba(204, 0, 0, 1.0);
   padding-bottom: 0.5rem;
+}
+
+.skill-card:hover h3 {
+  background: linear-gradient(135deg, rgb(204, 139, 0) 0%, white 50%, rgb(204, 139, 0) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; /* Torna o texto transparente para mostrar o gradiente */
+  border-bottom-color: rgb(204, 139, 0);
 }
 
 .tech-grid {

@@ -381,6 +381,48 @@ onUnmounted(() => {
   window.removeEventListener('keydown', handleKeydown)
   window.removeEventListener('change-section', handleSectionChange)
 })
+
+// Adicione ao script setup
+const updatePersonScale = () => {
+  const backgroundImage = document.querySelector('.background-image.back-layer')
+  const centerPerson = document.querySelector('.center-person-3d')
+  
+  if (!backgroundImage || !centerPerson) return
+  
+  const windowWidth = window.innerWidth
+  
+  // Apenas para telas maiores que 1251px
+  if (windowWidth >= 1251) {
+    // Calcula a escala baseada na largura da tela
+    // Valores base para 1251px
+    const baseWidth = 1251
+    const currentWidth = windowWidth
+    
+    // Calcula o fator de escala (limitado para não ficar extremo)
+    const scaleFactor = Math.min(currentWidth / baseWidth, 1.5)
+    
+    // Aplica a escala mantendo as proporções relativas
+    centerPerson.style.transform = `translateZ(0px) scale(${scaleFactor})`
+    centerPerson.style.transformOrigin = 'center center'
+  } else {
+    // Reseta para valores originais abaixo de 1251px
+    centerPerson.style.transform = 'translateZ(0px)'
+    centerPerson.style.transformOrigin = ''
+  }
+}
+
+// Adicione ao onMounted
+onMounted(() => {
+  // ... seu código existente
+  window.addEventListener('resize', updatePersonScale)
+  updatePersonScale() // Chamada inicial
+})
+
+// Adicione ao onUnmounted
+onUnmounted(() => {
+  // ... seu código existente
+  window.removeEventListener('resize', updatePersonScale)
+})
 </script>
 
 <style scoped>
@@ -499,8 +541,8 @@ onUnmounted(() => {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
   background-image: url('https://res.cloudinary.com/dimsi9muz/image/upload/v1762210369/Adobe_Express_-_file_xcviof.png');
   background-size: cover;
   background-position: center;
@@ -509,6 +551,11 @@ onUnmounted(() => {
   pointer-events: none;
   transform: translateZ(0px);
   z-index: 500000 !important;
+  
+  top: 11.7%;
+  left: 37.5%;
+  width: 25%;
+  height: 76.5%;
 }
 
 .carousel-3d-control {
@@ -781,12 +828,12 @@ onUnmounted(() => {
   animation-duration: 2s;
 }
 
-@media (min-width:1025px) and (max-width: 1115px) {
-  .center-person-3d{
-    top: -8.35%;
-    left: -5.05%;
-    width: 110%;
-    height: 117%;
+@media (max-width: 1250px){
+  .center-person-3d{  
+    top: 12%;
+    left: 37.5%;
+    width: 25%;
+    height: 76%;
   }
 }
 
@@ -873,17 +920,12 @@ onUnmounted(() => {
     perspective: 1500px;
   }
   
-  .center-person-3d{
+  /* .center-person-3d{
     top: 7.7%;
     left: 7.5%;
     width: 85%;
     height: 84.5%;
-
-    /*top: 19.4%;
-    left: 17.5%;*/
-    /*width: 65%;
-    height: 61.2%;*/
-  }
+  } */
   
   /* 🔥 CORREÇÃO PARA NOVO SISTEMA EM MOBILE */
   .sections-container {
@@ -928,12 +970,12 @@ onUnmounted(() => {
     perspective: 1200px;
   }
   
-  .center-person-3d{
+  /* .center-person-3d{
     top: 12.5%;
     left: 12.5%;
     width: 75%;
     height: 75%;
-  }
+  } */
   
   /* 🔥 CORREÇÃO PARA NOVO SISTEMA EM MOBILE PEQUENO */
   .sections-container {
@@ -960,6 +1002,13 @@ onUnmounted(() => {
   
   .carousel-3d-wrapper {
     perspective: 2000px;
+  }
+
+  .center-person-3d{  
+    top: 16.75%;
+    left: 37.4%;
+    width: 25%;
+    height: 66.35%;
   }
 }
 
@@ -1001,6 +1050,13 @@ onUnmounted(() => {
   .carousel-3d-wrapper {
     perspective: 1500px;
   }
+
+  .center-person-3d{  
+    top: 22.5%;
+    left: 37.4%;
+    width: 25%;
+    height: 55%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1034,6 +1090,22 @@ onUnmounted(() => {
     width: 40px;
     height: 40px;
     font-size: 1.5rem;
+  }
+
+  .center-person-3d{  
+    top: 25%;
+    left: 37.4%;
+    width: 25%;
+    height: 50%;
+  }
+}
+
+@media (max-width: 374px) {
+  .center-person-3d{  
+    top: 25%;
+    left: 37.4%;
+    width: 25%;
+    height: 50%;
   }
 }
 

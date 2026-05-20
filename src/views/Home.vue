@@ -50,8 +50,8 @@
         </div>
         
         <!-- Controles -->
-        <button class="carousel-3d-control prev" @click="rotateManual(-72)">‹</button>
-        <button class="carousel-3d-control next" @click="rotateManual(72)">›</button>
+        <button class="carousel-3d-control prev" @click="rotateManual(-60)">‹</button>
+        <button class="carousel-3d-control next" @click="rotateManual(60)">›</button>
       </div>
     </section>
 
@@ -114,7 +114,7 @@
 </template>
 
 <script setup>
-import { ref, /*computed,*/ onMounted, onUnmounted/*, nextTick*/ } from 'vue'
+import { ref, /*computed,*/ onMounted, onUnmounted, nextTick } from 'vue'
 import NavigationBar from '@/components/NavigationBar.vue'
 import AboutSection from '@/components/AboutSection.vue'
 // import PersonalWork from '@/components/PersonalWork.vue'
@@ -186,11 +186,16 @@ const carouselImages = ref([
     id: 'carousel-5',
     url: cloudinaryUrls.slider[4] || '',
     alt: 'Project 5'
+  },
+  {
+    id: 'carousel-6',  // 🔥 NOVO SEXTO CARD
+    url: cloudinaryUrls.slider[5] || '',
+    alt: 'Project 6'
   }
 ])
 
 // POSIÇÃO FIXA DE CADA CARD NO CAROUSEL
-const cardBasePositions = [0, 72, 144, 216, 288]
+const cardBasePositions = [0, 60, 120, 180, 240, 300]
 
 // POSIÇÃO 3D DO CARD - MANTIDO
 const getCardPosition = (index) => {
@@ -260,6 +265,8 @@ const resumeRotation = () => {
   isRotationPaused.value = false
 }
 
+const MANUAL_ROTATION_ANGLE = 60  // 🔥 NOVO: 360/6 = 60 graus
+
 const rotateManual = (angleChange) => {
   currentRotation.value = (currentRotation.value + angleChange) % 360
   if (currentRotation.value < 0) currentRotation.value += 360
@@ -269,64 +276,101 @@ const rotateManual = (angleChange) => {
   }, 2000)
 }
 
+// 🔥 MAPEAMENTO CORRETO DOS CARDS - Adicione IDs únicos aos projetos
+const carouselToProjectMap = {
+  0: 'Astro Adventure 3D',  // Card 1 -> Astro Adventure 3D
+  1: 'Cook & Conquer',      // Card 2 -> Cook & Conquer
+  2: 'Astro Obstacle',      // Card 3 -> Astro Obstacle
+  3: 'Lost In The Stars',   // Card 4 -> Lost In The Stars
+  4: 'MyPong',              // Card 5 -> MyPong
+  5: '4Kingdoms'            // Card 6 -> 4Kingdoms
+}
+
 const setActiveImage = (index) => {
   pauseRotation()
   
-  // Mapear índice do carousel para seção e projeto específico
-  const carouselToProjectMap = {
-    0: { section: 1, projectIndex: 0 }, // Primeiro card -> Personal Work, primeiro projeto
-    1: { section: 1, projectIndex: 1 }, // Segundo card -> Personal Work, segundo projeto
-    2: { section: 1, projectIndex: 2 }, // Terceiro card -> Personal Work, terceiro projeto
-    3: { section: 1, projectIndex: 3 }, // Quarto card -> Personal Work, quarto projeto
-    4: { section: 1, projectIndex: 4 }  // Quinto card -> Personal Work, quinto projeto
-  }
-  
-  const mapping = carouselToProjectMap[index]
-  if (mapping) {
-    // Mudar para a seção Personal Work
-    changeSection(mapping.section)
+  const projectTitle = carouselToProjectMap[index]
+  if (projectTitle) {
+    console.log(`Clicou no card ${index}, procurando projeto: ${projectTitle}`)
     
-    // Aguardar a transição e rolar até o projeto específico
+    // Mudar para a seção de Games (índice 1)
+    currentSection.value = 1
+    
+    // Aguardar a mudança de seção e rolar para o projeto
     setTimeout(() => {
-      scrollToProject(mapping.projectIndex)
-    }, 500)
+      scrollToProjectByTitle(projectTitle)
+    }, 150)
   }
   
   setTimeout(() => {
     resumeRotation()
-  }, 2000)
+  }, 3000)
 }
 
-const scrollToProject = (projectIndex) => {
-  const projects = document.querySelectorAll('.project')
-  if (projects[projectIndex]) {
-    projects[projectIndex].scrollIntoView({ 
-      behavior: 'smooth',
-      block: 'center'
+// 🔥 NOVA FUNÇÃO: scrollToProjectByTitle - procura pelo título do projeto
+const scrollToProjectByTitle = async (projectTitle) => {
+  // Aguardar a seção ser renderizada
+  await new Promise(resolve => setTimeout(resolve, 500))
+  
+  // Forçar Vue a atualizar o DOM
+  await nextTick()
+  
+  // Tentar múltiplas vezes encontrar o projeto
+  let attempts = 0
+  const maxAttempts = 15
+  
+  const findAndScroll = () => {
+    // Procurar por todos os títulos de projeto
+    const projectTitles = document.querySelectorAll('.project-title')
+    console.log(`Tentativa ${attempts + 1}: Procurando por "${projectTitle}"`)
+    
+    let targetProject = null
+    let targetIndex = -1
+    
+    projectTitles.forEach((title, idx) => {
+      if (title.textContent.trim() === projectTitle) {
+        targetProject = title.closest('.project')
+        targetIndex = idx
+        console.log(`Encontrado! Índice ${idx}, título: ${title.textContent}`)
+      }
     })
     
-    // Destacar o projeto temporariamente
-    projects[projectIndex].style.transition = 'all 0.5s ease'
-    projects[projectIndex].style.boxShadow = '0 0 0 3px rgba(255, 255, 255, 0.5)'
-    setTimeout(() => {
-      projects[projectIndex].style.boxShadow = ''
-    }, 2000)
+    if (targetProject) {
+      const navbarHeight = 80
+      const elementPosition = targetProject.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+      
+      // Destacar o projeto
+      targetProject.style.transition = 'all 0.5s ease'
+      targetProject.style.boxShadow = '0 0 0 3px rgba(255, 215, 0, 0.8)'
+      targetProject.style.border = '3px solid gold'
+      
+      setTimeout(() => {
+        targetProject.style.boxShadow = ''
+        targetProject.style.border = ''
+      }, 2000)
+      
+      return true
+    }
+    
+    attempts++
+    if (attempts < maxAttempts) {
+      setTimeout(findAndScroll, 200)
+    } else {
+      console.error(`Projeto "${projectTitle}" não encontrado após ${maxAttempts} tentativas`)
+      console.log('Títulos disponíveis:', Array.from(projectTitles).map(t => t.textContent))
+    }
+    return false
   }
+  
+  findAndScroll()
 }
 
-// 🔥 MUDANÇA RADICAL: SIMPLES MUDANÇA DE SEÇÃO SEM CONTROLE DE ALTURA
-// const changeSection = (index) => {
-//   currentSection.value = index
-  
-//   // 🔥 ROLAR PARA O TOPO DA SEÇÃO
-//   setTimeout(() => {
-//     const sectionsContainer = document.querySelector('.sections-container')
-//     if (sectionsContainer) {
-//       sectionsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' })
-//     }
-//   }, 50)
-// }
-// 🔥 MUDANÇA RADICAL: SIMPLES MUDANÇA DE SEÇÃO SEM CONTROLE DE ALTURA
 const changeSection = (index) => {
   currentSection.value = index
   
@@ -334,7 +378,7 @@ const changeSection = (index) => {
   setTimeout(() => {
     const sectionsContainer = document.querySelector('.sections-container')
     if (sectionsContainer) {
-      const navbarHeight = 80 // Altura da navbar em pixels
+      const navbarHeight = 80
       const elementPosition = sectionsContainer.getBoundingClientRect().top
       const offsetPosition = elementPosition + window.pageYOffset - navbarHeight
       
@@ -826,6 +870,15 @@ onUnmounted(() => {
 
 .hero-headline:hover h1::before {
   animation-duration: 2s;
+}
+
+@media (min-width: 1670px){
+  .center-person-3d{  
+    top: 10.9%;
+    left: 37%;
+    width: 26%;
+    height: 78%;
+  }
 }
 
 @media (max-width: 1250px){

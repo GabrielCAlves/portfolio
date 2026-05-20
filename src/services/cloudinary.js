@@ -51,6 +51,7 @@ export const cloudinaryUrls = {
   // ========== ANGLED SLIDER ==========
   slider: [
     'https://res.cloudinary.com/dimsi9muz/image/upload/v1761513316/AstroAdventure3D_-_2_rwbxdf.gif',
+    'https://res.cloudinary.com/dimsi9muz/image/upload/v1779232788/CookAndConquer.gif',
     'https://res.cloudinary.com/dimsi9muz/image/upload/v1761512884/AstroObstacle_shpilu.gif', 
     'https://res.cloudinary.com/dimsi9muz/image/upload/v1761512830/LostInTheStars_-_2_cigu8t.gif',
     'https://res.cloudinary.com/dimsi9muz/image/upload/v1761511375/MyPong_kmj4it.gif',
@@ -75,6 +76,18 @@ export const cloudinaryUrls = {
     project2: {
       media: [
         // Vídeos
+        'https://player.vimeo.com/video/1193764041?badge=0&autopause=0&player_id=0&app_id=58479&byline=0&portrait=0&title=0&dnt=1',
+        // Imagens
+        'https://res.cloudinary.com/dimsi9muz/image/upload/v1779231348/screenshot-1.png',
+        'https://res.cloudinary.com/dimsi9muz/image/upload/v1779231351/screenshot-2.png',
+        'https://res.cloudinary.com/dimsi9muz/image/upload/v1779231354/screenshot-3.png',
+        'https://res.cloudinary.com/dimsi9muz/image/upload/v1779231357/screenshot-4.png'
+      ]
+    },
+    // Projeto 3
+    project3: {
+      media: [
+        // Vídeos
         'https://player.vimeo.com/video/1131090517?badge=0&autopause=0&player_id=0&app_id=58479&byline=0&portrait=0&title=0&dnt=1',
         // Imagens
         'https://res.cloudinary.com/dimsi9muz/image/upload/v1761448355/screenshot-1_adu0kx.png',
@@ -83,8 +96,8 @@ export const cloudinaryUrls = {
         'https://res.cloudinary.com/dimsi9muz/image/upload/v1761448365/screenshot-4_bvcgrg.png'
       ]
     },
-    // Projeto 3
-    project3: {
+    // Projeto 4
+    project4: {
       media: [
         // Vídeos
         'https://player.vimeo.com/video/1131089928?badge=0&autopause=0&player_id=0&app_id=58479&byline=0&portrait=0&title=0&dnt=1',
@@ -95,8 +108,8 @@ export const cloudinaryUrls = {
         'https://res.cloudinary.com/dimsi9muz/image/upload/v1761448408/screenshot-4_mszjr1.png'
       ]
     },
-    // Projeto 4
-    project4: {
+    // Projeto 5
+    project5: {
       media: [
         // Vídeos
         'https://player.vimeo.com/video/1131089229?badge=0&autopause=0&player_id=0&app_id=58479&byline=0&portrait=0&title=0&dnt=1',
@@ -107,8 +120,8 @@ export const cloudinaryUrls = {
         'https://res.cloudinary.com/dimsi9muz/image/upload/v1761448453/screenshot-4_mp6jza.png'
       ]
     },
-    // Projeto 5
-    project5: {
+    // Projeto 6
+    project6: {
       media: [
         // Vídeos
         'https://player.vimeo.com/video/1131087867?badge=0&autopause=0&player_id=0&app_id=58479&byline=0&portrait=0&title=0&dnt=1',

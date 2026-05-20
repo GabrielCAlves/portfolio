@@ -301,6 +301,19 @@ const translations = {
   },
 
   // PERSONAL WORK
+  'personal.cookAndConquer.role': {
+    en: 'Gameplay Development, UI Development and Sound.',
+    pt: 'Desenvolvimento de Gameplay, Desenvolvimento de UI e Som.'
+  },
+  'personal.cookAndConquer.responsibilities': {
+    en: 'Inventory System, Drop System, Collect System, Crafting System',
+    pt: 'Sistema de Inventário, Sistema de Drop, Sistema de Coleta, Sistema de Criação.'
+  },
+  'personal.cookAndConquer.description': {
+    en: 'A survival roguelike game with medieval and cooking themes. Survive in the dungeon for as long as possible, defeating as many enemies as you can, collecting ingredients and cooking recipes for your journey, until you find and defeat the boss of the region.',
+    pt: 'Um roguelike de sobrevivência com temáticas medieval e de cozinha. Sobreviva na masmorra pelo maior tempo possível, eliminando o maior número de inimigos, coletando ingredientes e cozinhando receitas para sua jornada, até encontrar e derrotar o boss da região.'
+  },
+
   'personal.astroAdventure.role': {
     en: 'Gameplay Development, Level Design, UI Development, Sound and Animation.',
     pt: 'Desenvolvimento de Gameplay, Design de Níveis, Desenvolvimento de UI, Som e Animação.'
@@ -390,12 +403,12 @@ const translations = {
 
   // PROJETOS WEB
   'web.adotaai.role': {
-    en: 'Full-Stack Developer and Debugger.',
-    pt: 'Desenvolvedor Full-Stack e Debugger.'
+    en: 'Full-Stack Developer, Debugger.',
+    pt: 'Desenvolvedor Full-Stack, Debugger.'
   },
   'web.adotaai.responsibilities': {
-    en: 'Development of frontend and backend, API integration, debugging and bug fixing.',
-    pt: 'Desenvolvimento de frontend e backend, integração com APIs, debugging e correção de bugs.'
+    en: 'Frontend Development, Backend Development, API integration, Debugging, Bug Fixing.',
+    pt: 'Desenvolvimento de Frontend, Desenvolvimento de Backend, Integração com APIs, Debugging, Correção de Bugs.'
   },
   'web.adotaai.description': {
     en: 'A responsible pet adoption platform connecting animal owners with potential adopters. Features include user registration, pet listings, search filters, adoption request management and password recovery.',
@@ -403,12 +416,12 @@ const translations = {
   },
 
   'web.casadoanciao.role': {
-    en: 'Full-Stack Developer and Debugger.',
-    pt: 'Desenvolvedor Full-Stack e Debugger.'
+    en: 'Full-Stack Developer, Debugger.',
+    pt: 'Desenvolvedor Full-Stack, Debugger.'
   },
   'web.casadoanciao.responsibilities': {
-    en: 'Development of frontend and backend, database management, API integration and system debugging.',
-    pt: 'Desenvolvimento de frontend e backend, gerenciamento de banco de dados, integração com APIs e debugging do sistema.'
+    en: 'Frontend Development, Backend Development, Database Management, API Integration, System Debugging.',
+    pt: 'Desenvolvimento de Frontend e Backend, Gerenciamento de Banco de Dados, Integração com APIs, Debugging do Sistema.'
   },
   'web.casadoanciao.description': {
     en: 'Management system for employees of a nursing home. Includes tools for password recovery, searching and managing work schedules, incidents, users, histories, and generating reports for better coordination of care.',
@@ -425,12 +438,12 @@ const translations = {
     pt: '👁️ Mostrar Conteúdo'
   },
   'mobile.consultasqx.role': {
-    en: 'Full-Stack Developer and Debugger.',
-    pt: 'Desenvolvedor Full-Stack e Debugger.'
+    en: 'Full-Stack Developer, Debugger.',
+    pt: 'Desenvolvedor Full-Stack, Debugger.'
   },
   'mobile.consultasqx.responsibilities': {
-    en: 'Mobile app development, Firebase integration, user interface implementation and system debugging.',
-    pt: 'Desenvolvimento de aplicativo mobile, integração com Firebase, implementação de interface de usuário e debugging do sistema.'
+    en: 'Mobile App Development, Firebase Integration, User Interface Implementation, System Debugging.',
+    pt: 'Desenvolvimento de Aplicativo Mobile, Integração com Firebase, Implementação de Interface de Usuário, Debugging do Sistema.'
   },
   'mobile.consultasqx.description': {
     en: 'Medical appointment scheduling app that connects patients with healthcare professionals. Features include user and doctor registration, search filters, appointment scheduling, location services, visualization of doctor profiles, and managing medical appointment history.',
@@ -438,12 +451,12 @@ const translations = {
   },
 
   'mobile.motora.role': {
-    en: 'Full-Stack Developer and Debugger.',
-    pt: 'Desenvolvedor Full-Stack e Debugger.'
+    en: 'Full-Stack Developer, Debugger.',
+    pt: 'Desenvolvedor Full-Stack, Debugger.'
   },
   'mobile.motora.responsibilities': {
-    en: 'Mobile app development, Firebase integration, implementation of calculation logic and system debugging.',
-    pt: 'Desenvolvimento de aplicativo mobile, integração com Firebase, implementação de lógica de cálculos e debugging do sistema.'
+    en: 'Mobile App Development, Firebase Integration, Calculation Logic Implementation, System Debugging.',
+    pt: 'Desenvolvimento de Aplicativo Mobile, Integração com Firebase, Implementação de Lógica de Cálculos, Debugging do Sistema.'
   },
   'mobile.motora.description': {
     en: 'A physical education app that helps P.E. teachers evaluate their students\' performance in physical tests. Features include teacher and student registration, search filters, exercise selection with the appropriate calculus and supportive videos, report and suggestion boxes and password recovery.',
@@ -451,12 +464,12 @@ const translations = {
   },
 
   'mobile.feiraonordeste.role': {
-    en: 'Full-Stack Developer and Debugger.',
-    pt: 'Desenvolvedor Full-Stack e Debugger.'
+    en: 'Full-Stack Developer, Debugger.',
+    pt: 'Desenvolvedor Full-Stack, Debugger.'
   },
   'mobile.feiraonordeste.responsibilities': {
-    en: 'Mobile app development, Firebase and ImgBB integration, shopping list functionality implementation and system debugging.',
-    pt: 'Desenvolvimento de aplicativo mobile, integração com Firebase e ImgBB, implementação de funcionalidades de lista de compras e debugging do sistema.'
+    en: 'Mobile App Development, Firebase and ImgBB Integration, Shopping List Functionality Implementation, System Debugging.',
+    pt: 'Desenvolvimento de Aplicativo Mobile, Integração com Firebase e ImgBB, Implementação de Funcionalidades de Lista de Compras, Debugging do Sistema.'
   },
   'mobile.feiraonordeste.description': {
     en: 'An app to list your shopping items and have them always at hand. Features include user registration, item listing, search filter, price calculation, item and data management, and password recovery.',

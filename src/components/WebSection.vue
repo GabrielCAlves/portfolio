@@ -7,6 +7,24 @@
         <div class="project-content">
           <div class="project-info">
             <ul>
+              <!-- 🔥 NOVA SEÇÃO: ABOUT DO PROJETO -->
+              <li :key="forceUpdate" class="about-item">
+                <div class="about-header">
+                  <strong>{{ $t('projectAbout') }}</strong>
+                </div>
+                <p class="project-description">{{ project.description }}</p>
+              </li>
+              <!-- <li :key="forceUpdate"><strong>{{ $t('myRole') }}</strong> {{ project.role }}</li> -->
+              <li :key="forceUpdate" class="responsibilities-item">
+                <strong>{{ $t('myRole') }}</strong>
+                <ul class="responsibilities-list">
+                  <li v-for="(role, idx) in getRolesList(project.role)" 
+                      :key="idx" 
+                      class="responsibility-list-item">
+                    {{ role }};
+                  </li>
+                </ul>
+              </li>
               <li :key="forceUpdate" class="technologies-item">
                 <div class="technologies-header">
                   <strong>{{ $t('technologiesLabel') }}</strong>
@@ -28,17 +46,20 @@
                   </div>
                 </div>
               </li>
-              <li :key="forceUpdate"><strong>{{ $t('myRole') }}</strong> {{ project.role }}</li>
-              <li :key="forceUpdate">
+              <!-- <li :key="forceUpdate">
                 <strong>{{ $t('myResponsibilities') }}</strong> 
                 {{ project.responsibilities }}
-              </li>
-              <!-- 🔥 NOVA SEÇÃO: ABOUT DO PROJETO -->
-              <li :key="forceUpdate" class="about-item">
-                <div class="about-header">
-                  <strong>{{ $t('projectAbout') }}</strong>
-                </div>
-                <p class="project-description">{{ project.description }}</p>
+              </li> -->
+              <!-- RESPONSABILIDADES (SEPARADAS EM ITENS DE LISTA) -->
+              <li :key="forceUpdate" class="responsibilities-item">
+                <strong>{{ $t('myResponsibilities') }}</strong>
+                <ul class="responsibilities-list">
+                  <li v-for="(responsibility, idx) in getResponsibilitiesList(project.responsibilities)" 
+                      :key="idx" 
+                      class="responsibility-list-item">
+                    {{ responsibility }};
+                  </li>
+                </ul>
               </li>
               <li :key="forceUpdate">
                 <strong>{{ $t('highlights') }}</strong> 
@@ -54,7 +75,10 @@
             </ul>
           </div>
           <div class="project-media">
-            <MediaCarousel :media="project.media" section="web-section" />
+            <MediaCarousel 
+              :media="project.media" 
+              section="web-section" 
+              :vertical="project.carouselVertical !== undefined ? project.carouselVertical : true" />
           </div>
         </div>
       </div>
@@ -87,6 +111,7 @@ const loadStaticProjects = () => {
       highlights: '',
       downloadUrl: '',
       githubUrl: 'https://github.com/Italorodri/Projeto-Final-WEB',
+      carouselVertical: false,
       media: cloudinaryUrls.webProjects.project1.media
     },
     {
@@ -99,9 +124,48 @@ const loadStaticProjects = () => {
       highlights: ['Private Source'],
       downloadUrl: '',
       githubUrl: '',
+      carouselVertical: false,
       media: cloudinaryUrls.webProjects.project2.media
     },
   ]
+}
+
+const getRolesList = (rolesText) => {
+  if (!rolesText) return []
+  
+  if (Array.isArray(rolesText)) return rolesText
+  
+  if (typeof rolesText === 'string') {
+    const items = rolesText
+      .split(/[.;,\n]+/)
+      .map(item => item.trim())
+      .filter(item => item.length > 0)
+    
+    if (items.length > 1) return items
+    
+    return [rolesText.trim()]
+  }
+  
+  return [rolesText]
+}
+
+const getResponsibilitiesList = (responsibilitiesText) => {
+  if (!responsibilitiesText) return []
+  
+  if (Array.isArray(responsibilitiesText)) return responsibilitiesText
+  
+  if (typeof responsibilitiesText === 'string') {
+    const items = responsibilitiesText
+      .split(/[.;,\n]+/)
+      .map(item => item.trim())
+      .filter(item => item.length > 0)
+    
+    if (items.length > 1) return items
+    
+    return [responsibilitiesText.trim()]
+  }
+  
+  return [responsibilitiesText]
 }
 
 // Função para obter logo da tecnologia
@@ -172,6 +236,17 @@ onMounted(() => {
   font-size: 3rem;
   text-align: center;
   margin-bottom: 2rem;
+  display: inline-block; 
+  width: auto; 
+  padding: 0.5rem 2rem; 
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-image: linear-gradient(135deg, rgb(204, 139, 0) 0%, white 50%, rgb(204, 139, 0) 100%) 1;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 5px;
+  left: 50%;
+  position: relative;
+  transform: translateX(-50%);
 }
 
 .projects-container {
@@ -188,6 +263,13 @@ onMounted(() => {
   padding: 2rem;
   border-radius: 10px;
   backdrop-filter: blur(10px);
+  border: 3px solid;
+  border-image: linear-gradient(135deg, red 0%, blue 100%) 1;
+}
+
+.project:hover {
+  border: 3px solid;
+  border-image: linear-gradient(135deg, rgb(204, 139, 0) 0%, white 50%, rgb(204, 139, 0) 100%) 1;
 }
 
 .project-title {
@@ -204,7 +286,7 @@ onMounted(() => {
 }
 
 .project-info ul {
-  list-style: none;
+  /* list-style: none; */
   padding: 0;
 }
 
@@ -321,6 +403,8 @@ onMounted(() => {
   width: 100%;
   position: relative;
   z-index: 1;
+  display: flex;
+  align-self: center;
 }
 
 /* 🔥 CORREÇÃO: ITENS DA LISTA COM LAYOUT CORRETO E Z-INDEX */
@@ -405,6 +489,28 @@ onMounted(() => {
   line-height: 1.6;
 }
 
+.responsibilities-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.responsibilities-list {
+  list-style: disc !important;
+  list-style-position: inside !important;
+  padding-left: 1.5rem !important;
+  width: 100%;
+  margin: 0;
+}
+
+.responsibilities-list li {
+  display: list-item !important;
+  border-bottom: none !important;
+  padding-top: 0px;
+  padding-bottom: 5px;
+}
+
 /* ADICIONE A TODAS AS SEÇÕES DE PROJETOS */
 @media (max-width: 968px) {
   .project-content {
@@ -414,6 +520,11 @@ onMounted(() => {
   
   .project-media {
     order: -1; /* Coloca o carousel acima nas telas menores */
+    /* height: 300px; */
+  }
+
+  .rotating-card-carousel{
+    height: 300px;
   }
 }
 
@@ -428,8 +539,8 @@ onMounted(() => {
   }
 
   .project-media {
-    margin-top: -95px;
-    margin-bottom: -105px;
+    margin-top: -20px;
+    height: 275px;
   }
   
   .project-tech-grid {
@@ -473,9 +584,17 @@ onMounted(() => {
     margin-bottom: 20px !important;
   }
 
-  .project-media {
+  /* .project-media {
     margin-top: -95px;
     margin-bottom: -105px;
+  } */
+  .project-media {
+    margin-top: -30px;
+    height: 215px;
+  }
+
+  .rotating-card-carousel{
+    height: 245px !important;
   }
 
   .project-info li {

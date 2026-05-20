@@ -24,6 +24,7 @@ import githubIcon from '@/assets/images/github-mark-white.png'
 import linkedinIcon from '@/assets/images/LI-In-Bug.png'
 import gmailIcon from '@/assets/images/gmail.png'
 import instagramIcon from '@/assets/images/instagram.png'
+import itchioIcon from '@/assets/images/itch.io-logo.svg'
 
 const { $t, forceUpdate } = useTranslations()
 
@@ -31,7 +32,8 @@ const contacts = [
   { platform: 'LinkedIn', url: 'https://linkedin.com/in/gabrielcavalcantialves', icon: linkedinIcon },
   { platform: 'GitHub', url: 'https://github.com/GabrielCAlves', icon: githubIcon },
   { platform: 'Email', url: 'mailto:gabriel0603cavalcanti@gmail.com', icon: gmailIcon },
-  { platform: 'Instagram', url: 'https://instagram.com/x_GCA_x6', icon: instagramIcon }
+  { platform: 'Instagram', url: 'https://instagram.com/x_GCA_x6', icon: instagramIcon },
+  { platform: 'Itch.io', url: 'https://gabrielcalves.itch.io/', icon: itchioIcon }
 ]
 </script>
 
@@ -51,12 +53,27 @@ const contacts = [
 }
 
 .section-title {
-  font-size: 3rem;
-  text-align: center;
   color: white;
+  
 
   width: 100%;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
+
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  display: inline-block; 
+  width: auto;
+  height: 55px;
+  justify-self: center !important;
+  padding: 0.075rem 2rem; 
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-image: linear-gradient(135deg, rgb(204, 139, 0) 0%, white 50%, rgb(204, 139, 0) 100%) 1;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 5px;
+  /* left: 50%; */
+  position: relative;
 }
 
 .contact-item {
@@ -113,6 +130,43 @@ const contacts = [
   font-weight: bold;
 }
 
+/* 3 colunas até 678px */
+@media (max-width: 678px) {
+  .contacts-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1.5rem !important;
+    min-width: auto;
+  }
+  
+  .contact-item {
+    padding: 1.5rem !important;
+  }
+  
+  .contact-icon {
+    width: 50px !important;
+    height: 50px !important;
+  }
+  
+  .contact-platform {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 1280px) {
+  .section-title {
+    font-size: 2.5rem;
+    padding: 0.2rem 2rem;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1246px) {
+  .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    padding: 0.2rem 0.5rem;
+  }
+}
+
 @media (max-width: 1200px) {
   .contacts-container {
     padding-right: 4%;
@@ -135,9 +189,16 @@ const contacts = [
   .contact-platform {
     font-size: 1.1rem;
   }
+
+  .section-title {
+    height: 50px;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    padding: 0.2rem 2rem;
+  }
 }
 
-@media (min-width: 548px) and (max-width: 1042px) {
+@media (min-width: 679px) and (max-width: 1042px) {
   .section {
     align-items: center;
     min-height: 500px;
@@ -187,10 +248,10 @@ const contacts = [
   }
 }
 
-@media (min-width: 481px) and (max-width: 547px) {
+@media (min-width: 481px) and (max-width: 678px) {
   .section {
     align-items: center;
-    min-height: 550px;
+    min-height: 500px;
   }
   
   .contacts-container {
@@ -202,10 +263,10 @@ const contacts = [
   
   .contacts-grid {
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 1rem !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.5rem !important;
     width: 90% !important;
-    max-width: 255px !important;
+    max-width: 315px !important;
     min-width: auto;
   }
   
@@ -213,7 +274,7 @@ const contacts = [
     display: flex !important;
     flex-direction: column !important;
     padding: 1rem !important;
-    width: 120px !important;
+    width: 100px !important;
     height: auto !important;
     gap: 0.5rem !important;
   }
@@ -229,14 +290,17 @@ const contacts = [
   }
 }
 
+/* Telas até 480px - 3 colunas também */
 @media (max-width: 480px) {
   .section {
     align-items: center;
-    min-height: 850px;
+    min-height: 500px;
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 1.75rem;
+    padding: 0.25rem 2rem;
+    height: 40px;
   }
   
   .contacts-container {
@@ -248,36 +312,42 @@ const contacts = [
   
   .contacts-grid {
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 1rem !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.5rem !important;
     width: 90% !important;
-    max-width: 235px !important;
+    max-width: 280px !important;
     min-width: auto;
   }
   
   .contact-item {
     flex-direction: column !important;
-    padding: 0.9rem 1.2rem !important;
-    width: 110px !important;
+    padding: 0.7rem !important;
+    width: auto !important;
     justify-content: center;
-    gap: 0.5rem !important;
+    gap: 0.3rem !important;
   }
   
   .contact-icon {
-    width: 40px !important;
-    height: 40px !important;
+    width: 32px !important;
+    height: 32px !important;
     margin-bottom: 0;
   }
   
   .contact-platform {
-    font-size: 0.9rem !important;
+    font-size: 0.75rem !important;
   }
 }
 
 @media (max-width: 360px) {
   .section {
     align-items: center;
-    min-height: 650px;
+    min-height: 500px;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    padding: 0.4rem 2rem;
+    height: 40px;
   }
   
   .contacts-container {
@@ -288,26 +358,26 @@ const contacts = [
 
   .contacts-grid {
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 1rem !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.5rem !important;
     width: 90% !important;
-    max-width: 215px !important;
+    max-width: 240px !important;
     min-width: auto;
   }
   
   .contact-item {
-    padding: 0.8rem 1rem !important;
-    width: 100px !important;
-    gap: 0.5rem !important;
+    padding: 0.6rem 0.4rem !important;
+    width: auto !important;
+    gap: 0.3rem !important;
   }
   
   .contact-icon {
-    width: 32px !important;
-    height: 32px !important;
+    width: 28px !important;
+    height: 28px !important;
   }
   
   .contact-platform {
-    font-size: 0.8rem !important;
+    font-size: 0.7rem !important;
   }
 }
 </style>

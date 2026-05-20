@@ -24,6 +24,7 @@ import githubIcon from '@/assets/images/github-mark-white.png'
 import linkedinIcon from '@/assets/images/LI-In-Bug.png'
 import gmailIcon from '@/assets/images/gmail.png'
 import instagramIcon from '@/assets/images/instagram.png'
+import itchioIcon from '@/assets/images/itch.io-logo.svg'
 
 const { $t, forceUpdate } = useTranslations()
 
@@ -31,7 +32,8 @@ const contacts = [
   { platform: 'GitHub', url: 'https://github.com/GabrielCAlves', icon: githubIcon },
   { platform: 'LinkedIn', url: 'https://linkedin.com/in/gabrielcavalcantialves', icon: linkedinIcon },
   { platform: 'Email', url: 'mailto:gabriel0603cavalcanti@gmail.com', icon: gmailIcon },
-  { platform: 'Instagram', url: 'https://instagram.com/x_GCA_x6', icon: instagramIcon }
+  { platform: 'Instagram', url: 'https://instagram.com/x_GCA_x6', icon: instagramIcon },
+  { platform: 'Itch.io', url: 'https://gabrielcalves.itch.io/', icon: itchioIcon }
 ]
 
 // onMounted(() => {

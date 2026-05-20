@@ -2,7 +2,14 @@
   <section class="section">
     <h2 class="section-title" :key="forceUpdate">{{ $t('games') }}</h2>
     <div class="projects-container">
-      <div v-for="project in projects" :key="project.id" class="project">
+      <!-- 🔥 ADICIONAR DATA-ATRIBUTE PARA IDENTIFICAÇÃO -->
+      <div 
+        v-for="(project, idx) in projects" 
+        :key="project.id" 
+        :data-project-index="idx"
+        class="project"
+        :ref="el => { if(el) setProjectRef(el, idx) }"
+      >
         <h3 class="project-title">{{ project.title }}</h3>
         <div class="project-content">
           <div class="project-info">
@@ -96,11 +103,11 @@
             </ul>
           </div>
           <div class="project-media">
-            <!-- 🔥 AGORA O VERTICAL É DEFINIDO POR PROJETO -->
+            <!-- 🔥 VERTICAL CONTROLADO RESPONSIVAMENTE -->
             <MediaCarousel 
               :media="project.media" 
               section="games" 
-              :vertical="project.carouselVertical !== undefined ? project.carouselVertical : true" 
+              :vertical="getCarouselVertical(project)" 
             />
           </div>
         </div>
@@ -110,7 +117,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, onUnmounted } from 'vue'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '@/services/firebase'
 import { cloudinaryUrls } from '@/services/cloudinary'
@@ -119,7 +126,34 @@ import { useTranslations } from '@/composables/useTranslations'
 
 const { $t, forceUpdate, currentLanguage } = useTranslations()
 
+// 🔥 REF PARA CONTROLE RESPONSIVO
+const isMobile = ref(window.innerWidth <= 968)
+
+// 🔥 ADICIONAR REFS PARA OS PROJETOS
+const projectRefs = ref([])
+
+const setProjectRef = (el, index) => {
+  if (el) {
+    projectRefs.value[index] = el
+    // Também adicionar um ID único
+    if (!el.id) {
+      el.id = `project-${index}`
+    }
+  }
+}
+
 const projects = ref([])
+
+// 🔥 FUNÇÃO PARA DETERMINAR O VALOR DE VERTICAL BASEADO NA TELA
+const getCarouselVertical = (project) => {
+  // Se for tela mobile (<= 968px), queremos false
+  // Se for desktop (> 968px), queremos true
+  if (isMobile.value) {
+    return false
+  } else {
+    return true
+  }
+}
 
 // Função para separar responsabilidades em lista
 const getResponsibilitiesList = (responsibilitiesText) => {
@@ -212,6 +246,16 @@ const handleImageError = (event) => {
   }
 }
 
+// 🔥 FUNÇÃO PARA ATUALIZAR O ESTADO MOBILE
+const updateMobileState = () => {
+  isMobile.value = window.innerWidth <= 968
+}
+
+// 🔥 LISTENER PARA REDIMENSIONAMENTO DA TELA
+const handleResize = () => {
+  updateMobileState()
+}
+
 // Função para obter projetos estáticos com traduções atualizadas
 const loadStaticProjects = () => {
   projects.value = [
@@ -226,11 +270,25 @@ const loadStaticProjects = () => {
       highlights: '',
       githubUrl: 'https://github.com/GabrielCAlves/Desenvolvedor-Unity-Module-40',
       projectUrl: 'https://gabrielcalves.itch.io/astro-adventure-3d',
-      carouselVertical: true,
+      carouselVertical: true, // Mantém true, mas será sobrescrito pelo getCarouselVertical()
       media: cloudinaryUrls.personalWork.project1.media
     },
     {
       id: 'project2',
+      title: 'Cook & Conquer', 
+      platform: 'PC (Windows), Android',
+      technologies: ['Unity', 'C#'],
+      role: $t('personal.cookAndConquer.role'),
+      responsibilities: $t('personal.cookAndConquer.responsibilities'),
+      description: $t('personal.cookAndConquer.description'),
+      highlights: '',
+      githubUrl: 'https://github.com/PierrotNobre/Project_RED',
+      projectUrl: 'https://squadred.itch.io/cook-and-conquer',
+      carouselVertical: true,
+      media: cloudinaryUrls.personalWork.project2.media
+    },
+    {
+      id: 'project3',
       title: 'Astro Obstacle', 
       platform: 'Android',
       technologies: ['Unity', 'C#'],
@@ -241,10 +299,10 @@ const loadStaticProjects = () => {
       githubUrl: 'https://github.com/GabrielCAlves/Desenvolvedor-Unity-Module-25',
       projectUrl: 'https://gabrielcalves.itch.io/astro-obstacle',
       carouselVertical: true,
-      media: cloudinaryUrls.personalWork.project2.media
+      media: cloudinaryUrls.personalWork.project3.media
     },
     {
-      id: 'project3',
+      id: 'project4',
       title: 'Lost In The Stars',
       platform: 'PC (Windows)',
       technologies: ['Unity', 'C#'],
@@ -256,10 +314,10 @@ const loadStaticProjects = () => {
       githubUrl: 'https://github.com/GabrielCAlves/Desenvolvedor-Unity-Module-19',
       projectUrl: 'https://gabrielcalves.itch.io/lost-in-the-stars',
       carouselVertical: true,
-      media: cloudinaryUrls.personalWork.project3.media
+      media: cloudinaryUrls.personalWork.project4.media
     },
     {
-      id: 'project4',
+      id: 'project5',
       title: 'MyPong',
       platform: 'PC (Windows)',
       technologies: ['Unity', 'C#'],
@@ -270,10 +328,10 @@ const loadStaticProjects = () => {
       githubUrl: 'https://github.com/GabrielCAlves/MyPong',
       projectUrl: 'https://gabrielcalves.itch.io/mypong',
       carouselVertical: true,
-      media: cloudinaryUrls.personalWork.project4.media
+      media: cloudinaryUrls.personalWork.project5.media
     },
     {
-      id: 'project5',
+      id: 'project6',
       title: '4Kingdoms',
       platform: 'PC (Windows)',
       technologies: ['Unity', 'C#'],
@@ -284,7 +342,7 @@ const loadStaticProjects = () => {
       githubUrl: '',
       projectUrl: 'https://gabrielcalves.itch.io/4-kingdoms',
       carouselVertical: true,
-      media: cloudinaryUrls.personalWork.project5.media
+      media: cloudinaryUrls.personalWork.project6.media
     }
   ]
 }
@@ -322,8 +380,20 @@ watch(currentLanguage, () => {
   loadStaticProjects()
 })
 
+// 🔥 OBSERVER PARA MUDANÇAS NO TAMANHO DA TELA
+watch(isMobile, (newValue) => {
+  // Forçar atualização dos componentes MediaCarousel quando o tamanho da tela mudar
+  // O Vue irá re-renderizar automaticamente pois a prop :vertical mudará
+})
+
 onMounted(() => {
   loadProjects()
+  updateMobileState()
+  window.addEventListener('resize', handleResize)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
 })
 </script>
 
@@ -455,9 +525,13 @@ onMounted(() => {
 }
 
 .responsibility-list-item {
-  padding: 0.3rem 0;
   border-bottom: none !important;
   line-height: 1.5;
+}
+
+.responsibilities-list li {
+  padding-top: 0px;
+  padding-bottom: 5px;
 }
 
 .highlights-item {
@@ -634,9 +708,15 @@ onMounted(() => {
   width: 100%;
 }
 
+@media (max-width: 1325px){
+  .project{
+    backdrop-filter: blur(2px);
+  }
+}
+
 @media (max-width: 968px) {
   .project-media{
-    z-index: -1 !important;
+    z-index: 0 !important;
   }
 
   .project-content {
@@ -646,7 +726,14 @@ onMounted(() => {
   
   .project-media {
     order: -1;
-    min-height: 350px;
+  }
+
+  .project-media {
+    min-height: 200px !important;
+  }
+
+  .rotating-card-carousel{
+    height: 310px !important;
   }
 }
 
@@ -662,6 +749,14 @@ onMounted(() => {
 
   .project-media {
     min-height: 300px;
+  }
+
+  .project-media {
+    min-height: 170px !important;
+  }
+
+  .rotating-card-carousel{
+    height: 250px !important;
   }
   
   .project-tech-grid {
@@ -698,7 +793,11 @@ onMounted(() => {
   }
 
   .project-media {
-    min-height: 250px;
+    min-height: 170px !important;
+  }
+
+  .rotating-card-carousel{
+    min-height: 200px !important;
   }
 
   .project-info li {

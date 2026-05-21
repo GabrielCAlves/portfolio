@@ -275,30 +275,30 @@ const translations = {
 },
 
   // PROFESSIONAL WORK EMPTY STATE
-  'noProfessionalProjects': {
-    en: 'No Professional Projects Yet',
-    pt: 'Ainda Não Há Projetos Profissionais'
-  },
-  'professionalWorkDescription': {
-    en: "I'm currently looking for a job, so this section might be empty for a while. Check back soon to see my professional work and projects!",
-    pt: 'Estou atualmente procurando por trabalho, então esta seção pode ficar vazia por um tempo. Volte em breve para ver meus trabalhos e projetos profissionais!'
-  },
-  'exploreOtherProjects': {
-    en: 'In the meantime, feel free to explore my:',
-    pt: 'Enquanto isso, sinta-se à vontade para explorar meus:'
-  },
-  'personalProjects': {
-    en: 'Personal Projects',
-    pt: 'Projetos Pessoais'
-  },
-  'webProjects': {
-    en: 'Web Projects',
-    pt: 'Projetos Web'
-  },
-  'mobileProjects': {
-    en: 'Mobile Projects',
-    pt: 'Projetos Mobile'
-  },
+  // 'noProfessionalProjects': {
+  //   en: 'No Professional Projects Yet',
+  //   pt: 'Ainda Não Há Projetos Profissionais'
+  // },
+  // 'professionalWorkDescription': {
+  //   en: "I'm currently looking for a job, so this section might be empty for a while. Check back soon to see my professional work and projects!",
+  //   pt: 'Estou atualmente procurando por trabalho, então esta seção pode ficar vazia por um tempo. Volte em breve para ver meus trabalhos e projetos profissionais!'
+  // },
+  // 'exploreOtherProjects': {
+  //   en: 'In the meantime, feel free to explore my:',
+  //   pt: 'Enquanto isso, sinta-se à vontade para explorar meus:'
+  // },
+  // 'personalProjects': {
+  //   en: 'Personal Projects',
+  //   pt: 'Projetos Pessoais'
+  // },
+  // 'webProjects': {
+  //   en: 'Web Projects',
+  //   pt: 'Projetos Web'
+  // },
+  // 'mobileProjects': {
+  //   en: 'Mobile Projects',
+  //   pt: 'Projetos Mobile'
+  // },
 
   // PERSONAL WORK
   'personal.cookAndConquer.role': {
@@ -379,10 +379,10 @@ const translations = {
     pt: 'Um jogo de plataforma e briga 2D para 4 pessoas. Escolha seu reino e lute por ele contra seus amigos na guerra!'
   },
 
-  // Add these to your translations.js file
+// PROJECTS
 'platform': {
-  en: 'Platform:',
-  pt: 'Plataforma:'
+  en: 'Platforms:',
+  pt: 'Plataformas:'
 },
 'playOnline': {
   en: 'Play Online',
@@ -400,6 +400,85 @@ const translations = {
   en: 'No code available',
   pt: 'Nenhum código disponível'
 },
+
+'github.solarSystem.description': {
+  en: 'A 3D solar system simulation with rotations, translations and physics.',
+  pt: 'Uma simulação 3D do sistema solar com rotações, translações e física.'
+},
+'github.movement.description': {
+  en: 'A simulation of the diversity of movement types.',
+  pt: 'Uma simulação da diversidade de tipos de movimento.'
+},
+'github.vector.description': {
+  en: 'A simulation of vector operations and their applications.',
+  pt: 'Uma simulação de operações vetoriais e suas aplicações.'
+},
+'github.life.description': {
+  en: 'Test of different types of life bars, including single life bars, multiple life bars, life bar filling, background delay follow and color changing.',
+  pt: 'Teste de diferentes tipos de barras de vida, incluindo barras de vida única, múltiplas barras de vida, preenchimento de barra de vida, atraso de fundo e mudança de cor.'
+},
+'github.inventory.description': {
+  en: 'A system that includes inventory management, item dropping, collecting and crafting mechanics (with recipes). It also involves features such as item stacking and a crafting system that allows players to combine items to create new ones, as well as a basic combat system.',
+  pt: 'Um sistema que inclui gerenciamento de inventário, mecânicas de drop, coleta e crafting (com receitas). Também envolve recursos como empilhamento de itens e um sistema de crafting que permite aos jogadores combinar itens para criar novos, além de um sistema básico de combate.'
+},
+'github.time.description': {
+  en: 'A diversity of time usages, such as a cronometer and comparison between different types of coroutine returns.',
+  pt: 'Uma diversidade de usos de tempo, como um cronômetro e comparação entre diferentes tipos de retornos de corrotina.'
+},
+'github.dragAndDrop.description': {
+  en: 'A test of drag and drop mechanics for both 2D and 3D objects, with glowing effect as a visual feedback, in the case of 3D objects.',
+  pt: 'Um teste de mecânicas de arrastar e soltar para objetos 2D e 3D, com efeito de brilho como feedback visual, no caso de objetos 3D.'
+},
+'github.secondStuff.description': {
+  en: 'A series of 2D mechanics tests, including ghost effects and other VFX, animations, finite state machines, UI elements and more.',
+  pt: 'Uma série de testes de mecânicas 2D, incluindo efeitos fantasma e outros VFX, animações, máquinas de estado finito, elementos de UI e mais.'
+},
+'github.astroAdventure.description': {
+  en: 'A 3D space adventure game where players need to navigate through a hostile alien environment for the survival.',
+  pt: 'Um jogo de aventura espacial 3D onde os jogadores precisam navegar por um ambiente alienígena hostil para sobreviver.'
+},
+'github.cookAndConquer.description': {
+  en: 'A survival roguelike game with medieval and cooking themes.',
+  pt: 'Um jogo roguelike de sobrevivência com temas medievais e de culinária.'
+},
+'github.lostInTheStars.description': {
+  en: 'A 2D action-platformer game set in space.',
+  pt: 'Um jogo de ação e plataforma 2D ambientado no espaço.'
+},
+'github.myPong.description': {
+  en: 'The classic Pong game with multiplayer functionality and customizable colors.',
+  pt: 'O clássico jogo Pong com funcionalidade multiplayer e cores personalizáveis.'
+},
+'github.astroObstacle.description': {
+  en: 'A challenging 3D obstacle course game with random platforms.',
+  pt: 'Um desafiador jogo de percurso de obstáculos 3D com plataformas aleatórias.'
+},
+'github.fourKingdoms.description': {
+  en: 'A 4-player 2D brawl platformer game.',
+  pt: 'Um jogo de plataforma e brawl 2D para 4 jogadores.'
+},
+'github.adotaai.description': {
+  en: 'A responsible pet adoption platform connecting animal owners with potential adopters.',
+  pt: 'Uma plataforma responsável de adoção de animais conectando donos com potenciais adotantes.'
+},
+'github.casaDoAnciao.description': {
+  en: 'Management system for employees of a nursing home.',
+  pt: 'Sistema de gerenciamento para funcionários de uma casa de repouso.'
+},
+'github.consultasqx.description': {
+  en: 'Medical appointment scheduling app connecting patients with healthcare professionals.',
+  pt: 'Aplicativo de agendamento de consultas médicas conectando pacientes com profissionais de saúde.'
+},
+'github.feiraonordeste.description': {
+  en: 'Shopping list app with price calculation and item management.',
+  pt: 'Aplicativo de lista de compras com cálculo de preços e gerenciamento de itens.'
+},
+'github.motora.description': {
+  en: 'Physical education app for P.E. teachers to track student progress and evaluate student performance.',
+  pt: 'Aplicativo de educação física para professores avaliarem o progresso e desempenho dos alunos.'
+},
+
+
 
   // PROJETOS WEB
   'web.adotaai.role': {

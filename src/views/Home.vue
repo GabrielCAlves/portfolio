@@ -75,10 +75,10 @@
         </div>
         
         <!-- Professional Work -->
-        <div class="section-content" :class="{ 'active': currentSection === 2 }">
-          <GaltonPegboards />
-          <!-- <ProfessionalWork /> -->
-           <ProjectsSection />
+        <div class="section-content projects-wrapper" :class="{ 'active': currentSection === 2 }">
+            <FloatingEmbers />
+
+            <ProjectsSection />
         </div>
         
         <!-- Web Section -->
@@ -129,6 +129,7 @@ import FooterSection from '@/components/FooterSection.vue'
 import CompassFieldFlow from '@/components/backgrounds/CompassFieldFlow.vue'
 import ParticleGalaxyAnimation from '@/components/backgrounds/ParticleGalaxyAnimation.vue'
 import GaltonPegboards from '@/components/backgrounds/GaltonPegboards.vue'
+import FloatingEmbers from '@/components/backgrounds/FloatingEmbers.vue'
 import MatrixFallingCodeAnimation from '@/components/backgrounds/MatrixFallingCodeAnimation.vue'
 import BlackholeBackground from '@/components/backgrounds/BlackholeBackground.vue'
 import GlobeBackground from '@/components/backgrounds/GlobeBackground.vue'
@@ -662,6 +663,33 @@ onUnmounted(() => {
   animation: fadeIn 0.5s ease-in-out;
 }
 
+.projects-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.projects-wrapper .background-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.projects-wrapper .background-layer {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  z-index: 0;
+}
+
+.content-layer {
+  position: relative;
+  z-index: 2;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -1192,7 +1220,7 @@ onUnmounted(() => {
 }
 
 /* Conteúdo das seções fica acima */
-.section-content > :not(.blackhole-container):not(.globe-container):not(.compass-field-canvas):not(.galaxy-canvas):not(.galton-container):not(.matrix-canvas) {
+.section-content > :not(.blackhole-container):not(.globe-container):not(.compass-field-canvas):not(.galaxy-canvas):not(.galton-container):not(.matrix-canvas):not(.embers-container) {
   position: relative;
   z-index: 10;
 }

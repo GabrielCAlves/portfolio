@@ -23,12 +23,28 @@
               </li>
 
               <!-- PLATAFORMA DO PROJETO -->
-              <li :key="forceUpdate" class="platform-item">
+              <!-- <li :key="forceUpdate" class="platform-item">
                 <div class="platform-header">
                   <strong>{{ $t('platform') }}</strong>
                 </div>
                 <div class="platform-content">
                   <span class="platform-value">{{ project.platform || 'PC (Windows)' }}</span>
+                </div>
+              </li> -->
+              <!-- PLATAFORMAS DO PROJETO -->
+              <li :key="forceUpdate" class="platform-item">
+                <div class="platform-header">
+                  <strong>{{ $t('platform') }}</strong>
+                </div>
+
+                <div class="platform-tags">
+                  <span
+                    v-for="platform in getPlatformList(project.platform)"
+                    :key="platform"
+                    class="platform-tag"
+                  >
+                    {{ platform }}
+                  </span>
                 </div>
               </li>
 
@@ -155,6 +171,25 @@ const getCarouselVertical = (project) => {
   }
 }
 
+const getPlatformList = (platformData) => {
+  if (!platformData) return ['PC (Windows)']
+
+  // Se já for array
+  if (Array.isArray(platformData)) {
+    return platformData
+  }
+
+  // Se for string
+  if (typeof platformData === 'string') {
+    return platformData
+      .split(/[;,]+/)
+      .map(item => item.trim())
+      .filter(item => item.length > 0)
+  }
+
+  return ['PC (Windows)']
+}
+
 // Função para separar responsabilidades em lista
 const getResponsibilitiesList = (responsibilitiesText) => {
   if (!responsibilitiesText) return []
@@ -268,7 +303,7 @@ const loadStaticProjects = () => {
       responsibilities: $t('personal.astroAdventure.responsibilities'),
       description: $t('personal.astroAdventure.description'),
       highlights: '',
-      githubUrl: 'https://github.com/GabrielCAlves/Desenvolvedor-Unity-Module-40',
+      githubUrl: 'https://github.com/GabrielCAlves/Astro-Adventure-3D',
       projectUrl: 'https://gabrielcalves.itch.io/astro-adventure-3d',
       carouselVertical: true, // Mantém true, mas será sobrescrito pelo getCarouselVertical()
       media: cloudinaryUrls.personalWork.project1.media
@@ -296,7 +331,7 @@ const loadStaticProjects = () => {
       responsibilities: $t('personal.astroObstacle.responsibilities'),
       description: $t('personal.astroObstacle.description'),
       highlights: '',
-      githubUrl: 'https://github.com/GabrielCAlves/Desenvolvedor-Unity-Module-25',
+      githubUrl: 'https://github.com/GabrielCAlves/Astro-Obstacle',
       projectUrl: 'https://gabrielcalves.itch.io/astro-obstacle',
       carouselVertical: true,
       media: cloudinaryUrls.personalWork.project3.media
@@ -311,7 +346,7 @@ const loadStaticProjects = () => {
       description: $t('personal.lostInTheStars.description'),
       highlights: '',
       downloadUrl: 'https://drive.google.com/uc?export=download&id=1UTbGsqzTjlF9gEQr8QaFHaRVBjDmzF6U',
-      githubUrl: 'https://github.com/GabrielCAlves/Desenvolvedor-Unity-Module-19',
+      githubUrl: 'https://github.com/GabrielCAlves/Lost-In-The-Stars',
       projectUrl: 'https://gabrielcalves.itch.io/lost-in-the-stars',
       carouselVertical: true,
       media: cloudinaryUrls.personalWork.project4.media
@@ -507,6 +542,31 @@ onUnmounted(() => {
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(50, 50, 50, 0.6));
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
+}
+
+.platform-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.platform-tag {
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: default;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(50, 50, 50, 0.6));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.platform-tag:hover {
+  transform: translateY(-2px);
+  border-color: #cc0000;
+  box-shadow: 0 4px 12px rgba(204, 0, 0, 0.3);
 }
 
 .responsibilities-item {

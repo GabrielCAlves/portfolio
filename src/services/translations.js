@@ -44,12 +44,12 @@ const translations = {
     pt: 'Meu Currículo:'
   },
   'downloadEnglishCV': {
-    en: 'Download CV (English)',
-    pt: 'Baixar CV (Inglês)'
+    en: 'Download CV/Resumé (English)',
+    pt: 'Baixar CV/Resumo (Inglês)'
   },
   'downloadPortugueseCV': {
-    en: 'Download CV (Portuguese)',
-    pt: 'Baixar CV (Português)'
+    en: 'Download CV/Resumé (Portuguese)',
+    pt: 'Baixar CV/Resumo (Português)'
   },
   'aboutDescription': {
     en: `Hi, I'm Gabriel Cavalcanti Alves. Ready to level up your development team with fresh game development talent and technical skills!`,

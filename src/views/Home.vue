@@ -429,31 +429,25 @@ onUnmounted(() => {
 
 // Adicione ao script setup
 const updatePersonScale = () => {
-  const backgroundImage = document.querySelector('.background-image.back-layer')
   const centerPerson = document.querySelector('.center-person-3d')
-  
-  if (!backgroundImage || !centerPerson) return
-  
+
+  if (!centerPerson) return
+
   const windowWidth = window.innerWidth
-  
-  // Apenas para telas maiores que 1251px
-  if (windowWidth >= 1251) {
-    // Calcula a escala baseada na largura da tela
-    // Valores base para 1251px
-    const baseWidth = 1251
-    const currentWidth = windowWidth
-    
-    // Calcula o fator de escala (limitado para não ficar extremo)
-    const scaleFactor = Math.min(currentWidth / baseWidth, 1.5)
-    
-    // Aplica a escala mantendo as proporções relativas
-    centerPerson.style.transform = `translateZ(0px) scale(${scaleFactor})`
-    centerPerson.style.transformOrigin = 'center center'
-  } else {
-    // Reseta para valores originais abaixo de 1251px
-    centerPerson.style.transform = 'translateZ(0px)'
-    centerPerson.style.transformOrigin = ''
-  }
+  const windowHeight = window.innerHeight
+
+  // resolução base da arte
+  const baseWidth = 2560
+  const baseHeight = 1440
+
+  // escala proporcional
+  const scaleX = windowWidth / baseWidth
+  const scaleY = windowHeight / baseHeight
+
+  // usa a menor escala para manter proporção
+  const scale = Math.min(scaleX, scaleY)
+
+  centerPerson.style.setProperty('--person-scale', scale)
 }
 
 // Adicione ao onMounted
@@ -584,23 +578,45 @@ onUnmounted(() => {
 /* PESSOA CENTRAL - FORA DO CAROUSEL STAGE MAS NO MESMO CONTEXTO 3D */
 .center-person-3d {
   position: absolute;
-  top: 0;
-  left: 0;
-  /* width: 100%;
-  height: 100%; */
+
+  width: 100%;
+  height: 100%;
+
   background-image: url('https://res.cloudinary.com/dimsi9muz/image/upload/v1762210369/Adobe_Express_-_file_xcviof.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
   transform-style: preserve-3d;
   pointer-events: none;
   transform: translateZ(0px);
+
   z-index: 500000 !important;
+
+  /* CENTRALIZAÇÃO REAL */
+  inset: 0;
+  margin: auto;
   
-  top: 11.7%;
+  /* top: -5.15vw;
   left: 37.5%;
   width: 25%;
   height: 76.5%;
+  height: 42vw; */
+}
+
+.center-person-3d::before {
+  content: '';
+
+  width: 100%;
+  height: 100%;
+
+  background-image: url('https://res.cloudinary.com/dimsi9muz/image/upload/v1762210369/Adobe_Express_-_file_xcviof.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  transform-origin: center center;
+  /* transform: scale(var(--person-scale, 1)); */
 }
 
 .carousel-3d-control {
@@ -901,20 +917,21 @@ onUnmounted(() => {
 }
 
 @media (min-width: 1670px){
-  .center-person-3d{  
+  /* .center-person-3d{  
     top: 10.9%;
     left: 37%;
     width: 26%;
     height: 78%;
-  }
+  } */
 }
 
 @media (max-width: 1250px){
   .center-person-3d{  
-    top: 12%;
+    /* top: 12%;
     left: 37.5%;
     width: 25%;
-    height: 76%;
+    height: 76%; */
+    height: 697px !important;
   }
 }
 
@@ -1086,10 +1103,13 @@ onUnmounted(() => {
   }
 
   .center-person-3d{  
-    top: 16.75%;
+    /* top: 16.75%;
     left: 37.4%;
     width: 25%;
-    height: 66.35%;
+    height: 66.35%; */
+
+    /* height: 58.1vw !important; */
+    height: 599.8px !important;
   }
 }
 
@@ -1133,10 +1153,13 @@ onUnmounted(() => {
   }
 
   .center-person-3d{  
-    top: 22.5%;
+    /* top: 22.5%;
     left: 37.4%;
     width: 25%;
-    height: 55%;
+    height: 55%; */
+    
+    /* height: 64.9vw !important; */
+    height: 499px !important;
   }
 }
 
@@ -1174,19 +1197,26 @@ onUnmounted(() => {
   }
 
   .center-person-3d{  
-    top: 25%;
+    /* top: 25%;
     left: 37.4%;
     width: 25%;
-    height: 50%;
+    height: 50%; */
+
+    /* height: 93.9vw !important; */
+    
+    height: 450px !important;
   }
 }
 
 @media (max-width: 374px) {
   .center-person-3d{  
-    top: 25%;
+    /* top: 25%;
     left: 37.4%;
     width: 25%;
-    height: 50%;
+    height: 50%; */
+    
+    /* height: 120vw !important; */
+    /* height: 450px !important; */
   }
 }
 

@@ -57,13 +57,11 @@ const animate = () => {
   animationId = requestAnimationFrame(animate)
 }
 
-// Usar window para capturar movimento do mouse em qualquer lugar
 const handleMouseMove = (e) => {
   const canvas = canvasRef.value
   if (!canvas) return
   
   const rect = canvas.getBoundingClientRect()
-  // Verificar se o mouse está sobre a seção
   const parent = canvas.parentElement
   if (parent) {
     const parentRect = parent.getBoundingClientRect()
@@ -114,7 +112,7 @@ onMounted(() => {
   height: 100%;
   display: block;
   z-index: 0;
-  pointer-events: none; /* Deixa os cliques passarem */
+  pointer-events: none;
   background-color: black;
 }
 </style>

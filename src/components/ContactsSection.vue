@@ -72,7 +72,6 @@ const contacts = [
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
   border-radius: 5px;
-  /* left: 50%; */
   position: relative;
 }
 
@@ -130,7 +129,6 @@ const contacts = [
   font-weight: bold;
 }
 
-/* 3 colunas até 678px */
 @media (max-width: 678px) {
   .contacts-grid {
     grid-template-columns: repeat(3, 1fr) !important;
@@ -290,7 +288,6 @@ const contacts = [
   }
 }
 
-/* Telas até 480px - 3 colunas também */
 @media (max-width: 480px) {
   .section {
     align-items: center;
@@ -346,7 +343,7 @@ const contacts = [
 
   .section-title {
     font-size: 1.5rem;
-    padding: 0.4rem 2rem;
+    padding: 0.3rem 2rem;
     height: 40px;
   }
   

@@ -2,7 +2,6 @@
   <section class="section">
     <h2 class="section-title" :key="forceUpdate">{{ $t('aboutMe') }}</h2>
     
-    <!-- Primeira linha: duas colunas -->
     <div class="about-content">
       <div class="left-column project">
         <img :src="profileImage" alt="Profile" class="profile-image" />
@@ -51,7 +50,6 @@
             </button>
           </div>
           
-          <!-- SEÇÃO: Projetos em Unity -->
           <div class="achievement-section">
             <h4 class="section-subtitle">
               <span class="icon">🎮</span>
@@ -66,7 +64,6 @@
             </div>
           </div>
 
-          <!-- SEÇÃO: Mobile Apps Registrados -->
           <div class="achievement-section">
             <h4 class="section-subtitle">
               <span class="icon">📱</span>
@@ -78,7 +75,6 @@
             </div>
           </div>
 
-          <!-- SEÇÃO: Publicação Acadêmica (SEPARADA) -->
           <div class="achievement-section academic-section">
             <h4 class="section-subtitle">
               <span class="icon">📚</span>
@@ -102,7 +98,6 @@
             </div>
           </div>
 
-          <!-- SEÇÃO: Certificações -->
           <div class="achievement-section">
             <h4 class="section-subtitle">
               <span class="icon">📜</span>
@@ -145,9 +140,7 @@
       </div>
     </div>
 
-    <!-- Segunda linha: grids de tecnologias em layout de 2-3 colunas -->
     <div class="skills-grid-container">
-      <!-- Programming Languages -->
       <div class="skill-card">
         <h3 :key="forceUpdate">{{ $t('programmingLanguages') }}</h3>
         <div class="tech-grid">
@@ -168,7 +161,6 @@
         </div>
       </div>
 
-      <!-- Engines/IDEs -->
       <div class="skill-card">
         <h3 :key="forceUpdate">{{ $t('enginesAndIDEs') }}</h3>
         <div class="tech-grid">
@@ -189,7 +181,6 @@
         </div>
       </div>
 
-      <!-- Specializations -->
       <div class="skill-card">
         <h3 :key="forceUpdate">{{ $t('specializations') }}</h3>
         <div class="tech-grid">
@@ -210,7 +201,6 @@
         </div>
       </div>
 
-      <!-- Version Control -->
       <div class="skill-card">
         <h3 :key="forceUpdate">{{ $t('versionControl') }}</h3>
         <div class="tech-grid">
@@ -231,7 +221,6 @@
         </div>
       </div>
 
-      <!-- Back-End -->
       <div class="skill-card">
         <h3 :key="forceUpdate">{{ $t('backEnd') }}</h3>
         <div class="tech-grid">
@@ -252,7 +241,6 @@
         </div>
       </div>
 
-      <!-- Frameworks -->
       <div class="skill-card">
         <h3 :key="forceUpdate">{{ $t('frameworks') }}</h3>
         <div class="tech-grid">
@@ -273,7 +261,6 @@
         </div>
       </div>
 
-      <!-- Additional Skills -->
       <div class="skill-card">
         <h3 :key="forceUpdate">{{ $t('additionalSkills') }}</h3>
         <div class="tech-grid">
@@ -295,7 +282,6 @@
       </div>
     </div>
 
-    <!-- Terceira linha: Experiências Profissionais -->
     <div class="experience-section">
       <h2 class="experience-section-title" :key="forceUpdate">{{ $t('professionalExperience') }}</h2>
       <div class="timeline">
@@ -359,7 +345,6 @@ const profileImage = ref('')
 const ukFlag = ref('')
 const brFlag = ref('')
 
-// Categorized technologies
 const programmingLanguages = ['C#', 'C++', 'C', 'Java', 'HTML', 'CSS', 'JavaScript', 'TypeScript']
 const enginesAndIDEs = ['Unity', 'Android Studio', 'Node.js']
 const specializations = ['Gameplay Programming']
@@ -368,15 +353,13 @@ const backEnd = ['Firebase', 'DBeaver', 'PostgreSQL', 'MySQL', 'SpringBoot', 'St
 const frameworks = ['Vue.js', 'Vuetify', 'Vite', 'Bootstrap']
 const additionalSkills = ['Agile Methodology', 'Scrum', 'OOP', 'Rest APIs', 'Astah', 'UI/UX', 'Figma', 'Adobe XD']
 
-// Adicione com as outras constantes
 const academicPaperUrl = ref('https://sol.sbc.org.br/index.php/sbgames/article/view/37500')
 
-// Função para rolar suavemente até a seção de experiência com offset
 const scrollToExperience = () => {
   const experienceSection = document.querySelector('.experience-section')
   if (experienceSection) {
     const elementPosition = experienceSection.getBoundingClientRect().top
-    const offsetPosition = elementPosition + window.pageYOffset - 100 // 100px de offset
+    const offsetPosition = elementPosition + window.pageYOffset - 100
     
     window.scrollTo({
       top: offsetPosition,
@@ -385,7 +368,6 @@ const scrollToExperience = () => {
   }
 }
 
-// Professional Experiences Data with translation keys
 const professionalExperiences = ref([
   {
     roleKey: 'experience.npi.role',
@@ -407,12 +389,10 @@ const professionalExperiences = ref([
   },
 ])
 
-// Função para obter logo da tecnologia
 const getTechLogo = (techName) => {
   return cloudinaryUrls.technologyLogos[techName] || ''
 }
 
-// Função para tratar erro de carregamento de imagem
 const handleImageError = (event) => {
   const parent = event.target.parentElement
   if (parent) {
@@ -499,7 +479,6 @@ onUnmounted(() => {
   transform: translateX(-50%);
 }
 
-/* Primeira linha: duas colunas */
 .about-content {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -609,7 +588,6 @@ onUnmounted(() => {
   font-size: 1.5rem;
 }
 
-/* Melhorias para o description-container */
 .description-container {
   padding: 1rem;
 }
@@ -659,7 +637,6 @@ onUnmounted(() => {
   margin-bottom: 1rem;
 }
 
-/* Scroll Link Button Melhorado */
 .scroll-link {
   background: linear-gradient(to right, var(--primary-red) 0%, var(--primary-red) 25%, var(--primary-blue) 80%, var(--primary-blue) 90%);
   border: none;
@@ -727,7 +704,6 @@ onUnmounted(() => {
   transform: translateX(5px);
 }
 
-/* Animação de bounce melhorada */
 @keyframes bounce {
   0%, 100% {
     transform: translateY(0);
@@ -737,7 +713,6 @@ onUnmounted(() => {
   }
 }
 
-/* Efeito de pulso no botão ao carregar a página */
 @keyframes pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(204, 0, 0, 0.7);
@@ -758,7 +733,6 @@ onUnmounted(() => {
   animation: none;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   .experience-header-wrapper {
     flex-direction: column;
@@ -849,7 +823,6 @@ onUnmounted(() => {
   font-weight: 500;
 }
 
-/* Adicione animações para os textos */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -873,7 +846,6 @@ onUnmounted(() => {
 .description-container > *:nth-child(5) { animation-delay: 0.5s; }
 .description-container > *:nth-child(6) { animation-delay: 0.6s; }
 
-/* Seção Acadêmica */
 .academic-section {
   background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(204, 0, 0, 0.05));
   border: 1px solid rgba(255, 215, 0, 0.3);
@@ -929,7 +901,6 @@ onUnmounted(() => {
   transform: translateY(0);
 }
 
-/* Responsividade para a seção acadêmica */
 @media (max-width: 768px) {
   .academic-content {
     flex-direction: column;
@@ -957,7 +928,6 @@ onUnmounted(() => {
   }
 }
 
-/* Tooltip para o link acadêmico */
 .academic-link {
   position: relative;
 }
@@ -983,10 +953,6 @@ onUnmounted(() => {
   opacity: 1;
 }
 
-/* Se quiser usar o tooltip, adicione no HTML: */
-/* data-tooltip="Opens in new tab" */
-
-/* Achievement Sections */
 .achievement-section {
   margin: 1.5rem 0;
   padding: 1rem;
@@ -1015,7 +981,6 @@ onUnmounted(() => {
   font-size: 1.3rem;
 }
 
-/* Tech Tags */
 .tech-tags {
   display: flex;
   flex-wrap: wrap;
@@ -1044,7 +1009,6 @@ onUnmounted(() => {
   box-shadow: 0 4px 12px rgba(204, 0, 0, 0.3);
 }
 
-/* Achievement Note */
 .achievement-note {
   display: flex;
   align-items: center;
@@ -1066,7 +1030,6 @@ onUnmounted(() => {
   color: #ffd700;
 }
 
-/* Certifications Grid */
 .certifications-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -1103,7 +1066,6 @@ onUnmounted(() => {
   font-size: 1.2rem;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   .achievement-section {
     padding: 0.8rem;
@@ -1149,7 +1111,6 @@ onUnmounted(() => {
   }
 }
 
-/* Responsividade para telas menores */
 @media (max-width: 768px) {
   .description-container {
     padding: 0.5rem;
@@ -1211,7 +1172,6 @@ onUnmounted(() => {
   margin-bottom: 0;
 }
 
-/* Grid container para os cards de skills - 3 colunas em desktop */
 .skills-grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1220,13 +1180,11 @@ onUnmounted(() => {
   margin: 0 auto 3rem auto;
 }
 
-/* Cada card de skill com background */
 .skill-card {
   background: #080c16;
   backdrop-filter: blur(10px);
   border-radius: 12px;
   padding: 1.2rem;
-  /* border: 1px solid rgba(255, 255, 255, 0.15); */
   border: 1px solid;
   border-image: linear-gradient(135deg, red 20%, #05f 100%) 1;
   transition: all 0.3s ease;
@@ -1235,7 +1193,6 @@ onUnmounted(() => {
 .skill-card:hover {
   transform: translateY(-3px);
   border: 3px solid;
-  /* border-color: rgb(204, 139, 0); */
   border-image: linear-gradient(135deg, rgb(204, 139, 0) 0%, white 50%, rgb(204, 139, 0) 100%) 1;
   box-shadow: 0 8px 40px rgb(204, 139, 0);
 }
@@ -1254,7 +1211,7 @@ onUnmounted(() => {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: transparent; /* Torna o texto transparente para mostrar o gradiente */
+  color: transparent;
   border-bottom-color: rgb(204, 139, 0);
 }
 
@@ -1308,7 +1265,6 @@ onUnmounted(() => {
   height: fit-content;
 }
 
-/* Seção de Experiências */
 .experience-section {
   max-width: 1000px;
   margin: 0 auto;
@@ -1319,17 +1275,17 @@ onUnmounted(() => {
   text-align: center;
   margin-bottom: 2rem;
   color: #fff;
-  display: inline-block; /* 🔥 MUDE para inline-block */
-  width: auto; /* 🔥 Largura automática */
-  padding: 0.5rem 2rem; /* 🔥 Adicione padding para espaçamento interno */
+  display: inline-block;
+  width: auto;
+  padding: 0.5rem 2rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.15);
   border-image: linear-gradient(135deg, rgb(204, 139, 0) 0%, white 50%, rgb(204, 139, 0) 100%) 1;
   backdrop-filter: blur(10px);
-  border-radius: 5px; /* 🔥 Opcional: bordas arredondadas */
-  left: 50%; /* 🔥 Para centralizar */
-  position: relative; /* 🔥 Para centralizar */
-  transform: translateX(-50%); /* 🔥 Para centralizar */
+  border-radius: 5px;
+  left: 50%;
+  position: relative;
+  transform: translateX(-50%);
 }
 
 .timeline {
@@ -1386,7 +1342,6 @@ onUnmounted(() => {
 
 .experience-card:hover {
   transform: translateX(5px);
-  /* border-color: rgba(204, 0, 0, 0.5); */
   box-shadow: 0 4px 20px rgba(204, 0, 0, 0.5);
   border-image: linear-gradient(135deg, red 20%, #05f 100%) 1;
 }
@@ -1482,7 +1437,6 @@ onUnmounted(() => {
   transform: scale(1.05);
 }
 
-/* Responsividade */
 @media (max-width: 968px) {
   .about-content {
     grid-template-columns: 1fr;
@@ -1521,11 +1475,6 @@ onUnmounted(() => {
   .section-title {
     font-size: 2.5rem;
   }
-  
-  /* .description {
-    font-size: 1rem;
-    margin-bottom: 0.7rem;
-  } */
   
   .experience-list {
     margin-left: 1rem;

@@ -2,7 +2,6 @@
   <nav class="navbar">
     <div class="nav-background"></div>
     
-    <!-- Imagem e texto do lado esquerdo -->
     <div class="nav-logo">
       <img src="/android-chrome-512x512.png" alt="Logo" class="logo-image" />
       <span class="logo-text"><strong>Gabriel Game Dev.</strong></span>
@@ -74,7 +73,6 @@ defineEmits(['sectionChange'])
   isolation: isolate;
 }
 
-/* Fundo escuro azulado */
 .nav-background {
   position: absolute;
   top: 0;
@@ -88,7 +86,6 @@ defineEmits(['sectionChange'])
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilos para o logo e texto */
 .nav-logo {
   display: flex;
   align-items: center;
@@ -160,7 +157,6 @@ defineEmits(['sectionChange'])
   gap: 0.5rem;
 }
 
-/* Indicador (barra vermelha embaixo) */
 .nav-indicator {
   position: relative;
   width: 0;
@@ -171,7 +167,6 @@ defineEmits(['sectionChange'])
   display: block;
 }
 
-/* Hover effect - barra se estende a partir do centro */
 .nav-links a:hover .nav-indicator {
   width: 100%;
 }
@@ -181,7 +176,6 @@ defineEmits(['sectionChange'])
   text-shadow: 0 0 5px rgba(255, 50, 50, 0.5);
 }
 
-/* Active state - barra vermelha fica visível até a seção ser trocada */
 .nav-links a.active {
   color: white;
   font-weight: bold;
@@ -193,12 +187,10 @@ defineEmits(['sectionChange'])
   box-shadow: 0 0 8px rgba(255, 50, 50, 0.6);
 }
 
-/* Efeito de brilho no texto ativo */
 .nav-links a.active {
   text-shadow: 0 0 8px rgba(255, 50, 50, 0.5);
 }
 
-/* 🔥 RESPONSIVIDADE PARA TELA ENTRE 651px E 716px */
 @media (min-width: 651px) and (max-width: 763px) {
   .navbar {
     flex-direction: column;
@@ -233,7 +225,6 @@ defineEmits(['sectionChange'])
   }
 }
 
-/* 🔥 RESPONSIVIDADE PARA TELA ENTRE 764px E 800px */
 @media (min-width: 764px) and (max-width: 800px) {
   .navbar {
     padding: 0 1rem;
@@ -266,7 +257,6 @@ defineEmits(['sectionChange'])
   }
 }
 
-/* 🔥 RESPONSIVIDADE PARA TELA ENTRE 854px E 922px */
 @media (min-width: 854px) and (max-width: 922px) {
   .navbar {
     padding: 0 1.5rem;
@@ -294,7 +284,6 @@ defineEmits(['sectionChange'])
   }
 }
 
-/* Responsividade padrão para telas médias (já coberto por cima) */
 @media (min-width: 801px) and (max-width: 853px) {
   .navbar {
     padding: 0 1.2rem;
@@ -317,7 +306,6 @@ defineEmits(['sectionChange'])
   }
 }
 
-/* Responsividade para telas menores que 650px */
 @media (max-width: 650px) {
   .navbar {
     flex-direction: column;
@@ -352,7 +340,6 @@ defineEmits(['sectionChange'])
   }
 }
 
-/* Responsividade para mobile */
 @media (max-width: 480px) {
   .logo-image {
     height: 35px;

@@ -1,6 +1,5 @@
 <template>
   <section class="section mobile-section" :class="{ 'content-hidden': !showContent, 'no-interaction': !showContent }">
-    <!-- 🔥 BOTÃO NO CANTO SUPERIOR ESQUERDO -->
     <div class="toggle-button-container">
       <button @click="toggleContent" class="toggle-visibility-btn">
         {{ showContent ? $t('mobile.hidecontent') : $t('mobile.showcontent') }}
@@ -21,7 +20,6 @@
                 </div>
                 <p class="project-description">{{ project.description }}</p>
               </li>
-              <!-- <li :key="forceUpdate"><strong>{{ $t('myRole') }}</strong> {{ project.role }}</li> -->
               <li :key="forceUpdate" class="responsibilities-item">
                 <strong>{{ $t('myRole') }}</strong>
                 <ul class="responsibilities-list">
@@ -53,11 +51,6 @@
                   </div>
                 </div>
               </li>
-              <!-- <li :key="forceUpdate">
-                <strong>{{ $t('myResponsibilities') }}</strong> 
-                {{ project.responsibilities }}
-              </li> -->
-              <!-- RESPONSABILIDADES (SEPARADAS EM ITENS DE LISTA) -->
               <li :key="forceUpdate" class="responsibilities-item">
                 <strong>{{ $t('myResponsibilities') }}</strong>
                 <ul class="responsibilities-list">
@@ -106,16 +99,13 @@ const { $t, forceUpdate, currentLanguage } = useTranslations()
 const projects = ref([])
 const showContent = ref(true)
 
-// 🔥 FUNÇÃO PARA ALTERNAR CONTEÚDO
 const toggleContent = async () => {
   showContent.value = !showContent.value
   
   await nextTick()
   
-  // 🔥 FORÇA O REDIMENSIONAMENTO DO BACKGROUND
   window.dispatchEvent(new Event('resize'))
   
-  // Dispara múltiplas vezes para garantir
   setTimeout(() => {
     window.dispatchEvent(new Event('resize'))
   }, 50)
@@ -124,7 +114,6 @@ const toggleContent = async () => {
   }, 150)
 }
 
-// Função para obter projetos estáticos com traduções atualizadas
 const loadStaticProjects = () => {
   projects.value = [
     {
@@ -207,12 +196,10 @@ const getResponsibilitiesList = (responsibilitiesText) => {
   return [responsibilitiesText]
 }
 
-// Função para obter logo da tecnologia
 const getTechLogo = (techName) => {
   return cloudinaryUrls.technologyLogos[techName] || ''
 }
 
-// Função para tratar erro de carregamento de imagem
 const handleImageError = (event) => {
   const parent = event.target.parentElement
   if (parent) {
@@ -271,7 +258,6 @@ onMounted(() => {
   transition: height 0.3s ease;
 }
 
-/* 🔥 QUANDO CONTEÚDO ESTÁ ESCONDIDO, ALTURA FIXA */
 .section.content-hidden {
   height: 1000px !important;
   min-height: 1000px !important;
@@ -294,7 +280,6 @@ onMounted(() => {
   transform: translateX(-50%);
 }
 
-/* 🔥 ESTILOS DO BOTÃO - CANTO SUPERIOR ESQUERDO */
 .toggle-button-container {
   position: absolute;
   top: 20px;
@@ -553,7 +538,6 @@ onMounted(() => {
   }
 }
 
-/* Responsividade */
 @media (max-width: 968px) {
   .project-content {
     grid-template-columns: 1fr !important;

@@ -55,11 +55,9 @@
       </div>
     </section>
 
-    <!-- 🔥 MUDANÇA RADICAL: REMOVER SISTEMA DE ALTURA FIXA -->
     <section class="main-section section-transition">
       <!-- <NavigationBar class="navigationbar" :active-section="currentSection" @section-change="changeSection" /> -->
       
-      <!-- 🔥 CONTAINER SIMPLES SEM ALTURA FIXA -->
       <div class="sections-container">
         <!-- About Section -->
         <div class="section-content" :class="{ 'active': currentSection === 0 }">
@@ -86,22 +84,12 @@
           <MatrixFallingCodeAnimation />
           <WebSection />
         </div>
-        
-        <!-- Mobile Section -->
-        <!-- <div class="section-content" :class="{ 'active': currentSection === 4 }">
-          <BlackholeBackground />
-          <MobileSection />
-        </div> -->
+
         <div v-if="currentSection === 4" class="section-content active">
           <BlackholeBackground />
           <MobileSection />
         </div>
         
-        <!-- Contacts Section -->
-        <!-- <div class="section-content" :class="{ 'active': currentSection === 5 }">
-          <GlobeBackground />
-          <ContactsSection />
-        </div> -->
         <div v-if="currentSection === 5" class="section-content active">
           <GlobeBackground />
           <ContactsSection />
@@ -137,21 +125,17 @@ import GlobeBackground from '@/components/backgrounds/GlobeBackground.vue'
 import { cloudinaryUrls } from '@/services/cloudinary'
 
 const currentSection = ref(0)
-// 🔥 REMOVER: containerHeight não é mais necessário
 const isRotationPaused = ref(false)
 const rotationSpeed = ref(20)
 const showCenterPerson = ref(true)
 
-// VARIÁVEIS COM REFERENCIAL ÚNICO
 const currentRotation = ref(0)
 const animationId = ref(null)
 const lastTimestamp = ref(0)
 
-// Refs para elementos
 const carouselStage = ref(null)
 const carouselItems = ref([])
 
-// Refs para cada seção
 const aboutRef = ref(null)
 // const personalRef = ref(null)
 // const professionalRef = ref(null)
@@ -189,7 +173,7 @@ const carouselImages = ref([
     alt: 'Project 5'
   },
   {
-    id: 'carousel-6',  // 🔥 NOVO SEXTO CARD
+    id: 'carousel-6',
     url: cloudinaryUrls.slider[5] || '',
     alt: 'Project 6'
   }
@@ -198,43 +182,23 @@ const carouselImages = ref([
 // POSIÇÃO FIXA DE CADA CARD NO CAROUSEL
 const cardBasePositions = [0, 60, 120, 180, 240, 300]
 
-// POSIÇÃO 3D DO CARD - MANTIDO
+// POSIÇÃO 3D DO CARD
 const getCardPosition = (index) => {
   return cardBasePositions[index]
 }
 
-// ÂNGULO GLOBAL DO CARD EM RELAÇÃO AO OBSERVADOR - MANTIDO
+// ÂNGULO GLOBAL DO CARD EM RELAÇÃO AO OBSERVADOR
 const getGlobalAngle = (index) => {
   const globalAngle = (cardBasePositions[index] + currentRotation.value) % 360
   return globalAngle < 0 ? globalAngle + 360 : globalAngle
 }
 
-// Z-INDEX SUAVIZADO - CORRIGIDO
-// const getDynamicZIndex = (index) => {
-//   const globalAngle = getGlobalAngle(index)
-  
-//   // Ângulos mais amplos para transição suave
-//   const frontThreshold = 90 // aumentado de 80
-//   const backThreshold = 90  // reduzido de 100
-  
-//   if (globalAngle <= frontThreshold || globalAngle >= (360 - frontThreshold)) {
-//     return 10000 // Frente
-//   } else {
-//     return 10 // Atrás
-//   }
-// }
-
-// VERIFICAR SE ITEM ESTÁ NA FRENTE - CORRIGIDO
+// VERIFICAR SE ITEM ESTÁ NA FRENTE
 const isItemInFront = (index) => {
   const globalAngle = getGlobalAngle(index)
   const frontThreshold = 90
   return globalAngle <= frontThreshold || globalAngle >= (360 - frontThreshold)
 }
-
-// TOGGLE PESSOA CENTRAL
-// const toggleCenterPerson = () => {
-//   showCenterPerson.value = !showCenterPerson.value
-// }
 
 // ANIMAÇÃO
 const animateRotation = (timestamp) => {
@@ -266,7 +230,7 @@ const resumeRotation = () => {
   isRotationPaused.value = false
 }
 
-const MANUAL_ROTATION_ANGLE = 60  // 🔥 NOVO: 360/6 = 60 graus
+const MANUAL_ROTATION_ANGLE = 60
 
 const rotateManual = (angleChange) => {
   currentRotation.value = (currentRotation.value + angleChange) % 360
@@ -277,7 +241,7 @@ const rotateManual = (angleChange) => {
   }, 2000)
 }
 
-// 🔥 MAPEAMENTO CORRETO DOS CARDS - Adicione IDs únicos aos projetos
+// MAPEAMENTO DOS CARDS
 const carouselToProjectMap = {
   0: 'Astro Adventure 3D',  // Card 1 -> Astro Adventure 3D
   1: 'Cook & Conquer',      // Card 2 -> Cook & Conquer
@@ -294,7 +258,6 @@ const setActiveImage = (index) => {
   if (projectTitle) {
     console.log(`Clicou no card ${index}, procurando projeto: ${projectTitle}`)
     
-    // Mudar para a seção de Games (índice 1)
     currentSection.value = 1
     
     // Aguardar a mudança de seção e rolar para o projeto
@@ -308,7 +271,6 @@ const setActiveImage = (index) => {
   }, 3000)
 }
 
-// 🔥 NOVA FUNÇÃO: scrollToProjectByTitle - procura pelo título do projeto
 const scrollToProjectByTitle = async (projectTitle) => {
   // Aguardar a seção ser renderizada
   await new Promise(resolve => setTimeout(resolve, 500))
@@ -375,7 +337,7 @@ const scrollToProjectByTitle = async (projectTitle) => {
 const changeSection = (index) => {
   currentSection.value = index
   
-  // 🔥 ROLAR PARA O TOPO DA SEÇÃO COM OFFSET PARA A NAVBAR
+  // ROLAR PARA O TOPO DA SEÇÃO COM OFFSET PARA A NAVBAR
   setTimeout(() => {
     const sectionsContainer = document.querySelector('.sections-container')
     if (sectionsContainer) {
@@ -427,7 +389,6 @@ onUnmounted(() => {
   window.removeEventListener('change-section', handleSectionChange)
 })
 
-// Adicione ao script setup
 const updatePersonScale = () => {
   const centerPerson = document.querySelector('.center-person-3d')
 
@@ -450,16 +411,12 @@ const updatePersonScale = () => {
   centerPerson.style.setProperty('--person-scale', scale)
 }
 
-// Adicione ao onMounted
 onMounted(() => {
-  // ... seu código existente
   window.addEventListener('resize', updatePersonScale)
   updatePersonScale() // Chamada inicial
 })
 
-// Adicione ao onUnmounted
 onUnmounted(() => {
-  // ... seu código existente
   window.removeEventListener('resize', updatePersonScale)
 })
 </script>
@@ -509,7 +466,6 @@ onUnmounted(() => {
   transform-style: preserve-3d;
 }
 
-/* ATUALIZE ESTAS REGRAS CSS */
 .carousel-stage {
   position: relative;
   width: 100%;
@@ -519,7 +475,6 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   z-index: 1000 !important;
-  /* REMOVA transition daqui se existir */
 }
 
 .carousel-3d-item {
@@ -527,7 +482,7 @@ onUnmounted(() => {
   width: 180px;
   height: 320px;
   transform-style: preserve-3d;
-  transition: transform 0.5s ease; /* Reduzida e simplificada */
+  transition: transform 0.5s ease;
   cursor: pointer;
   border-radius: 10px;
   overflow: visible;
@@ -544,9 +499,8 @@ onUnmounted(() => {
   transform-style: preserve-3d;
   border-radius: 10px;
   overflow: hidden;
-  transition: all 0.5s ease; /* Transição mais suave */
+  transition: all 0.5s ease;
   border: 3px solid transparent;
-  /* Garantir que o z-index seja aplicado corretamente */
   position: relative;
   z-index: inherit;
 }
@@ -557,15 +511,14 @@ onUnmounted(() => {
 }
 
 .image-3d-wrapper:not(.front-layer) {
-  filter: brightness(0.7) !important; /* Aumentado de 0.6 para menos contraste */
+  filter: brightness(0.7) !important;
   z-index: 10 !important;
 }
 
-/* MELHORAR A TRANSIÇÃO NO HOVER */
 .carousel-3d-item:hover .image-3d-wrapper {
-  transform: scale(1.1) translateZ(30px); /* Mais suave */
+  transform: scale(1.1) translateZ(30px);
   filter: brightness(1.2);
-  transition: all 0.3s ease; /* Transição mais rápida no hover */
+  transition: all 0.3s ease;
 }
 
 .carousel-3d-item img {
@@ -593,15 +546,8 @@ onUnmounted(() => {
 
   z-index: 500000 !important;
 
-  /* CENTRALIZAÇÃO REAL */
   inset: 0;
   margin: auto;
-  
-  /* top: -5.15vw;
-  left: 37.5%;
-  width: 25%;
-  height: 76.5%;
-  height: 42vw; */
 }
 
 .center-person-3d::before {
@@ -616,7 +562,6 @@ onUnmounted(() => {
   background-repeat: no-repeat;
 
   transform-origin: center center;
-  /* transform: scale(var(--person-scale, 1)); */
 }
 
 .carousel-3d-control {
@@ -655,7 +600,6 @@ onUnmounted(() => {
   padding-left: 2px;
 }
 
-/* 🔥 MUDANÇA RADICAL: NOVO SISTEMA DE SEÇÕES */
 .main-section {
   position: relative;
   width: 100%;
@@ -717,24 +661,9 @@ onUnmounted(() => {
   }
 }
 
-/* NOVO: Estilos para dourado metálico claro e brilhante */
-/* .hero-headline {
-  position: absolute;
-  display: inline-block;
-  top: 1.5%;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  color: white;
-  z-index: 1000000 !important;
-  width: 75%;
-  pointer-events: none;
-  padding: 0 20px;
-} */
-
 .hero-section {
   height: 700px;
-  position: relative; /* 🔥 JÁ DEVE TER ISSO */
+  position: relative;
   background: #000;
   overflow: hidden;
   display: flex;
@@ -742,7 +671,6 @@ onUnmounted(() => {
   justify-content: center;
 }
 
-/* ALTERE O .hero-headline para ficar relativo à hero-section */
 .hero-headline {
   position: absolute;
   display: inline-block;
@@ -751,7 +679,7 @@ onUnmounted(() => {
   transform: translateX(-50%);
   text-align: center;
   color: white;
-  z-index: 100; /* 🔥 REDUZA o z-index (antes era 1000000) */
+  z-index: 100;
   width: 75%;
   pointer-events: none;
   padding: 0 20px;
@@ -798,13 +726,12 @@ onUnmounted(() => {
   width: 20px;
   height: 200%;
   background: white;
-  z-index: 9997; /* Um pouco menor que o z-index do texto */
+  z-index: 9997;
   animation: slide-shine 3s ease-in-out infinite;
   pointer-events: none;
   opacity: 0.7;
   transform: rotate(-45deg);
   transform-origin: center;
-  /* Usar o texto como máscara */
   -webkit-mask: linear-gradient(#fff, #fff) content-box, linear-gradient(#fff, #fff);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#fff, #fff) content-box, linear-gradient(#fff, #fff);
@@ -828,7 +755,6 @@ onUnmounted(() => {
   background-clip: text;
   background-size: 200% 200%;
   text-shadow: 
-    /* Contorno sutil para legibilidade */
     0 0.5px 1px rgba(0, 0, 0, 0.1),
     0 1px 2px rgba(0, 0, 0, 0.1),
     /* Brilho dourado intenso */
@@ -916,29 +842,14 @@ onUnmounted(() => {
   animation-duration: 2s;
 }
 
-@media (min-width: 1670px){
-  /* .center-person-3d{  
-    top: 10.9%;
-    left: 37%;
-    width: 26%;
-    height: 78%;
-  } */
-}
-
 @media (max-width: 1250px){
   .center-person-3d{  
-    /* top: 12%;
-    left: 37.5%;
-    width: 25%;
-    height: 76%; */
     height: 697px !important;
   }
 }
 
-/* MEDIA QUERIES UNIFICADAS */
 @media (max-width: 1024px) {
   .hero-headline {
-    /*top: 10%;*/
     max-width: 95%;
   }
   
@@ -1018,14 +929,6 @@ onUnmounted(() => {
     perspective: 1500px;
   }
   
-  /* .center-person-3d{
-    top: 7.7%;
-    left: 7.5%;
-    width: 85%;
-    height: 84.5%;
-  } */
-  
-  /* 🔥 CORREÇÃO PARA NOVO SISTEMA EM MOBILE */
   .sections-container {
     min-height: 300px;
   }
@@ -1047,7 +950,7 @@ onUnmounted(() => {
     margin-bottom: 0.5rem;
     white-space: normal;
     letter-spacing: 0.2px;
-    text-transform: none; /* Remover uppercase em mobile */
+    text-transform: none;
   }
   
   .hero-headline p {
@@ -1068,14 +971,6 @@ onUnmounted(() => {
     perspective: 1200px;
   }
   
-  /* .center-person-3d{
-    top: 12.5%;
-    left: 12.5%;
-    width: 75%;
-    height: 75%;
-  } */
-  
-  /* 🔥 CORREÇÃO PARA NOVO SISTEMA EM MOBILE PEQUENO */
   .sections-container {
     min-height: 250px;
   }
@@ -1085,7 +980,6 @@ onUnmounted(() => {
   }
 }
 
-/* 🔥 CORREÇÕES DE RESPONSIVIDADE CRÍTICAS */
 @media (max-width: 1024px) {
   .hero-section {
     height: 600px;
@@ -1102,13 +996,7 @@ onUnmounted(() => {
     perspective: 2000px;
   }
 
-  .center-person-3d{  
-    /* top: 16.75%;
-    left: 37.4%;
-    width: 25%;
-    height: 66.35%; */
-
-    /* height: 58.1vw !important; */
+  .center-person-3d{
     height: 599.8px !important;
   }
 }
@@ -1119,7 +1007,7 @@ onUnmounted(() => {
   }
   
   .hero-headline {
-    top: 1%; /* 🔥 SUBIR ainda mais em tablet */
+    top: 1%;
   }
   
   .hero-headline h1 {
@@ -1152,13 +1040,7 @@ onUnmounted(() => {
     perspective: 1500px;
   }
 
-  .center-person-3d{  
-    /* top: 22.5%;
-    left: 37.4%;
-    width: 25%;
-    height: 55%; */
-    
-    /* height: 64.9vw !important; */
+  .center-person-3d{
     height: 499px !important;
   }
 }
@@ -1169,12 +1051,12 @@ onUnmounted(() => {
   }
   
   .hero-headline {
-    top: 0.5%; /* 🔥 SUBIR ainda mais em mobile */
+    top: 0.5%;
     width: 90%;
   }
   
   .hero-headline h1 {
-    font-size: 1.3rem !important; /* 🔥 TEXTO um pouco menor */
+    font-size: 1.3rem !important;
     -webkit-text-stroke: 0.2px #000;
     text-transform: none;
   }
@@ -1196,38 +1078,17 @@ onUnmounted(() => {
     font-size: 1.5rem;
   }
 
-  .center-person-3d{  
-    /* top: 25%;
-    left: 37.4%;
-    width: 25%;
-    height: 50%; */
-
-    /* height: 93.9vw !important; */
-    
+  .center-person-3d{
     height: 450px !important;
   }
 }
 
-@media (max-width: 374px) {
-  .center-person-3d{  
-    /* top: 25%;
-    left: 37.4%;
-    width: 25%;
-    height: 50%; */
-    
-    /* height: 120vw !important; */
-    /* height: 450px !important; */
-  }
-}
-
-/* Garantir que as seções tenham tamanho definido */
 .section-content {
   position: relative;
   min-height: 500px;
   overflow: hidden;
 }
 
-/* Forçar os containers dos backgrounds a terem tamanho */
 .blackhole-container,
 .globe-container {
   position: absolute !important;
@@ -1255,7 +1116,6 @@ onUnmounted(() => {
   z-index: 10;
 }
 
-/*Novo*/ 
 /* Todos os backgrounds devem permitir que os cliques passem através */
 .compass-field-canvas,
 .galaxy-canvas,

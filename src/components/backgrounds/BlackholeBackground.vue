@@ -21,7 +21,6 @@ const initThree = () => {
   const container = containerRef.value
   if (!container) return
   
-  // 🔥 NÃO usar parent - usar o próprio container
   const rect = container.getBoundingClientRect()
   const width = rect.width
   const height = rect.height
@@ -31,7 +30,6 @@ const initThree = () => {
     return
   }
   
-  // Importar Three.js e addons
   Promise.all([
     import('three'),
     import('three/addons/controls/OrbitControls.js'),
@@ -40,7 +38,6 @@ const initThree = () => {
     import('three/addons/postprocessing/UnrealBloomPass.js')
   ]).then(([THREE, { OrbitControls }, { EffectComposer }, { RenderPass }, { UnrealBloomPass }]) => {
     
-    // • Configuração da cena •
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0x010115);
     scene.fog = new THREE.FogExp2(0x010115, 0.002);
@@ -51,19 +48,16 @@ const initThree = () => {
 
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setSize(width, height);
-    // renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ReinhardToneMapping;
     renderer.toneMappingExposure = 1.25;
     container.appendChild(renderer.domElement);
 
-    // 🔥 Garantir que o canvas recebe eventos
     renderer.domElement.style.pointerEvents = 'auto'
     renderer.domElement.style.position = 'absolute'
     renderer.domElement.style.top = '0'
     renderer.domElement.style.left = '0'
 
-    // • Effect Composer com Bloom •
     const renderScene = new RenderPass(scene, camera);
     const bloomPass = new UnrealBloomPass(new THREE.Vector2(width, height), 1.0, 0.4, 0.8);
     bloomPass.threshold = 0.12;
@@ -74,7 +68,6 @@ const initThree = () => {
     effectComposer.addPass(renderScene);
     effectComposer.addPass(bloomPass);
     
-    // • Controles Orbitais •
     controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.06;
@@ -85,7 +78,6 @@ const initThree = () => {
     controls.target.set(0, 0, 0);
     controls.maxPolarAngle = Math.PI / 1.6;
     
-    // • Iluminação •
     const ambientLight = new THREE.AmbientLight(0x0a0a1a);
     scene.add(ambientLight);
     
@@ -101,7 +93,6 @@ const initThree = () => {
     coreLight.position.set(0, 0, 0);
     scene.add(coreLight);
     
-    // • Horizonte de Eventos (esfera preta) •
     const coreGeometry = new THREE.SphereGeometry(0.88, 128, 128);
     const coreMaterial = new THREE.MeshStandardMaterial({
         color: 0x000000,
@@ -122,10 +113,6 @@ const initThree = () => {
     });
     const innerGlow = new THREE.Mesh(glowGeometry, glowMaterial);
     scene.add(innerGlow);
-    
-    // ============================================================
-    // • DISCO HORIZONTAL • Dots redondos •
-    // ============================================================
     
     const HORIZONTAL_COUNT = 9000;
     
@@ -192,12 +179,8 @@ const initThree = () => {
     });
     const horizontalSystem = new THREE.Points(horizontalGeo, horizontalMat);
     scene.add(horizontalSystem);
-    
-    // ============================================================
-    // • DISCO VERTICAL • Dots redondos (copiado do horizontal)
-    // ============================================================
 
-    const VERTICAL_COUNT = 6000;  // 🔥 Aumentado para igual ao horizontal
+    const VERTICAL_COUNT = 6000;
 
     class VerticalParticle {
         constructor(radius, angle, xOffset, color) {
@@ -205,7 +188,7 @@ const initThree = () => {
             this.angle = angle;
             this.xOffset = xOffset;
             this.color = color;
-            this.angularSpeed = 0.008 + (1.2 / (radius + 0.5)) * 0.003;  // 🔥 Mesma velocidade do horizontal
+            this.angularSpeed = 0.008 + (1.2 / (radius + 0.5)) * 0.003;
         }
     }
 
@@ -215,7 +198,6 @@ const initThree = () => {
 
     for (let i = 0; i < VERTICAL_COUNT; i++) {
         let r;
-        // 🔥 Mesma distribuição do horizontal
         if (Math.random() < 0.55) {
             r = 0.9 + Math.random() * 0.8;
         } else {
@@ -224,7 +206,6 @@ const initThree = () => {
         
         const angle = Math.random() * Math.PI * 2;
         
-        // 🔥 Mesmo cálculo de yOffset do horizontal (convertido para xOffset)
         let xOffset;
         if (r < 1.65) {
             xOffset = (Math.random() - 0.5) * 0.45 * (1 - (r - 1.05) / 0.8);
@@ -232,7 +213,6 @@ const initThree = () => {
             xOffset = (Math.random() - 0.5) * 0.12;
         }
         
-        // 🔥 Mesmas cores do horizontal
         const t = (r - 1.05) / 2.3;
         const rCol = 1.0 - t * 0.65;
         const gCol = 0.55 + Math.sin(t * Math.PI) * 0.35;
@@ -257,18 +237,14 @@ const initThree = () => {
     verticalGeo.setAttribute('color', new THREE.BufferAttribute(verticalColors, 3));
 
     const verticalMat = new THREE.PointsMaterial({
-        size: 0.045,  // 🔥 Mesmo tamanho do horizontal
+        size: 0.045,
         vertexColors: true,
         blending: THREE.AdditiveBlending,
         transparent: true,
-        opacity: 0.9  // 🔥 Mesma opacidade do horizontal
+        opacity: 0.9
     });
     const verticalSystem = new THREE.Points(verticalGeo, verticalMat);
     scene.add(verticalSystem);
-    
-    // ============================================================
-    // • 8 DESCIDAS ORIGINAIS • Dots redondos menores •
-    // ============================================================
     
     const INTERSECTION_COUNT = 5000;
     
@@ -382,10 +358,6 @@ const initThree = () => {
     const intersectionSystem = new THREE.Points(intersectionGeo, intersectionMat);
     scene.add(intersectionSystem);
     
-    // ============================================================
-    // • CAMADA DENSA • Dots redondos próximos ao horizonte •
-    // ============================================================
-    
     const DENSE_COUNT = 3000;
     
     class DenseParticle {
@@ -440,10 +412,6 @@ const initThree = () => {
     const denseSystem = new THREE.Points(denseGeo, denseMat);
     scene.add(denseSystem);
     
-    // ============================================================
-    // • POEIRA FINA • Dots espalhados •
-    // ============================================================
-    
     const DUST_COUNT = 5000;
     const dustGeo = new THREE.BufferGeometry();
     const dustPos = new Float32Array(DUST_COUNT * 3);
@@ -460,9 +428,6 @@ const initThree = () => {
     const dustCloud = new THREE.Points(dustGeo, dustMat);
     scene.add(dustCloud);
     
-    // ============================================================
-    // • ESTRELAS DE FUNDO • Dots •
-    // ============================================================
     const starCount = 6000;
     const starGeoBg = new THREE.BufferGeometry();
     const starPosBg = new Float32Array(starCount * 3);
@@ -489,10 +454,6 @@ const initThree = () => {
     const brightStars = new THREE.Points(brightStarGeo, brightStarMat);
     scene.add(brightStars);
     
-    // ============================================================
-    // • FLARES • Dots luminosos •
-    // ============================================================
-    
     const flareCount = 1600;
     const flareGeo = new THREE.BufferGeometry();
     const flarePos = new Float32Array(flareCount * 3);
@@ -509,26 +470,6 @@ const initThree = () => {
     const flares = new THREE.Points(flareGeo, flareMat);
     scene.add(flares);
     
-    // • Raios de luz (linhas mantidas para contraste) •
-    // const rayCount = 40;
-    // const rayLines = [];
-    // const rayMaterial = new THREE.LineBasicMaterial({ color: 0xff6644, transparent: true, opacity: 0.18 });
-    // for (let i = 0; i < rayCount; i++) {
-    //     const angle = (i / rayCount) * Math.PI * 2;
-    //     const points = [];
-    //     points.push(new THREE.Vector3(0, 0, 0));
-    //     const len = 1.95;
-    //     points.push(new THREE.Vector3(Math.cos(angle) * len, Math.sin(angle) * 0.12, Math.sin(angle) * len));
-    //     const geometry = new THREE.BufferGeometry().setFromPoints(points);
-    //     const line = new THREE.Line(geometry, rayMaterial);
-    //     scene.add(line);
-    //     rayLines.push(line);
-    // }
-    
-    // ============================================================
-    // • ANIMAÇÃO •
-    // ============================================================
-    
     let time = 0;
     
     const horizontalPosAttr = horizontalGeo.attributes.position;
@@ -540,7 +481,6 @@ const initThree = () => {
         animationId = requestAnimationFrame(animate);
         time += 0.016;
         
-        // • Disco Horizontal •
         const hPosArray = horizontalPosAttr.array;
         for (let i = 0; i < HORIZONTAL_COUNT; i++) {
             const p = horizontalParticles[i];
@@ -555,7 +495,6 @@ const initThree = () => {
         }
         horizontalPosAttr.needsUpdate = true;
         
-        // • Disco Vertical •
         const vPosArray = verticalPosAttr.array;
         for (let i = 0; i < VERTICAL_COUNT; i++) {
             const p = verticalParticles[i];
@@ -570,7 +509,6 @@ const initThree = () => {
         }
         verticalPosAttr.needsUpdate = true;
         
-        // • Camada Densa •
         const dPosArray = densePosAttr.array;
         for (let i = 0; i < DENSE_COUNT; i++) {
             const p = denseParticles[i];
@@ -585,7 +523,6 @@ const initThree = () => {
         }
         densePosAttr.needsUpdate = true;
         
-        // • Partículas de Interseção (8 descidas) •
         const iPosArray = intersectionPosAttr.array;
         for (let i = 0; i < INTERSECTION_COUNT; i++) {
             const p = intersectionParticles[i];
@@ -597,23 +534,16 @@ const initThree = () => {
         }
         intersectionPosAttr.needsUpdate = true;
         
-        // • Efeitos visuais dinâmicos •
         const pulseIntensity = 0.6 + Math.sin(time * 2.4) * 0.14;
         coreLight.intensity = pulseIntensity;
         coreMaterial.emissiveIntensity = 0.18 + Math.sin(time * 2.1) * 0.07;
         innerGlow.material.opacity = 0.1 + Math.sin(time * 1.9) * 0.05;
         
-        // rayLines.forEach((line, idx) => {
-        //     line.material.opacity = 0.15 + Math.sin(time * 2.8 + idx * 0.3) * 0.06;
-        // });
-        
-        // • Opacidade pulsante dos dots •
         horizontalMat.opacity = 0.8 + Math.sin(time * 1.5) * 0.03;
-        verticalMat.opacity = 0.75 + Math.sin(time * 1.8) * 0.04;  // 🔥 Igual ao horizontal
+        verticalMat.opacity = 0.75 + Math.sin(time * 1.8) * 0.04;
         denseMat.opacity = 0.5 + Math.sin(time * 2.2) * 0.02;
         intersectionMat.opacity = 0.4 + Math.sin(time * 2.0) * 0.05;
         
-        // • Rotação suave dos elementos de fundo •
         starsField.rotation.y += 0.0002;
         brightStars.rotation.x += 0.00015;
         dustCloud.rotation.y += 0.0003;
@@ -655,22 +585,7 @@ const initThree = () => {
 const updateSize = () => {
     if (!containerRef.value || !renderer || !camera) return
 
-    // const width = containerRef.value.clientWidth
-    // const height = containerRef.value.clientHeight
-
-    // renderer.setSize(width, height)
-
-    // camera.aspect = width / height
-    // camera.updateProjectionMatrix() 
     window.dispatchEvent(new Event('resize'))
-  
-    // // Dispara múltiplas vezes para garantir
-    // setTimeout(() => {
-    //     window.dispatchEvent(new Event('resize'))
-    // }, 50)
-    // setTimeout(() => {
-    //     window.dispatchEvent(new Event('resize'))
-    // }, 150)
 }
 
 onMounted(async () => {
@@ -678,15 +593,12 @@ onMounted(async () => {
 
   initThree()
 
-  // Resize imediato
   updateSize()
 
-  // Resize após layout terminar
   requestAnimationFrame(() => {
     updateSize()
   })
 
-  // Resize extra para transições/layouts lentos
   setTimeout(() => {
     updateSize()
   }, 100)
@@ -706,18 +618,6 @@ onMounted(async () => {
   }
 })
 
-// onBeforeUnmount(() => {
-//   if (animationId) cancelAnimationFrame(animationId)
-//   cleanupFunctions.forEach(fn => fn())
-//   if (renderer && renderer.domElement && containerRef.value) {
-//     containerRef.value.removeChild(renderer.domElement)
-//   }
-//   renderer = null
-//   scene = null
-//   camera = null
-//   controls = null
-//   effectComposer = null
-// })
 onBeforeUnmount(() => {
   if (animationId) {
     cancelAnimationFrame(animationId)
@@ -725,12 +625,10 @@ onBeforeUnmount(() => {
 
   cleanupFunctions.forEach(fn => fn())
 
-  // 🔥 Dispose dos controles
   if (controls) {
     controls.dispose()
   }
 
-  // 🔥 Dispose do EffectComposer
   if (effectComposer) {
     effectComposer.dispose?.()
   }
@@ -739,7 +637,6 @@ onBeforeUnmount(() => {
     const canvas = renderer.domElement
 
     renderer.dispose()
-    //renderer.forceContextLoss?.()
 
     if (canvas && containerRef.value?.contains(canvas)) {
         containerRef.value.removeChild(canvas)
@@ -754,16 +651,6 @@ onBeforeUnmount(() => {
 })
 
 onUnmounted(() => {
-//   if (animationId) cancelAnimationFrame(animationId)
-//   cleanupFunctions.forEach(fn => fn())
-//   if (renderer && renderer.domElement && containerRef.value) {
-//     containerRef.value.removeChild(renderer.domElement)
-//   }
-//   renderer = null
-//   scene = null
-//   camera = null
-//   controls = null
-//   effectComposer = null
     window.removeEventListener('resize', updateSize)
 
     if (resizeObserver) {
@@ -782,11 +669,9 @@ onUnmounted(() => {
   height: 100% !important;
   z-index: 5 !important;
   overflow: hidden !important;
-  /* 🔥 IMPORTANTE: pointer-events: auto para o container */
   pointer-events: auto !important;
 }
 
-/* 🔥 Canvas DEVE receber eventos */
 .blackhole-container canvas {
   display: block !important;
   width: 100% !important;

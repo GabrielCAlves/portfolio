@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { useTranslations } from '@/composables/useTranslations' // 🔥 USAR COMPOSABLE
+import { useTranslations } from '@/composables/useTranslations'
 import githubIcon from '@/assets/images/github-mark-white.png'
 import linkedinIcon from '@/assets/images/LI-In-Bug.png'
 import gmailIcon from '@/assets/images/gmail.png'
@@ -35,19 +35,11 @@ const contacts = [
   { platform: 'Instagram', url: 'https://instagram.com/x_GCA_x6', icon: instagramIcon },
   { platform: 'Itch.io', url: 'https://gabrielcalves.itch.io/', icon: itchioIcon }
 ]
-
-// onMounted(() => {
-//   window.addEventListener('languageChanged', handleLanguageChange)
-// })
-
-// onUnmounted(() => {
-//   window.removeEventListener('languageChanged', handleLanguageChange)
-// })
 </script>
 
 <style scoped>
 .footer {
-  background: #080c16/*#1a1a1a*/;
+  background: #080c16;
   color: white;
   padding: 2rem 0;
   border-top: 2px solid rgba(255, 255, 255, 0.1);
@@ -104,7 +96,6 @@ const contacts = [
   font-style: italic;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   .social-links {
     flex-wrap: wrap;
@@ -116,7 +107,6 @@ const contacts = [
   }
 }
 
-/* ADICIONE A AMBOS */
 @media (max-width: 768px) {
   .contacts-grid {
     grid-template-columns: 1fr;

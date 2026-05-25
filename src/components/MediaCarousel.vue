@@ -243,7 +243,6 @@ const goToSlide = (index) => {
   padding: 0;
 }
 
-/* POSIÇÕES HORIZONTAIS */
 .media-card.active {
   transform: translate(-50%, -50%) translateZ(0) rotateY(0deg) scale(1);
   z-index: 5;
@@ -279,7 +278,6 @@ const goToSlide = (index) => {
   filter: brightness(0.6);
 }
 
-/* 🔥 POSIÇÕES VERTICAIS COM DIÂMETRO REDUZIDO */
 .vertical-carousel .media-card.active {
   transform: translate(-50%, -50%) translateZ(0) rotateX(0deg) scale(1);
 }
@@ -437,7 +435,6 @@ const goToSlide = (index) => {
   transform: scale(1.2);
 }
 
-/* MODAL */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -585,7 +582,6 @@ const goToSlide = (index) => {
   }
 }
 
-/* RESPONSIVIDADE */
 @media (max-width: 768px) {
   .rotating-card-carousel,
   .rotating-card-carousel.vertical-carousel {

@@ -17,16 +17,15 @@ let nextId = 0
 let animationFrameId = null
 let isActive = true
 
-// 🔥 AJUSTE: Remover dependência de tamanho fixo
 const createEmber = () => {
-  const size = Math.random() * 8 + 8  // Reduzido um pouco
+  const size = Math.random() * 8 + 8
   const duration = Math.random() * 30 + 5
   const delay = Math.random() * 3
   
   const ember = {
     id: nextId++,
     style: {
-      left: `${Math.random() * 100}%`,  // 🔥 USAR % em vez de vw
+      left: `${Math.random() * 100}%`,
       width: `${size}px`,
       height: `${size}px`,
       animationDuration: `${duration}s`,
@@ -47,11 +46,10 @@ const removeEmber = (id) => {
   }
 }
 
-// 🔥 FUNÇÃO PARA MANTER NÚMERO CONSTANTE DE PARTÍCULAS
 const maintainEmberCount = () => {
   if (!isActive) return
   
-  const targetCount = 200  // Reduzido um pouco para performance
+  const targetCount = 200
   const currentCount = embers.value.length
   
   if (currentCount < targetCount) {
@@ -64,7 +62,6 @@ const maintainEmberCount = () => {
   animationFrameId = requestAnimationFrame(maintainEmberCount)
 }
 
-// 🔥 OBSERVADOR PARA QUANDO A SEÇÃO FICA VISÍVEL/INVISÍVEL
 const setupVisibilityObserver = () => {
   const container = document.querySelector('.embers-container')
   if (!container) return
@@ -74,11 +71,9 @@ const setupVisibilityObserver = () => {
       isActive = entry.isIntersecting
       
       if (!isActive) {
-        // Pausar animações quando não visível
         container.style.opacity = '0'
       } else {
         container.style.opacity = '1'
-        // Recriar partículas quando voltar a ficar visível
         if (embers.value.length < 50) {
           for (let i = 0; i < 50; i++) {
             createEmber()
@@ -93,18 +88,14 @@ const setupVisibilityObserver = () => {
 }
 
 onMounted(() => {
-  // Criar partículas iniciais
   for (let i = 0; i < 120; i++) {
     createEmber()
   }
   
-  // Iniciar manutenção do número de partículas
   animationFrameId = requestAnimationFrame(maintainEmberCount)
   
-  // Setup visibility observer
   const observer = setupVisibilityObserver()
   
-  // 🔥 FORÇAR O CONTAINER A OCUPAR TODO O ESPAÇO
   nextTick(() => {
     const container = document.querySelector('.embers-container')
     if (container) {

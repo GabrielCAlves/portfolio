@@ -63,7 +63,6 @@ const connectParticles = () => {
       const dy = particles[i].y - particles[j].y
       const dist = Math.sqrt(dx * dx + dy * dy)
       if (dist < 120) {
-        // CORREÇÃO: Aumentei a opacidade de 0.1 para 0.35
         ctx.strokeStyle = `rgba(255, 255, 255, 0.35)`
         ctx.lineWidth = 1
         ctx.beginPath()
@@ -86,7 +85,6 @@ const animate = () => {
   if (!ctx || !canvasRef.value) return
   ctx.clearRect(0, 0, w, h)
   
-  // CORREÇÃO: Usar fillStyle mais escuro para não apagar as linhas tão rápido
   ctx.fillStyle = 'rgba(13, 13, 26, 0.1)'
   ctx.fillRect(0, 0, w, h)
   

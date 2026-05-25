@@ -1,24 +1,30 @@
 <template>
   <div ref="containerRef" class="globe-container">
-    <div class="globe-controls">
-      <div class="control-group">
-        <div class="color-picker-wrapper">
-          <label>🎨 {{ $t('contacts.globebackground.color') }}</label>
-          <!-- <input type="color" id="corSeletor" value="#ff6688"> -->
-          <div class="color-display" id="colorDisplay" style="background: #ff6688"></div>
-          <input type="color" id="corSeletor" value="#ff6688" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;">
-        </div>
-        <button id="btnAplicarCor">🌈 {{ $t('contacts.globebackground.usecolor') }}</button>
-        <button id="btnResetarCores">🛰️ {{ $t('contacts.globebackground.satellitemap') }}</button>
-      </div>
+    <button class="toggle-controls-btn" @click="toggleControls">
+      {{ controlsVisible ? '▲' : '▼' }}
+    </button>
+
+    <div class="globe-controls" :class="{ 'controls-hidden': !controlsVisible }">
       
-      <div class="control-group">
-        <div class="slider-container">
-          <label>🔘 {{ $t('contacts.globebackground.dots') }}:</label>
-          <input type="range" id="pontoSlider" min="3000" max="45000" step="500" value="22000">
-          <span id="pontoCountValue">22.0k</span>
+      <div class="controls-content">
+        <div class="control-group">
+          <div class="color-picker-wrapper">
+            <label>🎨 {{ $t('contacts.globebackground.color') }}</label>
+            <div class="color-display" id="colorDisplay" style="background: #ff6688"></div>
+            <input type="color" id="corSeletor" value="#ff6688" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;">
+          </div>
+          <button id="btnAplicarCor">🌈 {{ $t('contacts.globebackground.usecolor') }}</button>
+          <button id="btnResetarCores">🛰️ {{ $t('contacts.globebackground.satellitemap') }}</button>
         </div>
-        <button id="btnRegenerar">🔄 {{ $t('contacts.globebackground.reload') }}</button>
+        
+        <div class="control-group">
+          <div class="slider-container">
+            <label>🔘 {{ $t('contacts.globebackground.dots') }}:</label>
+            <input type="range" id="pontoSlider" min="3000" max="45000" step="500" value="22000">
+            <span id="pontoCountValue">22.0k</span>
+          </div>
+          <button id="btnRegenerar">🔄 {{ $t('contacts.globebackground.reload') }}</button>
+        </div>
       </div>
     </div>
   </div>
@@ -60,12 +66,14 @@ let lastMouseX = 0, lastMouseY = 0
 let autoRotate = true
 const SENSIBILIDADE = 0.006
 
+const controlsVisible = ref(true)
+
+const toggleControls = () => {
+  controlsVisible.value = !controlsVisible.value
+}
+
 const initThree = () => {
   const container = containerRef.value
-  // const parent = container?.parentElement
-  // if (!container || !parent) return
-  
-  // const rect = parent.getBoundingClientRect()
   if (!container) return
 
   const rect = container.getBoundingClientRect()
@@ -90,7 +98,6 @@ const initThree = () => {
     
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
-    // renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
     
@@ -134,7 +141,6 @@ const initThree = () => {
       });
     }
     
-    // 🔥 FUNÇÃO MODIFICADA - CORES MAIS ESCURAS
     function gerarGeometriaComTexturaSatelite(qtd, texture) {
       const posicoes = [];
       const cores = [];
@@ -166,23 +172,17 @@ const initThree = () => {
         let g = dados[idx+1] / 255;
         let b = dados[idx+2] / 255;
         
-        // 🔥 AUMENTAR SATURAÇÃO - método mais simples
-        // Calcular a intensidade média
         const gray = (r + g + b) / 3;
-        // Fator de saturação (1.0 = original, >1.0 = mais saturado)
-        const satFactor = 3; // Aumenta saturação em 60%
+        const satFactor = 3;
         
-        // Aplicar saturação: puxar as cores para longe do cinza
         r = gray + (r - gray) * satFactor;
         g = gray + (g - gray) * satFactor;
         b = gray + (b - gray) * satFactor;
         
-        // Limitar valores entre 0 e 1
         r = Math.min(Math.max(r, 0), 1);
         g = Math.min(Math.max(g, 0), 1);
         b = Math.min(Math.max(b, 0), 1);
         
-        // Brilho moderado para manter cores vivas (0.8 a 1.05)
         const brilho = 0.8 + Math.random() * 0.25;
         
         return new THREE.Color(r * brilho, g * brilho, b * brilho);
@@ -336,14 +336,6 @@ const initThree = () => {
         const starMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.16, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending });
         estrelas = new THREE.Points(starGeometry, starMaterial);
         scene.add(estrelas);
-        
-        // const animateStars = () => {
-        //   estrelas.rotation.y += 0.00008;
-        //   estrelas.rotation.x += 0.00004;
-        //   requestAnimationFrame(animateStars);
-        // };
-        // animateStars();
-        
       } catch (error) {
         console.error('Erro ao inicializar globo:', error);
       }
@@ -467,12 +459,10 @@ const initThree = () => {
     window.addEventListener('touchmove', onTouchMove, { passive: false })
     window.addEventListener('touchend', onTouchEnd)
 
-    // Atualizar o background do seletor quando a cor mudar
     if (corSeletorInput) {
       corSeletorInput.addEventListener('input', (e) => {
         corSeletorInput.style.background = e.target.value;
       });
-      // Definir a cor inicial
       corSeletorInput.style.background = corSeletorInput.value;
     }
 
@@ -486,35 +476,9 @@ const initThree = () => {
         colorDisplay.style.background = e.target.value;
       });
       
-      // Definir a cor inicial
       colorDisplay.style.background = corSeletorInput.value;
     }
-    
-    // function animateRotation() {
-    //   if (autoRotate && !isDragging) {
-    //     autoRotateAngle += ROTACAO_AUTOMATICA_VEL;
-    //     targetRotationY = autoRotateAngle;
-    //   }
-      
-    //   currentRotY += (targetRotationY - currentRotY) * 0.12;
-    //   currentRotX += (targetRotationX - currentRotX) * 0.12;
-      
-    //   if (earthGroup) {
-    //     earthGroup.rotation.order = 'YXZ';
-    //     earthGroup.rotation.x = currentRotX;
-    //     earthGroup.rotation.y = currentRotY;
-    //     earthGroup.rotation.z = 0;
-    //   }
-      
-    //   requestAnimationFrame(animateRotation);
-    // }
-    // animateRotation();
-    
-    // function renderScene() {
-    //   if (renderer && scene && camera) renderer.render(scene, camera);
-    //   requestAnimationFrame(renderScene);
-    // }
-    // renderScene();
+
     function animate() {
       animationId = requestAnimationFrame(animate)
 
@@ -538,9 +502,6 @@ const initThree = () => {
         estrelas.rotation.x += 0.00004
       }
 
-      // if (renderer && scene && camera) {
-      //   renderer.render(scene, camera)
-      // }
       if (
         renderer &&
         scene &&
@@ -555,8 +516,6 @@ const initThree = () => {
     animate()
     
     const handleResize = () => {
-      // if (!container || !parent) return
-      // const newRect = parent.getBoundingClientRect()
       if (!container) return
       const newRect = container.getBoundingClientRect()
       
@@ -564,7 +523,7 @@ const initThree = () => {
         camera.aspect = newRect.width / newRect.height
         camera.updateProjectionMatrix()
       }
-      // if (renderer) renderer.setSize(newRect.width, newRect.height)
+
       if (
         renderer &&
         newRect.width > 0 &&
@@ -603,17 +562,6 @@ onMounted(() => {
   }, 100)
 })
 
-// onBeforeUnmount(() => {
-//   if (animationId) cancelAnimationFrame(animationId)
-//   cleanupFunctions.forEach(fn => fn())
-//   if (renderer && renderer.domElement && containerRef.value) {
-//     containerRef.value.removeChild(renderer.domElement)
-//   }
-//   renderer = null
-//   scene = null
-//   camera = null
-//   earthGroup = null
-// })
 onBeforeUnmount(() => {
   if (animationId) cancelAnimationFrame(animationId)
 
@@ -622,7 +570,6 @@ onBeforeUnmount(() => {
   const canvas = renderer.domElement
 
   renderer.dispose()
-  //renderer.forceContextLoss?.()
 
   if (canvas && containerRef.value?.contains(canvas)) {
     containerRef.value.removeChild(canvas)
@@ -669,30 +616,44 @@ onBeforeUnmount(() => {
   box-shadow: 0 6px 20px rgba(0,0,0,0.4);
   font-family: 'Segoe UI', monospace;
   min-width: 220px;
+  transform-origin: top left;
 }
 
-/* 🔥 RESPONSIVIDADE - Ajusta posição dos controles em telas menores */
-@media (max-width: 1024px) {
-  /* .globe-controls {
-    top: 15px;
-    left: 15px;
-    padding: 10px 16px;
-    min-width: 180px;
-    transform: scale(0.95);
-    transform-origin: top left;
-  } */
+.globe-controls.controls-hidden {
+  transform: translateX(-90%) scale(0.6);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.toggle-controls-btn {
+  position: absolute;
+  z-index: 50;
+  margin-left: 12px;
+  right: 1;
+  top: 12px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: left !important;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: none;
+  background: linear-gradient(135deg, #3a5a7a, #2a3a5a);
+}
+
+.toggle-controls-btn:hover {
+  transform: scale(1.1);
+  background: linear-gradient(135deg, #4a6a8a, #3a4a6a);
 }
 
 @media (max-width: 768px) {
-  /* .globe-controls {
-    top: 10px;
-    left: 10px;
-    padding: 8px 12px;
-    min-width: 160px;
-    transform: scale(0.9);
-    transform-origin: top left;
-  } */
-  
   .control-group {
     gap: 6px;
   }
@@ -731,16 +692,6 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 480px) {
-  /* .globe-controls {
-    top: 8px;
-    left: 8px;
-    padding: 6px 10px;
-    min-width: 140px;
-    transform: scale(0.85);
-    transform-origin: top left;
-    gap: 8px;
-  } */
-  
   .control-group {
     gap: 4px;
     flex-wrap: wrap;
@@ -804,7 +755,6 @@ onBeforeUnmount(() => {
   letter-spacing: 0.5px;
 }
 
-/***/
 .color-display {
   width: 38px;
   height: 38px;
@@ -826,17 +776,6 @@ onBeforeUnmount(() => {
   opacity: 0;
   pointer-events: none;
 }
-
-/* #corSeletor {
-  width: 38px;
-  height: 38px;
-  border: 2px solid white;
-  border-radius: 50%;
-  cursor: pointer;
-  background: #ff5588;
-  box-shadow: 0 0 8px rgba(0,0,0,0.3);
-  transition: transform 0.1s ease;
-} */
 
 #corSeletor:hover {
   transform: scale(1.05);
@@ -964,7 +903,6 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 @media (max-width: 700px) {
-  /* .globe-controls { padding: 10px 14px; top: 12px; left: 12px; min-width: 180px; gap: 10px; } */
   .control-group { gap: 8px; }
   button { padding: 5px 12px; font-size: 10px; }
   .slider-container label { font-size: 10px; }
@@ -987,6 +925,11 @@ input[type="range"]::-webkit-slider-thumb {
     padding: 4px 10px;
     gap: 3px;
   }
+
+  .toggle-controls-btn {
+    margin-left: 12px;
+    top: 55px;
+  }
 }
 
 @media (min-width: 548px) and (max-width: 1042px) {
@@ -995,6 +938,11 @@ input[type="range"]::-webkit-slider-thumb {
     margin-top: 60px;
     padding: 4px 10px;
     gap: 3px;
+  }
+
+  .toggle-controls-btn {
+    margin-left: 12px;
+    top: 50px;
   }
 }
 
@@ -1008,6 +956,11 @@ input[type="range"]::-webkit-slider-thumb {
     gap: 3px;
     min-width: 400px;
   }
+
+  .toggle-controls-btn {
+    margin-left: 25px;
+    top: 60px;
+  }
 }
 
 @media (min-width: 423px) and (max-width: 480px) {
@@ -1019,6 +972,12 @@ input[type="range"]::-webkit-slider-thumb {
     padding: 7px 10px;
     gap: 5px;
     min-width: 400px;
+  }
+
+  .toggle-controls-btn {
+    margin-left: 8px;
+    top: 30px;
+    border-radius: 50%;
   }
 }
 
@@ -1035,9 +994,7 @@ input[type="range"]::-webkit-slider-thumb {
 
   .slider-container {
     width: 150px !important;
-    height: 90px !important; 
-    /* flex-direction: column;
-    align-items: stretch; */
+    height: 90px !important;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
@@ -1058,6 +1015,17 @@ input[type="range"]::-webkit-slider-thumb {
   .control-group {
     flex-direction: column;
     gap: 10px;
+  }
+
+  .controls-content{
+    display: flex;
+  }
+
+  .toggle-controls-btn {
+    margin-left: 6px;
+    top: 25px;
+    font-size: 22px;
+    border-radius: 50%;
   }
 }
 </style>

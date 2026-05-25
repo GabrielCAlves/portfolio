@@ -1,4 +1,3 @@
-// plugins/translations.js
 import { translationService } from '@/services/translations'
 
 export default {

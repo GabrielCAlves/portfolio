@@ -2,7 +2,6 @@
   <section class="section">
     <h2 class="section-title" :key="forceUpdate">{{ $t('projects') }}</h2>
     
-    <!-- Stats Row -->
     <div class="stats-row">
       <div class="stat-card">
         <div class="stat-number"><strong>60+</strong></div>
@@ -14,7 +13,6 @@
       </div>
     </div>
 
-    <!-- Projects Grid -->
     <div class="projects-grid">
       <div 
         v-for="repo in repositories" 
@@ -58,7 +56,6 @@ const openUrl = (url) => {
   }
 }
 
-// Projetos manuais - usando chaves de tradução para as descrições
 const repositories = ref([
   {
     id: 1,
@@ -165,39 +162,38 @@ const repositories = ref([
     html_url: 'https://github.com/GabrielCAlves/AdotaAI',
     topics: ['Web', 'Vue.js', 'Node.js', 'API', 'Full Stack', 'Strapi']
   },
+  // {
+  //   id: 16,
+  //   name: 'CasaDoAnciao',
+  //   descriptionKey: 'github.casaDoAnciao.description',
+  //   html_url: 'https://github.com/GabrielCAlves/CasaDoAnciao',
+  //   topics: ['Web', 'Spring Boot', 'Vue.js', 'TypeScript', 'PostgreSQL', 'Full Stack']
+  // },
   {
     id: 16,
-    name: 'CasaDoAnciao',
-    descriptionKey: 'github.casaDoAnciao.description',
-    html_url: 'https://github.com/GabrielCAlves/CasaDoAnciao',
-    topics: ['Web', 'Spring Boot', 'Vue.js', 'TypeScript', 'PostgreSQL', 'Full Stack']
-  },
-  {
-    id: 17,
     name: 'ConsultasQX',
     descriptionKey: 'github.consultasqx.description',
-    html_url: 'https://github.com/GabrielCAlves/ConsultasQX',
+    html_url: 'https://github.com/giovanavi/mobile/tree/main/ConsultasQX',
     topics: ['Mobile', 'Java', 'Firebase', 'Android Studio', 'Healthcare']
   },
   {
-    id: 18,
+    id: 17,
     name: 'FeiraoNordeste',
     descriptionKey: 'github.feiraonordeste.description',
     html_url: 'https://github.com/GabrielCAlves/FeiraoNordeste',
     topics: ['Mobile', 'Java', 'Firebase', 'Android Studio', 'Shopping']
   },
   {
-    id: 19,
+    id: 18,
     name: 'Motora',
     descriptionKey: 'github.motora.description',
-    html_url: 'https://github.com/GabrielCAlves/MotoraApp',
+    html_url: 'https://github.com/dabliu89/Motora/tree/main',
     topics: ['Mobile', 'Java', 'Firebase', 'Android Studio', 'Education']
   }
 ])
 </script>
 
 <style scoped>
-/* Seus estilos permanecem exatamente iguais */
 .section {
   padding: 2rem;
   color: white;
@@ -223,7 +219,6 @@ const repositories = ref([
   transform: translateX(-50%);
 }
 
-/* Stats Row */
 .stats-row {
   display: flex;
   justify-content: center;
@@ -265,7 +260,6 @@ const repositories = ref([
   letter-spacing: 1px;
 }
 
-/* Projects Grid */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -314,27 +308,6 @@ const repositories = ref([
   gap: 0.5rem;
   margin-bottom: 1.25rem;
 }
-
-/* .topic-tag {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.2s ease;
-}
-
-.topic-tag:hover {
-  background: rgba(204, 139, 0, 0.3);
-  border-color: rgba(204, 139, 0, 0.5);
-} */
- /* .tech-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  margin-bottom: 1rem;
-} */
 
 .topic-tag {
   padding: 0.4rem 1rem;
@@ -391,7 +364,6 @@ const repositories = ref([
   filter: none;
 }
 
-/* Responsividade */
 @media (max-width: 968px) {
   .section {
     padding: 1rem;

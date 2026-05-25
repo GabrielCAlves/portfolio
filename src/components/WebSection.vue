@@ -7,14 +7,12 @@
         <div class="project-content">
           <div class="project-info">
             <ul>
-              <!-- 🔥 NOVA SEÇÃO: ABOUT DO PROJETO -->
               <li :key="forceUpdate" class="about-item">
                 <div class="about-header">
                   <strong>{{ $t('projectAbout') }}</strong>
                 </div>
                 <p class="project-description">{{ project.description }}</p>
               </li>
-              <!-- <li :key="forceUpdate"><strong>{{ $t('myRole') }}</strong> {{ project.role }}</li> -->
               <li :key="forceUpdate" class="responsibilities-item">
                 <strong>{{ $t('myRole') }}</strong>
                 <ul class="responsibilities-list">
@@ -46,11 +44,6 @@
                   </div>
                 </div>
               </li>
-              <!-- <li :key="forceUpdate">
-                <strong>{{ $t('myResponsibilities') }}</strong> 
-                {{ project.responsibilities }}
-              </li> -->
-              <!-- RESPONSABILIDADES (SEPARADAS EM ITENS DE LISTA) -->
               <li :key="forceUpdate" class="responsibilities-item">
                 <strong>{{ $t('myResponsibilities') }}</strong>
                 <ul class="responsibilities-list">
@@ -98,7 +91,6 @@ const { $t, forceUpdate, currentLanguage } = useTranslations()
 
 const projects = ref([])
 
-// Função para obter projetos estáticos com traduções atualizadas
 const loadStaticProjects = () => {
   projects.value = [
     {
@@ -168,12 +160,10 @@ const getResponsibilitiesList = (responsibilitiesText) => {
   return [responsibilitiesText]
 }
 
-// Função para obter logo da tecnologia
 const getTechLogo = (techName) => {
   return cloudinaryUrls.technologyLogos[techName] || ''
 }
 
-// Função para tratar erro de carregamento de imagem
 const handleImageError = (event) => {
   const parent = event.target.parentElement
   if (parent) {
@@ -209,14 +199,12 @@ const loadProjects = async () => {
   }
 }
 
-// 🔥 FUNÇÃO PARA ABRIR GITHUB
 const openGithub = (url) => {
   if (url) {
     window.open(url, '_blank', 'noopener,noreferrer')
   }
 }
 
-// Watch para recarregar projetos quando o idioma mudar
 watch(currentLanguage, () => {
   loadStaticProjects()
 })
@@ -286,7 +274,6 @@ onMounted(() => {
 }
 
 .project-info ul {
-  /* list-style: none; */
   padding: 0;
 }
 
@@ -296,7 +283,6 @@ onMounted(() => {
   line-height: 1.6;
 }
 
-/* 🔥 CORREÇÃO: BOTÕES GITHUB ALINHADOS */
 .github-btn {
   background: #333;
   color: white;
@@ -320,7 +306,6 @@ onMounted(() => {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* 🔥 CORREÇÃO: ÍCONES SVG */
 .icon {
   width: 16px;
   height: 16px;
@@ -332,14 +317,13 @@ onMounted(() => {
   filter: brightness(0) invert(1);
 }
 
-/* 🔥 CORREÇÃO: ESTRUTURA DE TECNOLOGIAS (já tem z-index) */
 .technologies-item {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
-  position: relative; /* 🔥 JÁ DEVE TER */
-  z-index: 10; /* 🔥 JÁ DEVE TER */
+  position: relative;
+  z-index: 10;
 }
 
 .technologies-header {
@@ -398,7 +382,6 @@ onMounted(() => {
   line-height: 1.2;
 }
 
-/* 🔥 CORREÇÃO: MEDIA CAROUSEL COM Z-INDEX MENOR */
 .project-media {
   width: 100%;
   position: relative;
@@ -407,24 +390,21 @@ onMounted(() => {
   align-self: center;
 }
 
-/* 🔥 CORREÇÃO: ITENS DA LISTA COM LAYOUT CORRETO E Z-INDEX */
 .project-info li {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
-  position: relative; /* 🔥 ADICIONE ISSO */
-  z-index: 10; /* 🔥 ADICIONE ISSO */
+  position: relative;
+  z-index: 10;
 }
 
-/* 🔥 CORREÇÃO: LABELS FORTES */
 .project-info li strong {
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-/* 🔥 CORREÇÃO ESPECÍFICA PARA HIGHLIGHTS */
 .project-info li:nth-child(3) {
   align-items: flex-start;
 }
@@ -434,7 +414,6 @@ onMounted(() => {
   margin-top: 0.2rem;
 }
 
-/* 🔥 RESPONSIVIDADE PARA TELAS MENORES */
 @media (max-width: 768px) {
   .project-tech-grid {
     gap: 0.4rem;
@@ -456,7 +435,6 @@ onMounted(() => {
   }
 }
 
-/* 🔥 ADICIONE ESTES ESTILOS PARA A NOVA SEÇÃO ABOUT */
 .about-item {
   display: flex;
   flex-direction: column;
@@ -482,7 +460,6 @@ onMounted(() => {
   width: 100%;
 }
 
-/* Ajuste o espaçamento dos itens da lista */
 .project-info li {
   padding: 0.8rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -511,7 +488,6 @@ onMounted(() => {
   padding-bottom: 5px;
 }
 
-/* ADICIONE A TODAS AS SEÇÕES DE PROJETOS */
 @media (max-width: 968px) {
   .project-content {
     grid-template-columns: 1fr !important;
@@ -519,8 +495,7 @@ onMounted(() => {
   }
   
   .project-media {
-    order: -1; /* Coloca o carousel acima nas telas menores */
-    /* height: 300px; */
+    order: -1;
   }
 
   .rotating-card-carousel{
@@ -584,10 +559,6 @@ onMounted(() => {
     margin-bottom: 20px !important;
   }
 
-  /* .project-media {
-    margin-top: -95px;
-    margin-bottom: -105px;
-  } */
   .project-media {
     margin-top: -30px;
     height: 215px;
@@ -603,7 +574,7 @@ onMounted(() => {
   }
   
   .project-tech-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 colunas fixas */
+    grid-template-columns: repeat(3, 1fr);
   }
   
   .project-tech-item {

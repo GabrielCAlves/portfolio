@@ -29,10 +29,9 @@ const images = ref([])
 const currentIndex = ref(0)
 
 const loadSliderImages = () => {
-  // Agora usa as URLs diretas do Cloudinary
   images.value = cloudinaryUrls.slider.map((url, index) => ({
     id: `slider-${index + 1}`,
-    url: url, // URL direta do Cloudinary
+    url: url,
     title: `Slider ${index + 1}`,
     alt: `Slider image ${index + 1}`
   }))
@@ -40,7 +39,6 @@ const loadSliderImages = () => {
   console.log('✅ Slider images loaded:', images.value)
 }
 
-// ⚡️ ESTAS FUNÇÕES CONTINUAM FUNCIONANDO NORMALMENTE ⚡️
 const nextSlide = () => {
   currentIndex.value = (currentIndex.value + 1) % images.value.length
   console.log('➡️ Next slide:', currentIndex.value)
@@ -72,7 +70,7 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px; /* Reduzi o gap para as imagens se sobreporem */
+  gap: 15px;
   flex: 1;
   height: 100%;
 }
@@ -83,40 +81,37 @@ onMounted(() => {
   transform: skew(-10deg);
   transition: all 0.4s ease;
   position: relative;
-  overflow: visible; /* 🔥 MUDADO: permite que a imagem vaze */
+  overflow: visible;
   cursor: pointer;
-  /* Removi o background e border do container */
 }
 
 .slider-item.active {
   flex: 2;
   transform: skew(-10deg) scale(1.05);
-  z-index: 2; /* 🔥 Ativo fica acima dos outros */
+  z-index: 2;
 }
 
 .slider-item:hover {
   transform: skew(-10deg) scale(1.02);
-  z-index: 3; /* 🔥 Hover fica acima de tudo */
+  z-index: 3;
 }
 
-/* Wrapper que controla o "vazamento" */
 .image-wrapper {
-  width: 140%; /* 🔥 Wrapper mais largo que o container */
+  width: 140%;
   height: 100%;
   transform: skew(10deg);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: visible; /* 🔥 Permite vazamento */
+  overflow: visible;
   position: relative;
-  left: -20%; /* 🔥 Centraliza o wrapper expandido */
+  left: -20%;
 }
 
-/* Imagem ocupa todo o wrapper expandido */
 .slider-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Preenche todo o espaço */
+  object-fit: cover;
   transition: all 0.4s ease;
   filter: grayscale(100%);
 }
@@ -126,7 +121,6 @@ onMounted(() => {
   filter: grayscale(0%);
 }
 
-/* Efeito de brilho no item ativo */
 .slider-item.active::before {
   content: '';
   position: absolute;

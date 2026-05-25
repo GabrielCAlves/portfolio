@@ -2,7 +2,6 @@
   <section class="section">
     <h2 class="section-title" :key="forceUpdate">{{ $t('games') }}</h2>
     <div class="projects-container">
-      <!-- 🔥 ADICIONAR DATA-ATRIBUTE PARA IDENTIFICAÇÃO -->
       <div 
         v-for="(project, idx) in projects" 
         :key="project.id" 
@@ -14,24 +13,12 @@
         <div class="project-content">
           <div class="project-info">
             <ul>
-              <!-- ABOUT DO PROJETO -->
               <li :key="forceUpdate" class="about-item">
                 <div class="about-header">
                   <strong>{{ $t('projectAbout') }}</strong>
                 </div>
                 <p class="project-description">{{ project.description }}</p>
               </li>
-
-              <!-- PLATAFORMA DO PROJETO -->
-              <!-- <li :key="forceUpdate" class="platform-item">
-                <div class="platform-header">
-                  <strong>{{ $t('platform') }}</strong>
-                </div>
-                <div class="platform-content">
-                  <span class="platform-value">{{ project.platform || 'PC (Windows)' }}</span>
-                </div>
-              </li> -->
-              <!-- PLATAFORMAS DO PROJETO -->
               <li :key="forceUpdate" class="platform-item">
                 <div class="platform-header">
                   <strong>{{ $t('platform') }}</strong>
@@ -48,7 +35,6 @@
                 </div>
               </li>
 
-              <!-- TECNOLOGIAS -->
               <li :key="forceUpdate" class="technologies-item">
                 <div class="technologies-header">
                     <strong>{{ $t('technologiesLabel') }}</strong>
@@ -71,7 +57,6 @@
                 </div>
               </li>
 
-              <!-- RESPONSABILIDADES (SEPARADAS EM ITENS DE LISTA) -->
               <li :key="forceUpdate" class="responsibilities-item">
                 <strong>{{ $t('myResponsibilities') }}</strong>
                 <ul class="responsibilities-list">
@@ -83,7 +68,6 @@
                 </ul>
               </li>
 
-              <!-- HIGHLIGHTS / CÓDIGO -->
               <li :key="forceUpdate" class="highlights-item">
                 <strong>{{ $t('highlights') }}</strong>
                 <div class="highlights-content">
@@ -98,7 +82,6 @@
                 </div>
               </li>
 
-              <!-- WANT TO TRY / LINK -->
               <li :key="forceUpdate" class="try-item">
                 <strong>{{ $t('wantToTry') }}</strong>
                 <button 
@@ -119,7 +102,6 @@
             </ul>
           </div>
           <div class="project-media">
-            <!-- 🔥 VERTICAL CONTROLADO RESPONSIVAMENTE -->
             <MediaCarousel 
               :media="project.media" 
               section="games" 
@@ -142,16 +124,13 @@ import { useTranslations } from '@/composables/useTranslations'
 
 const { $t, forceUpdate, currentLanguage } = useTranslations()
 
-// 🔥 REF PARA CONTROLE RESPONSIVO
 const isMobile = ref(window.innerWidth <= 968)
 
-// 🔥 ADICIONAR REFS PARA OS PROJETOS
 const projectRefs = ref([])
 
 const setProjectRef = (el, index) => {
   if (el) {
     projectRefs.value[index] = el
-    // Também adicionar um ID único
     if (!el.id) {
       el.id = `project-${index}`
     }
@@ -160,10 +139,7 @@ const setProjectRef = (el, index) => {
 
 const projects = ref([])
 
-// 🔥 FUNÇÃO PARA DETERMINAR O VALOR DE VERTICAL BASEADO NA TELA
 const getCarouselVertical = (project) => {
-  // Se for tela mobile (<= 968px), queremos false
-  // Se for desktop (> 968px), queremos true
   if (isMobile.value) {
     return false
   } else {
@@ -174,12 +150,10 @@ const getCarouselVertical = (project) => {
 const getPlatformList = (platformData) => {
   if (!platformData) return ['PC (Windows)']
 
-  // Se já for array
   if (Array.isArray(platformData)) {
     return platformData
   }
 
-  // Se for string
   if (typeof platformData === 'string') {
     return platformData
       .split(/[;,]+/)
@@ -190,33 +164,25 @@ const getPlatformList = (platformData) => {
   return ['PC (Windows)']
 }
 
-// Função para separar responsabilidades em lista
 const getResponsibilitiesList = (responsibilitiesText) => {
   if (!responsibilitiesText) return []
   
-  // Se já for um array, retorna o array
   if (Array.isArray(responsibilitiesText)) return responsibilitiesText
   
-  // Verifica se é uma string
   if (typeof responsibilitiesText === 'string') {
-    // Tenta separar por diferentes delimitadores: ponto final, ponto e vírgula, vírgula, ou quebra de linha
-    // Também remove espaços extras no início/fim de cada item
     const items = responsibilitiesText
       .split(/[.;,\n]+/)
       .map(item => item.trim())
       .filter(item => item.length > 0)
     
-    // Se encontrou múltiplos itens, retorna eles
     if (items.length > 1) return items
     
-    // Caso contrário, retorna como um único item
     return [responsibilitiesText.trim()]
   }
   
   return [responsibilitiesText]
 }
 
-// Função para determinar o ícone do link
 const getLinkIcon = (project) => {
   if (project.projectUrl) {
     if (project.projectUrl.includes('itch.io')) {
@@ -233,7 +199,6 @@ const getLinkIcon = (project) => {
   return ''
 }
 
-// Função para determinar o texto do botão
 const getLinkLabel = (project) => {
   if (project.projectUrl) {
     return $t('playlink') || 'Link'
@@ -247,14 +212,12 @@ const getLinkLabel = (project) => {
   return $t('playlink')
 }
 
-// Função unificada para abrir URLs
 const openUrl = (url) => {
   if (url) {
     window.open(url, '_blank', 'noopener,noreferrer')
   }
 }
 
-// Função principal para abrir link do projeto
 const openProjectLink = (project) => {
   if (project.projectUrl) {
     openUrl(project.projectUrl)
@@ -265,12 +228,10 @@ const openProjectLink = (project) => {
   }
 }
 
-// Função para obter logo da tecnologia
 const getTechLogo = (techName) => {
   return cloudinaryUrls.technologyLogos[techName] || ''
 }
 
-// Função para tratar erro de carregamento de imagem
 const handleImageError = (event) => {
   const parent = event.target.parentElement
   if (parent) {
@@ -281,17 +242,14 @@ const handleImageError = (event) => {
   }
 }
 
-// 🔥 FUNÇÃO PARA ATUALIZAR O ESTADO MOBILE
 const updateMobileState = () => {
   isMobile.value = window.innerWidth <= 968
 }
 
-// 🔥 LISTENER PARA REDIMENSIONAMENTO DA TELA
 const handleResize = () => {
   updateMobileState()
 }
 
-// Função para obter projetos estáticos com traduções atualizadas
 const loadStaticProjects = () => {
   projects.value = [
     {
@@ -305,7 +263,7 @@ const loadStaticProjects = () => {
       highlights: '',
       githubUrl: 'https://github.com/GabrielCAlves/Astro-Adventure-3D',
       projectUrl: 'https://gabrielcalves.itch.io/astro-adventure-3d',
-      carouselVertical: true, // Mantém true, mas será sobrescrito pelo getCarouselVertical()
+      carouselVertical: true,
       media: cloudinaryUrls.personalWork.project1.media
     },
     {
@@ -410,15 +368,12 @@ const loadProjects = async () => {
   }
 }
 
-// Watch para recarregar projetos quando o idioma mudar
 watch(currentLanguage, () => {
   loadStaticProjects()
 })
 
-// 🔥 OBSERVER PARA MUDANÇAS NO TAMANHO DA TELA
 watch(isMobile, (newValue) => {
   // Forçar atualização dos componentes MediaCarousel quando o tamanho da tela mudar
-  // O Vue irá re-renderizar automaticamente pois a prop :vertical mudará
 })
 
 onMounted(() => {
@@ -433,7 +388,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* Mantenha todos os estilos iguais ao anterior */
 .section {
   padding: 2rem;
   color: white;

@@ -1,7 +1,7 @@
 // URLs DIRETAS copiadas do Cloudinary Console
 export const cloudinaryUrls = {
   // ========== ABOUT SECTION ==========
-  profile: 'https://res.cloudinary.com/dimsi9muz/image/upload/v1763240147/IMG_20251115_103216_fh3ng0.jpg',
+  profile: 'https://res.cloudinary.com/dimsi9muz/image/upload/v1781558128/ProfessionalPhoto_f5r1av.png',
   ukFlag: 'https://res.cloudinary.com/dimsi9muz/image/upload/v1761449071/uk_flag_mkd0lm.png',
   brFlag: 'https://res.cloudinary.com/dimsi9muz/image/upload/v1761449066/br_flag_xkq9vl.png',
 

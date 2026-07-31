@@ -32,5 +32,14 @@ nav a.router-link-exact-active {
   color: #42b983;
 } */
 
+/* Backend
+yarn serve
+
+Frontend
+npm run serve
+
+Build e deploy
+npm run build
+firebase deploy --only hosting */
  @import './assets/styles/global.css';
 </style>

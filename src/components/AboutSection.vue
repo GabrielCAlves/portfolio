@@ -1,33 +1,35 @@
 <template>
   <section class="section">
-    <h2 class="section-title" :key="forceUpdate">{{ $t('aboutMe') }}</h2>
-    
+    <h2 class="section-title" :key="forceUpdate">{{ $t("aboutMe") }}</h2>
+
     <div class="about-content">
       <div class="left-column project">
         <img :src="profileImage" alt="Profile" class="profile-image" />
         <div class="flags">
-          <img 
-            :src="ukFlag" 
-            alt="English" 
-            class="flag" 
+          <img
+            :src="ukFlag"
+            alt="English"
+            class="flag"
             :class="{ active: currentLanguage === 'en' }"
             @click="changeLanguage('en')"
           />
-          <img 
-            :src="brFlag" 
-            alt="Portuguese" 
-            class="flag BR" 
+          <img
+            :src="brFlag"
+            alt="Portuguese"
+            class="flag BR"
             :class="{ active: currentLanguage === 'pt' }"
             @click="changeLanguage('pt')"
           />
         </div>
-        <p class="curriculum-text" :key="forceUpdate">{{ $t('myCurriculum') }}</p>
+        <p class="curriculum-text" :key="forceUpdate">
+          {{ $t("myCurriculum") }}
+        </p>
         <div class="download-buttons">
           <button class="download-btn" @click="downloadCV('en')">
-            <span :key="forceUpdate">{{ $t('downloadEnglishCV') }}</span>
+            <span :key="forceUpdate">{{ $t("downloadEnglishCV") }}</span>
           </button>
           <button class="download-btn" @click="downloadCV('pt')">
-            <span :key="forceUpdate">{{ $t('downloadPortugueseCV') }}</span>
+            <span :key="forceUpdate">{{ $t("downloadPortugueseCV") }}</span>
           </button>
         </div>
       </div>
@@ -35,25 +37,31 @@
       <div class="right-column project">
         <div class="description-container">
           <div class="intro-text">
-            <p class="description highlight" :key="forceUpdate">{{ $t('aboutDescription') }}</p>
-            <p class="description" :key="forceUpdate">{{ $t('aboutDescription2') }}</p>
+            <p class="description highlight" :key="forceUpdate">
+              {{ $t("aboutDescription") }}
+            </p>
+            <p class="description" :key="forceUpdate">
+              {{ $t("aboutDescription2") }}
+            </p>
           </div>
-          
+
           <div class="experience-highlight">
-            <button 
-              class="scroll-link" 
+            <button
+              class="scroll-link"
               @click="scrollToExperience"
               :title="$t('scrollToExperience')"
             >
               <span class="scroll-icon">👇</span>
-              <span class="scroll-text" :key="forceUpdate">{{ $t('seeProfessionalExperience') }}</span>
+              <span class="scroll-text" :key="forceUpdate">{{
+                $t("seeProfessionalExperience")
+              }}</span>
             </button>
           </div>
-          
+
           <div class="achievement-section">
             <h4 class="section-subtitle">
               <span class="icon">🎮</span>
-              <span :key="forceUpdate">{{ $t('unityProjects') }}</span>
+              <span :key="forceUpdate">{{ $t("unityProjects") }}</span>
             </h4>
             <div class="tech-tags">
               <span class="tag unity-tag">Astro Adventure 3D</span>
@@ -67,7 +75,7 @@
           <div class="achievement-section">
             <h4 class="section-subtitle">
               <span class="icon">📱</span>
-              <span :key="forceUpdate">{{ $t('mobileAppsRegistered') }}</span>
+              <span :key="forceUpdate">{{ $t("mobileAppsRegistered") }}</span>
             </h4>
             <div class="tech-tags">
               <span class="tag mobile-tag">ConsultasQX</span>
@@ -78,21 +86,21 @@
           <div class="achievement-section academic-section">
             <h4 class="section-subtitle">
               <span class="icon">📚</span>
-              <span :key="forceUpdate">{{ $t('academicPublication') }}</span>
+              <span :key="forceUpdate">{{ $t("academicPublication") }}</span>
             </h4>
             <div class="academic-content">
               <div class="academic-info">
                 <span class="academic-icon">🎓</span>
-                <span :key="forceUpdate">{{ $t('academicPaperText') }}</span>
+                <span :key="forceUpdate">{{ $t("academicPaperText") }}</span>
               </div>
-              <a 
-                :href="academicPaperUrl" 
-                target="_blank" 
+              <a
+                :href="academicPaperUrl"
+                target="_blank"
                 rel="noopener noreferrer"
                 class="academic-link"
               >
                 <span>🔗</span>
-                <span :key="forceUpdate">{{ $t('viewPublication') }}</span>
+                <span :key="forceUpdate">{{ $t("viewPublication") }}</span>
                 <span class="scroll-arrow">→</span>
               </a>
             </div>
@@ -101,32 +109,48 @@
           <div class="achievement-section">
             <h4 class="section-subtitle">
               <span class="icon">📜</span>
-              <span :key="forceUpdate">{{ $t('certifications') }}</span>
+              <span :key="forceUpdate">{{ $t("certifications") }}</span>
             </h4>
             <div class="certifications-grid">
               <div class="cert-item">
-                <span class="cert-icon">⚡</span>
-                <span>Scrum</span>
+                <span class="cert-icon">🧑🏻‍💻</span>
+                <span>Software Engineer</span>
               </div>
               <div class="cert-item">
-                <span class="cert-icon">☁️</span>
-                <span>AWS</span>
+                <span class="cert-icon">⚡</span>
+                <span>Scrum Foundation Professional</span>
               </div>
               <div class="cert-item">
                 <span class="cert-icon">🎮</span>
-                <span>Game Design</span>
+                <span>Game Designer & Unity Developer</span>
+              </div>
+              <div class="cert-item">
+                <span class="cert-icon">👾</span>
+                <span>Unity Junior Programmer</span>
+              </div>
+              <div class="cert-item">
+                <span class="cert-icon">⚙️</span>
+                <span>Unity Game Development</span>
+              </div>
+              <div class="cert-item">
+                <span class="cert-icon">📝</span>
+                <span>Unity Essentials</span>
               </div>
               <div class="cert-item">
                 <span class="cert-icon">🛠️</span>
-                <span>Unity Development</span>
+                <span>Foundational C# with Microsoft</span>
+              </div>
+              <div class="cert-item">
+                <span class="cert-icon">🤖</span>
+                <span>Object-Oriented Programming</span>
+              </div>
+              <div class="cert-item">
+                <span class="cert-icon">♨</span>
+                <span>Java Programming</span>
               </div>
               <div class="cert-item highlight-cert">
                 <span class="cert-icon">
-                  <img 
-                    :src="ukFlag" 
-                    alt="English" 
-                    class="flag" 
-                  />
+                  <img :src="ukFlag" alt="English" class="flag" />
                 </span>
                 <span>English Proficiency (B2+)</span>
               </div>
@@ -134,192 +158,634 @@
           </div>
 
           <div class="certifications-section">
-            <p class="description call-to-action" :key="forceUpdate">{{ $t('aboutDescription8') }}</p>
+            <p class="description call-to-action" :key="forceUpdate">
+              {{ $t("aboutDescription8") }}
+            </p>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="skills-grid-container">
+    <!-- <div class="skills-grid-container">
       <div class="skill-card">
-        <h3 :key="forceUpdate">{{ $t('programmingLanguages') }}</h3>
+        <h3 :key="forceUpdate">{{ $t("programmingLanguages") }}</h3>
         <div class="tech-grid">
-          <div 
-            v-for="tech in programmingLanguages" 
-            :key="tech" 
+          <div
+            v-for="tech in programmingLanguages"
+            :key="tech"
             class="tech-item"
             :title="tech"
           >
-            <img 
-              :src="getTechLogo(tech)" 
-              :alt="tech" 
+            <img
+              :src="getTechLogo(tech)"
+              :alt="tech"
               class="tech-logo"
               @error="handleImageError"
             />
-            <span class="tech-name"><strong>{{ tech }}</strong></span>
+            <span class="tech-name"
+              ><strong>{{ tech }}</strong></span
+            >
           </div>
         </div>
       </div>
 
       <div class="skill-card">
-        <h3 :key="forceUpdate">{{ $t('enginesAndIDEs') }}</h3>
+        <h3 :key="forceUpdate">{{ $t("enginesAndIDEs") }}</h3>
         <div class="tech-grid">
-          <div 
-            v-for="tech in enginesAndIDEs" 
-            :key="tech" 
+          <div
+            v-for="tech in enginesAndIDEs"
+            :key="tech"
             class="tech-item"
             :title="tech"
           >
-            <img 
-              :src="getTechLogo(tech)" 
-              :alt="tech" 
+            <img
+              :src="getTechLogo(tech)"
+              :alt="tech"
               class="tech-logo"
               @error="handleImageError"
             />
-            <span class="tech-name"><strong>{{ tech }}</strong></span>
+            <span class="tech-name"
+              ><strong>{{ tech }}</strong></span
+            >
           </div>
         </div>
       </div>
 
       <div class="skill-card">
-        <h3 :key="forceUpdate">{{ $t('specializations') }}</h3>
+        <h3 :key="forceUpdate">{{ $t("specializations") }}</h3>
         <div class="tech-grid">
-          <div 
-            v-for="tech in specializations" 
-            :key="tech" 
+          <div
+            v-for="tech in specializations"
+            :key="tech"
             class="tech-item"
             :title="tech"
           >
-            <img 
-              :src="getTechLogo(tech)" 
-              :alt="tech" 
+            <img
+              :src="getTechLogo(tech)"
+              :alt="tech"
               class="tech-logo"
               @error="handleImageError"
             />
-            <span class="tech-name"><strong>{{ tech }}</strong></span>
+            <span class="tech-name"
+              ><strong>{{ tech }}</strong></span
+            >
           </div>
         </div>
       </div>
 
       <div class="skill-card">
-        <h3 :key="forceUpdate">{{ $t('versionControl') }}</h3>
+        <h3 :key="forceUpdate">{{ $t("versionControl") }}</h3>
         <div class="tech-grid">
-          <div 
-            v-for="tech in versionControl" 
-            :key="tech" 
+          <div
+            v-for="tech in versionControl"
+            :key="tech"
             class="tech-item"
             :title="tech"
           >
-            <img 
-              :src="getTechLogo(tech)" 
-              :alt="tech" 
+            <img
+              :src="getTechLogo(tech)"
+              :alt="tech"
               class="tech-logo"
               @error="handleImageError"
             />
-            <span class="tech-name"><strong>{{ tech }}</strong></span>
+            <span class="tech-name"
+              ><strong>{{ tech }}</strong></span
+            >
           </div>
         </div>
       </div>
 
       <div class="skill-card">
-        <h3 :key="forceUpdate">{{ $t('backEnd') }}</h3>
+        <h3 :key="forceUpdate">{{ $t("backEnd") }}</h3>
         <div class="tech-grid">
-          <div 
-            v-for="tech in backEnd" 
-            :key="tech" 
+          <div
+            v-for="tech in backEnd"
+            :key="tech"
             class="tech-item"
             :title="tech"
           >
-            <img 
-              :src="getTechLogo(tech)" 
-              :alt="tech" 
+            <img
+              :src="getTechLogo(tech)"
+              :alt="tech"
               class="tech-logo"
               @error="handleImageError"
             />
-            <span class="tech-name"><strong>{{ tech }}</strong></span>
+            <span class="tech-name"
+              ><strong>{{ tech }}</strong></span
+            >
           </div>
         </div>
       </div>
 
       <div class="skill-card">
-        <h3 :key="forceUpdate">{{ $t('frameworks') }}</h3>
+        <h3 :key="forceUpdate">{{ $t("frameworks") }}</h3>
         <div class="tech-grid">
-          <div 
-            v-for="tech in frameworks" 
-            :key="tech" 
+          <div
+            v-for="tech in frameworks"
+            :key="tech"
             class="tech-item"
             :title="tech"
           >
-            <img 
-              :src="getTechLogo(tech)" 
-              :alt="tech" 
+            <img
+              :src="getTechLogo(tech)"
+              :alt="tech"
               class="tech-logo"
               @error="handleImageError"
             />
-            <span class="tech-name"><strong>{{ tech }}</strong></span>
+            <span class="tech-name"
+              ><strong>{{ tech }}</strong></span
+            >
           </div>
         </div>
       </div>
 
       <div class="skill-card">
-        <h3 :key="forceUpdate">{{ $t('additionalSkills') }}</h3>
+        <h3 :key="forceUpdate">{{ $t("additionalSkills") }}</h3>
         <div class="tech-grid">
-          <div 
-            v-for="skill in additionalSkills" 
-            :key="skill" 
+          <div
+            v-for="skill in additionalSkills"
+            :key="skill"
             class="tech-item"
             :title="skill"
           >
-            <img 
-              :src="getTechLogo(skill)" 
-              :alt="skill" 
+            <img
+              :src="getTechLogo(skill)"
+              :alt="skill"
               class="tech-logo"
               @error="handleImageError"
             />
-            <span class="tech-name"><strong>{{ skill }}</strong></span>
+            <span class="tech-name"
+              ><strong>{{ skill }}</strong></span
+            >
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="skills-grid-container">
+      <!-- ==================== WEB DEVELOPMENT ==================== -->
+      <div class="skill-card skill-card-main">
+        <h2 class="main-skill-title" :key="forceUpdate">
+          {{ $t("webDevelopment") }}
+        </h2>
+
+        <div class="sub-skills-group">
+          <div class="sub-skill-section">
+            <h3 :key="forceUpdate">{{ $t("programmingLanguages") }}:</h3>
+            <div class="tech-grid">
+              <div
+                v-for="tech in webProgrammingLanguages"
+                :key="tech"
+                class="tech-item"
+                :title="tech"
+              >
+                <img
+                  :src="getTechLogo(tech)"
+                  :alt="tech"
+                  class="tech-logo"
+                  @error="handleImageError"
+                />
+                <span class="tech-name"
+                  ><strong>{{ tech }}</strong></span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="sub-skill-section" v-if="webFrameworks.length">
+            <h3 :key="forceUpdate" style="margin-top: 21.5px">
+              {{ $t("frameworks") }}:
+            </h3>
+            <div class="tech-grid">
+              <div
+                v-for="tech in webFrameworks"
+                :key="tech"
+                class="tech-item"
+                :title="tech"
+              >
+                <img
+                  :src="getTechLogo(tech)"
+                  :alt="tech"
+                  class="tech-logo"
+                  @error="handleImageError"
+                />
+                <span class="tech-name"
+                  ><strong>{{ tech }}</strong></span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="sub-skill-section" v-if="webBackEnd.length">
+            <h3 :key="forceUpdate" style="margin-top: 21.5px">
+              {{ $t("backEnd") }}:
+            </h3>
+            <div class="tech-grid">
+              <div
+                v-for="tech in webBackEnd"
+                :key="tech"
+                class="tech-item"
+                :title="tech"
+              >
+                <img
+                  :src="getTechLogo(tech)"
+                  :alt="tech"
+                  class="tech-logo"
+                  @error="handleImageError"
+                />
+                <span class="tech-name"
+                  ><strong>{{ tech }}</strong></span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="sub-skill-section" v-if="webEnginesAndIDEs.length">
+            <h3 :key="forceUpdate" style="margin-top: 21.5px">
+              {{ $t("enginesAndIDEs") }}:
+            </h3>
+            <div class="tech-grid">
+              <div
+                v-for="tech in webEnginesAndIDEs"
+                :key="tech"
+                class="tech-item"
+                :title="tech"
+              >
+                <img
+                  :src="getTechLogo(tech)"
+                  :alt="tech"
+                  class="tech-logo"
+                  @error="handleImageError"
+                />
+                <span class="tech-name"
+                  ><strong>{{ tech }}</strong></span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="sub-skill-section" v-if="webSpecializations.length">
+            <h3 :key="forceUpdate" style="margin-top: 21.5px">
+              {{ $t("specializations") }}:
+            </h3>
+            <div class="tech-grid">
+              <div
+                v-for="tech in webSpecializations"
+                :key="tech"
+                class="tech-item"
+                :title="tech"
+              >
+                <img
+                  :src="getTechLogo(tech)"
+                  :alt="tech"
+                  class="tech-logo"
+                  @error="handleImageError"
+                />
+                <span class="tech-name"
+                  ><strong>{{ tech }}</strong></span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== GAME DEVELOPMENT ==================== -->
+      <div class="skill-card skill-card-main">
+        <h2 class="main-skill-title" :key="forceUpdate">
+          {{ $t("gameDevelopment") }}
+        </h2>
+
+        <div class="sub-skills-group">
+          <div class="sub-skill-section">
+            <h3 :key="forceUpdate">{{ $t("programmingLanguages") }}:</h3>
+            <div class="tech-grid">
+              <div
+                v-for="tech in gameProgrammingLanguages"
+                :key="tech"
+                class="tech-item"
+                :title="tech"
+              >
+                <img
+                  :src="getTechLogo(tech)"
+                  :alt="tech"
+                  class="tech-logo"
+                  @error="handleImageError"
+                />
+                <span class="tech-name"
+                  ><strong>{{ tech }}</strong></span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="sub-skill-section" v-if="gameEnginesAndIDEs.length">
+            <h3 :key="forceUpdate">{{ $t("enginesAndIDEs") }}:</h3>
+            <div class="tech-grid">
+              <div
+                v-for="tech in gameEnginesAndIDEs"
+                :key="tech"
+                class="tech-item"
+                :title="tech"
+              >
+                <img
+                  :src="getTechLogo(tech)"
+                  :alt="tech"
+                  class="tech-logo"
+                  @error="handleImageError"
+                />
+                <span class="tech-name"
+                  ><strong>{{ tech }}</strong></span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="sub-skill-section" v-if="gameSpecializations.length">
+            <h3 :key="forceUpdate">{{ $t("specializations") }}:</h3>
+            <div class="tech-grid">
+              <div
+                v-for="tech in gameSpecializations"
+                :key="tech"
+                class="tech-item"
+                :title="tech"
+              >
+                <img
+                  :src="getTechLogo(tech)"
+                  :alt="tech"
+                  class="tech-logo"
+                  @error="handleImageError"
+                />
+                <span class="tech-name"
+                  ><strong>{{ tech }}</strong></span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="sub-skill-section" v-if="gameBackEnd.length">
+            <h3 :key="forceUpdate">{{ $t("backEnd") }}:</h3>
+            <div class="tech-grid">
+              <div
+                v-for="tech in gameBackEnd"
+                :key="tech"
+                class="tech-item"
+                :title="tech"
+              >
+                <img
+                  :src="getTechLogo(tech)"
+                  :alt="tech"
+                  class="tech-logo"
+                  @error="handleImageError"
+                />
+                <span class="tech-name"
+                  ><strong>{{ tech }}</strong></span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="sub-skill-section" v-if="gameFrameworks.length">
+            <h3 :key="forceUpdate">{{ $t("frameworks") }}:</h3>
+            <div class="tech-grid">
+              <div
+                v-for="tech in gameFrameworks"
+                :key="tech"
+                class="tech-item"
+                :title="tech"
+              >
+                <img
+                  :src="getTechLogo(tech)"
+                  :alt="tech"
+                  class="tech-logo"
+                  @error="handleImageError"
+                />
+                <span class="tech-name"
+                  ><strong>{{ tech }}</strong></span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== MOBILE DEVELOPMENT ==================== -->
+      <div class="skill-card skill-card-main">
+        <h2 class="main-skill-title" :key="forceUpdate">
+          {{ $t("mobileDevelopment") }}
+        </h2>
+
+        <div class="sub-skills-group">
+          <div class="sub-skill-section">
+            <h3 :key="forceUpdate">{{ $t("programmingLanguages") }}:</h3>
+            <div class="tech-grid">
+              <div
+                v-for="tech in mobileProgrammingLanguages"
+                :key="tech"
+                class="tech-item"
+                :title="tech"
+              >
+                <img
+                  :src="getTechLogo(tech)"
+                  :alt="tech"
+                  class="tech-logo"
+                  @error="handleImageError"
+                />
+                <span class="tech-name"
+                  ><strong>{{ tech }}</strong></span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="sub-skill-section" v-if="mobileBackEnd.length">
+            <h3 :key="forceUpdate">{{ $t("backEnd") }}:</h3>
+            <div class="tech-grid">
+              <div
+                v-for="tech in mobileBackEnd"
+                :key="tech"
+                class="tech-item"
+                :title="tech"
+              >
+                <img
+                  :src="getTechLogo(tech)"
+                  :alt="tech"
+                  class="tech-logo"
+                  @error="handleImageError"
+                />
+                <span class="tech-name"
+                  ><strong>{{ tech }}</strong></span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="sub-skill-section" v-if="mobileEnginesAndIDEs.length">
+            <h3 :key="forceUpdate">{{ $t("enginesAndIDEs") }}:</h3>
+            <div class="tech-grid">
+              <div
+                v-for="tech in mobileEnginesAndIDEs"
+                :key="tech"
+                class="tech-item"
+                :title="tech"
+              >
+                <img
+                  :src="getTechLogo(tech)"
+                  :alt="tech"
+                  class="tech-logo"
+                  @error="handleImageError"
+                />
+                <span class="tech-name"
+                  ><strong>{{ tech }}</strong></span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="sub-skill-section" v-if="mobileSpecializations.length">
+            <h3 :key="forceUpdate">{{ $t("specializations") }}:</h3>
+            <div class="tech-grid">
+              <div
+                v-for="tech in mobileSpecializations"
+                :key="tech"
+                class="tech-item"
+                :title="tech"
+              >
+                <img
+                  :src="getTechLogo(tech)"
+                  :alt="tech"
+                  class="tech-logo"
+                  @error="handleImageError"
+                />
+                <span class="tech-name"
+                  ><strong>{{ tech }}</strong></span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="sub-skill-section" v-if="mobileFrameworks.length">
+            <h3 :key="forceUpdate">{{ $t("frameworks") }}:</h3>
+            <div class="tech-grid">
+              <div
+                v-for="tech in mobileFrameworks"
+                :key="tech"
+                class="tech-item"
+                :title="tech"
+              >
+                <img
+                  :src="getTechLogo(tech)"
+                  :alt="tech"
+                  class="tech-logo"
+                  @error="handleImageError"
+                />
+                <span class="tech-name"
+                  ><strong>{{ tech }}</strong></span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== VERSION CONTROL (separado) ==================== -->
+      <div class="skill-card">
+        <h2 :key="forceUpdate">{{ $t("versionControl") }}</h2>
+        <div class="tech-grid">
+          <div
+            v-for="tech in versionControl"
+            :key="tech"
+            class="tech-item"
+            :title="tech"
+          >
+            <img
+              :src="getTechLogo(tech)"
+              :alt="tech"
+              class="tech-logo"
+              @error="handleImageError"
+            />
+            <span class="tech-name"
+              ><strong>{{ tech }}</strong></span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== ADDITIONAL SKILLS (separado) ==================== -->
+      <div class="skill-card">
+        <h2 :key="forceUpdate">{{ $t("additionalSkills") }}</h2>
+        <div class="tech-grid">
+          <div
+            v-for="skill in additionalSkills"
+            :key="skill"
+            class="tech-item"
+            :title="skill"
+          >
+            <img
+              :src="getTechLogo(skill)"
+              :alt="skill"
+              class="tech-logo"
+              @error="handleImageError"
+            />
+            <span class="tech-name"
+              ><strong>{{ skill }}</strong></span
+            >
           </div>
         </div>
       </div>
     </div>
 
     <div class="experience-section">
-      <h2 class="experience-section-title" :key="forceUpdate">{{ $t('professionalExperience') }}</h2>
+      <h2 class="experience-section-title" :key="forceUpdate">
+        {{ $t("professionalExperience") }}
+      </h2>
       <div class="timeline">
-        <div 
-          v-for="(exp, index) in professionalExperiences" 
-          :key="index" 
+        <div
+          v-for="(exp, index) in professionalExperiences"
+          :key="index"
           class="timeline-item"
         >
-          <div class="timeline-badge">
-          </div>
+          <div class="timeline-badge"></div>
           <div class="timeline-content experience-card">
             <div class="experience-header">
               <h3 class="experience-role">{{ $t(exp.roleKey) }}</h3>
-              <span class="experience-company">🏢 {{ $t(exp.companyKey) }}</span>
+              <span class="experience-company"
+                >🏢 {{ $t(exp.companyKey) }}</span
+              >
             </div>
             <div class="experience-meta">
               <span class="experience-period">
-                <strong>🗓️ {{ $t('period') }}:</strong> {{ exp.period }}
+                <strong>🗓️ {{ $t("period") }}:</strong> {{ $t(exp.period) }}
               </span>
               <span class="experience-location" v-if="exp.location">
-                <strong>📌 {{ $t('location') }}:</strong> {{ $t(exp.location) }}
+                <strong>📌 {{ $t("location") }}:</strong> {{ $t(exp.location) }}
               </span>
             </div>
             <div class="experience-description">
               <p :key="forceUpdate">{{ $t(exp.descriptionKey) }}</p>
             </div>
-            <div class="experience-achievements" v-if="exp.achievementsKeys && exp.achievementsKeys.length">
-              <strong>🏆 {{ $t('achievements') }}:</strong>
+            <div
+              class="experience-achievements"
+              v-if="exp.achievementsKeys && exp.achievementsKeys.length"
+            >
+              <strong>🏆 {{ $t("achievements") }}:</strong>
               <ul>
-                <li v-for="(achievementKey, aIdx) in exp.achievementsKeys" :key="aIdx">{{ $t(achievementKey) }}</li>
+                <li
+                  v-for="(achievementKey, aIdx) in exp.achievementsKeys"
+                  :key="aIdx"
+                >
+                  {{ $t(achievementKey) }}
+                </li>
               </ul>
             </div>
-            <div class="experience-technologies" v-if="exp.technologies && exp.technologies.length">
-              <strong>🛠️ {{ $t('technologiesUsed') }}:</strong>
+            <div
+              class="experience-technologies"
+              v-if="exp.technologies && exp.technologies.length"
+            >
+              <strong>🛠️ {{ $t("technologiesUsed") }}:</strong>
               <div class="exp-tech-list">
-                <span 
-                  v-for="tech in exp.technologies" 
-                  :key="tech" 
+                <span
+                  v-for="tech in exp.technologies"
+                  :key="tech"
                   class="exp-tech-tag"
                 >
                   {{ tech }}
@@ -334,125 +800,240 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import { cloudinaryUrls } from '@/services/cloudinary'
-import { translationService } from '@/services/translations'
-import { useTranslations } from '@/composables/useTranslations'
+import { ref, onMounted, onUnmounted } from "vue";
+import { cloudinaryUrls } from "@/services/cloudinary";
+import { translationService } from "@/services/translations";
+import { useTranslations } from "@/composables/useTranslations";
 
-const { $t, currentLanguage, forceUpdate } = useTranslations()
+const { $t, currentLanguage, forceUpdate } = useTranslations();
 
-const profileImage = ref('')
-const ukFlag = ref('')
-const brFlag = ref('')
+const profileImage = ref("");
+const ukFlag = ref("");
+const brFlag = ref("");
 
-const programmingLanguages = ['C#', 'C++', 'C', 'Java', 'HTML', 'CSS', 'JavaScript', 'TypeScript']
-const enginesAndIDEs = ['Unity', 'Android Studio', 'Node.js']
-const specializations = ['Gameplay Programming']
-const versionControl = ['Git', 'Git bash', 'GitLab']
-const backEnd = ['Firebase', 'DBeaver', 'PostgreSQL', 'MySQL', 'SpringBoot', 'Strapi']
-const frameworks = ['Vue.js', 'Vuetify', 'Vite', 'Bootstrap']
-const additionalSkills = ['Agile Methodology', 'Scrum', 'OOP', 'Rest APIs', 'Astah', 'UI/UX', 'Figma', 'Adobe XD']
+// const programmingLanguages = [
+//   "C#",
+//   "C++",
+//   "C",
+//   "Java",
+//   "HTML",
+//   "CSS",
+//   "JavaScript",
+//   "TypeScript",
+// ];
+// const enginesAndIDEs = ["Unity", "Android Studio", "Node.js"];
+// const specializations = ["Gameplay Programming"];
+// const versionControl = ["Git", "Git bash", "GitLab"];
+// const backEnd = [
+//   "Firebase",
+//   "DBeaver",
+//   "PostgreSQL",
+//   "MySQL",
+//   "SpringBoot",
+//   "Strapi",
+// ];
+// const frameworks = ["Vue.js", "Vuetify", "Vite", "Bootstrap"];
+// const additionalSkills = [
+//   "Agile Methodology",
+//   "Scrum",
+//   "OOP",
+//   "Rest APIs",
+//   "Astah",
+//   "UI/UX",
+//   "Figma",
+//   "Adobe XD",
+// ];
+// ==================== WEB DEVELOPMENT ====================
+const webProgrammingLanguages = ["HTML", "CSS", "JavaScript", "TypeScript"];
+const webEnginesAndIDEs = ["Node.js", "VS Code"];
+const webSpecializations = ["Full-Stack Development"];
+const webBackEnd = [
+  "Firebase",
+  "SpringBoot",
+  "Supabase",
+  "DBeaver",
+  "PostgreSQL",
+  "MySQL",
+  "Strapi",
+];
+const webFrameworks = ["Vue.js", "Vuetify", "Vite", "Bootstrap"];
 
-const academicPaperUrl = ref('https://sol.sbc.org.br/index.php/sbgames/article/view/37500')
+// ==================== GAME DEVELOPMENT ====================
+const gameProgrammingLanguages = ["C#"];
+const gameEnginesAndIDEs = ["Unity"];
+const gameSpecializations = ["Gameplay Programming"];
+const gameBackEnd = [];
+const gameFrameworks = [];
+
+// ==================== MOBILE DEVELOPMENT ====================
+const mobileProgrammingLanguages = ["Java"];
+const mobileEnginesAndIDEs = ["Android Studio"];
+const mobileSpecializations = ["Full-Stack Mobile App Development"];
+const mobileBackEnd = ["Firebase"];
+const mobileFrameworks = [];
+
+// ==================== SEPARADOS ====================
+const versionControl = ["Git", "Git bash", "GitLab"];
+const additionalSkills = [
+  "Agile Methodology",
+  "Scrum",
+  "OOP",
+  "Rest APIs",
+  "C++",
+  "C",
+  "Astah",
+  "UI/UX",
+  "Figma",
+  "Adobe XD",
+];
+
+const academicPaperUrl = ref(
+  "https://sol.sbc.org.br/index.php/sbgames/article/view/37500",
+);
 
 const scrollToExperience = () => {
-  const experienceSection = document.querySelector('.experience-section')
+  const experienceSection = document.querySelector(".experience-section");
   if (experienceSection) {
-    const elementPosition = experienceSection.getBoundingClientRect().top
-    const offsetPosition = elementPosition + window.pageYOffset - 100
-    
+    const elementPosition = experienceSection.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - 100;
+
     window.scrollTo({
       top: offsetPosition,
-      behavior: 'smooth'
-    })
+      behavior: "smooth",
+    });
   }
-}
+};
 
 const professionalExperiences = ref([
   {
-    roleKey: 'experience.npi.role',
-    companyKey: 'experience.npi.company',
-    period: '2024 - 2025',
-    location: 'experience.npi.location',
-    descriptionKey: 'experience.npi.description',
+    roleKey: "experience.npi.role",
+    companyKey: "experience.npi.company",
+    period: "2024 - 2025",
+    location: "experience.npi.location",
+    descriptionKey: "experience.npi.description",
     achievementsKeys: [
-      'experience.npi.achievement1',
-      'experience.npi.achievement2',
-      'experience.npi.achievement3',
-      'experience.npi.achievement4',
-      'experience.npi.achievement5',
-      'experience.npi.achievement6',
-      'experience.npi.achievement7',
-      'experience.npi.achievement8'
+      "experience.npi.achievement1",
+      "experience.npi.achievement2",
+      "experience.npi.achievement3",
+      "experience.npi.achievement4",
+      "experience.npi.achievement5",
+      "experience.npi.achievement6",
+      "experience.npi.achievement7",
+      "experience.npi.achievement8",
     ],
-    technologies: ['Vue.js', 'Node.js', 'TypeScript', 'PostgreSQL', 'GitLab', 'Spring Boot', 'DBeaver', 'Figma', 'Playwright']
+    technologies: [
+      "Vue.js",
+      "Node.js",
+      "TypeScript",
+      "PostgreSQL",
+      "GitLab",
+      "Spring Boot",
+      "DBeaver",
+      "Figma",
+      "Playwright",
+      "VS Code",
+    ],
   },
-])
+  {
+    roleKey: "experience.tapps.role",
+    companyKey: "experience.tapps.company",
+    period: "2026 - 2026",
+    location: "experience.tapps.location",
+    descriptionKey: "experience.tapps.description",
+    achievementsKeys: [
+      "experience.tapps.achievement1",
+      "experience.tapps.achievement2",
+      "experience.tapps.achievement3",
+      "experience.tapps.achievement4",
+      "experience.tapps.achievement5",
+      "experience.tapps.achievement6",
+      "experience.tapps.achievement7",
+    ],
+    technologies: ["Unity", "C#", "Git Bash", "Visual Studio"],
+  },
+  {
+    roleKey: "experience.lumolab.role",
+    companyKey: "experience.lumolab.company",
+    period: "experience.lumolab.period",
+    location: "experience.lumolab.location",
+    descriptionKey: "experience.lumolab.description",
+    achievementsKeys: [
+      "experience.lumolab.achievement1",
+      "experience.lumolab.achievement2",
+      "experience.lumolab.achievement3",
+      "experience.lumolab.achievement4",
+      "experience.lumolab.achievement5",
+      "experience.lumolab.achievement6",
+      "experience.lumolab.achievement7",
+    ],
+    technologies: ["Unity", "C#", "Git Bash", "Visual Studio"],
+  },
+]);
 
 const getTechLogo = (techName) => {
-  return cloudinaryUrls.technologyLogos[techName] || ''
-}
+  return cloudinaryUrls.technologyLogos[techName] || "";
+};
 
 const handleImageError = (event) => {
-  const parent = event.target.parentElement
+  const parent = event.target.parentElement;
   if (parent) {
-    const textElement = parent.querySelector('.tech-name')
+    const textElement = parent.querySelector(".tech-name");
     if (textElement) {
-      textElement.style.opacity = '1'
+      textElement.style.opacity = "1";
     }
   }
-}
+};
 
 const changeLanguage = (language) => {
-  translationService.setLanguage(language)
-  currentLanguage.value = language
-}
+  translationService.setLanguage(language);
+  currentLanguage.value = language;
+};
 
 const downloadCV = (language) => {
   const cvUrls = {
-    en: '/cv-english.pdf',
-    pt: '/cv-portuguese.pdf'
-  }
-  
+    en: "/cv-english.pdf",
+    pt: "/cv-portuguese.pdf",
+  };
+
   const cvNames = {
-    en: 'CV_Gabriel_Cavalcanti_English.pdf',
-    pt: 'CV_Gabriel_Cavalcanti_Portuguese.pdf'
-  }
-  
-  const link = document.createElement('a')
-  link.href = cvUrls[language]
-  link.download = cvNames[language]
-  link.target = '_blank'
-  document.body.appendChild(link)
-  link.click()
-  document.body.removeChild(link)
-}
+    en: "CV_Gabriel_Cavalcanti_English.pdf",
+    pt: "CV_Gabriel_Cavalcanti_Portuguese.pdf",
+  };
+
+  const link = document.createElement("a");
+  link.href = cvUrls[language];
+  link.download = cvNames[language];
+  link.target = "_blank";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
 
 const loadImages = () => {
   try {
-    profileImage.value = cloudinaryUrls.profile || ''
-    ukFlag.value = cloudinaryUrls.ukFlag || ''
-    brFlag.value = cloudinaryUrls.brFlag || ''
+    profileImage.value = cloudinaryUrls.profile || "";
+    ukFlag.value = cloudinaryUrls.ukFlag || "";
+    brFlag.value = cloudinaryUrls.brFlag || "";
   } catch (error) {
-    console.error('Error loading images:', error)
-    profileImage.value = ''
-    ukFlag.value = ''
-    brFlag.value = ''
+    console.error("Error loading images:", error);
+    profileImage.value = "";
+    ukFlag.value = "";
+    brFlag.value = "";
   }
-}
+};
 
 const handleLanguageChange = (event) => {
-  currentLanguage.value = event.detail
-}
+  currentLanguage.value = event.detail;
+};
 
 onMounted(() => {
-  loadImages()
-  window.addEventListener('languageChanged', handleLanguageChange)
-})
+  loadImages();
+  window.addEventListener("languageChanged", handleLanguageChange);
+});
 
 onUnmounted(() => {
-  window.removeEventListener('languageChanged', handleLanguageChange)
-})
+  window.removeEventListener("languageChanged", handleLanguageChange);
+});
 </script>
 
 <style scoped>
@@ -466,11 +1047,17 @@ onUnmounted(() => {
   font-size: 3rem;
   text-align: center;
   margin-bottom: 2rem;
-  display: inline-block; 
-  width: auto; 
-  padding: 0.5rem 2rem; 
+  display: inline-block;
+  width: auto;
+  padding: 0.5rem 2rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-image: linear-gradient(135deg, rgb(204, 139, 0) 0%, white 50%, rgb(204, 139, 0) 100%) 1;
+  border-image: linear-gradient(
+      135deg,
+      rgb(204, 139, 0) 0%,
+      white 50%,
+      rgb(204, 139, 0) 100%
+    )
+    1;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
   border-radius: 5px;
@@ -499,7 +1086,13 @@ onUnmounted(() => {
 
 .left-column:hover {
   border: 3px solid;
-  border-image: linear-gradient(135deg, rgb(204, 139, 0) 0%, white 50%, rgb(204, 139, 0) 100%) 1;
+  border-image: linear-gradient(
+      135deg,
+      rgb(204, 139, 0) 0%,
+      white 50%,
+      rgb(204, 139, 0) 100%
+    )
+    1;
   box-shadow: 0 8px 40px rgb(204, 139, 0);
 }
 
@@ -528,13 +1121,13 @@ onUnmounted(() => {
   border: 2px solid transparent;
 }
 
-.BR{
+.BR {
   width: 43px;
   height: 43px;
 }
 
 .flag.active {
-  border-color: #FFFFFF;
+  border-color: #ffffff;
   transform: scale(1.2);
 }
 
@@ -572,14 +1165,20 @@ onUnmounted(() => {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.right-column{
+.right-column {
   border: 3px solid;
   border-image: linear-gradient(135deg, red 20%, #05f 100%) 1;
 }
 
 .right-column:hover {
   border: 3px solid;
-  border-image: linear-gradient(135deg, rgb(204, 139, 0) 0%, white 50%, rgb(204, 139, 0) 100%) 1;
+  border-image: linear-gradient(
+      135deg,
+      rgb(204, 139, 0) 0%,
+      white 50%,
+      rgb(204, 139, 0) 100%
+    )
+    1;
   box-shadow: 0 8px 40px rgb(204, 139, 0);
 }
 
@@ -599,7 +1198,12 @@ onUnmounted(() => {
 .intro-text .description:first-child {
   font-size: 1.2rem;
   font-weight: 500;
-  color: linear-gradient(135deg, rgb(204, 139, 0) 0%, white 50%, rgb(204, 139, 0) 100%);
+  color: linear-gradient(
+    135deg,
+    rgb(204, 139, 0) 0%,
+    white 50%,
+    rgb(204, 139, 0) 100%
+  );
   padding-left: 1rem;
   margin-bottom: 1.2rem;
   border-radius: 8px;
@@ -638,7 +1242,13 @@ onUnmounted(() => {
 }
 
 .scroll-link {
-  background: linear-gradient(to right, var(--primary-red) 0%, var(--primary-red) 25%, var(--primary-blue) 80%, var(--primary-blue) 90%);
+  background: linear-gradient(
+    to right,
+    var(--primary-red) 0%,
+    var(--primary-red) 25%,
+    var(--primary-blue) 80%,
+    var(--primary-blue) 90%
+  );
   border: none;
   color: white;
   padding: 0.6rem 1.2rem;
@@ -656,7 +1266,7 @@ onUnmounted(() => {
 }
 
 .scroll-link::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -676,7 +1286,12 @@ onUnmounted(() => {
 .scroll-link:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(204, 0, 0, 0.4);
-  background: linear-gradient(135deg, rgb(204, 139, 0) 0%, white 50%, rgb(204, 139, 0) 100%);
+  background: linear-gradient(
+    135deg,
+    rgb(204, 139, 0) 0%,
+    white 50%,
+    rgb(204, 139, 0) 100%
+  );
   gap: 0.8rem;
   color: black;
 }
@@ -705,7 +1320,8 @@ onUnmounted(() => {
 }
 
 @keyframes bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -738,17 +1354,17 @@ onUnmounted(() => {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .subtitle {
     justify-content: center;
   }
-  
+
   .scroll-link {
     justify-content: center;
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
   }
-  
+
   .scroll-text {
     font-size: 0.85rem;
   }
@@ -758,7 +1374,7 @@ onUnmounted(() => {
   .experience-highlight {
     padding: 1rem;
   }
-  
+
   .scroll-link {
     width: 100%;
   }
@@ -798,7 +1414,11 @@ onUnmounted(() => {
 }
 
 .call-to-action {
-  background: linear-gradient(135deg, rgba(204, 139, 0, 0.1), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(204, 139, 0, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
   padding: 1rem;
   border-radius: 8px;
   margin-top: 1rem;
@@ -839,15 +1459,31 @@ onUnmounted(() => {
   opacity: 0;
 }
 
-.description-container > *:nth-child(1) { animation-delay: 0.1s; }
-.description-container > *:nth-child(2) { animation-delay: 0.2s; }
-.description-container > *:nth-child(3) { animation-delay: 0.3s; }
-.description-container > *:nth-child(4) { animation-delay: 0.4s; }
-.description-container > *:nth-child(5) { animation-delay: 0.5s; }
-.description-container > *:nth-child(6) { animation-delay: 0.6s; }
+.description-container > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.description-container > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.description-container > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.description-container > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.description-container > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.description-container > *:nth-child(6) {
+  animation-delay: 0.6s;
+}
 
 .academic-section {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(204, 0, 0, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.05),
+    rgba(204, 0, 0, 0.05)
+  );
   border: 1px solid rgba(255, 215, 0, 0.3);
 }
 
@@ -875,7 +1511,13 @@ onUnmounted(() => {
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 1.2rem;
-  background: linear-gradient(to right, var(--primary-red) 0%, var(--primary-red) 25%, var(--primary-blue) 80%, var(--primary-blue) 90%);
+  background: linear-gradient(
+    to right,
+    var(--primary-red) 0%,
+    var(--primary-red) 25%,
+    var(--primary-blue) 80%,
+    var(--primary-blue) 90%
+  );
   color: white;
   text-decoration: none;
   border-radius: 8px;
@@ -889,7 +1531,12 @@ onUnmounted(() => {
 .academic-link:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(204, 0, 0, 0.4);
-  background: linear-gradient(135deg, rgb(204, 139, 0) 0%, white 50%, rgb(204, 139, 0) 100%);
+  background: linear-gradient(
+    135deg,
+    rgb(204, 139, 0) 0%,
+    white 50%,
+    rgb(204, 139, 0) 100%
+  );
   color: black;
 }
 
@@ -906,12 +1553,12 @@ onUnmounted(() => {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .academic-link {
     width: 100%;
     justify-content: center;
   }
-  
+
   .academic-info {
     font-size: 0.9rem;
   }
@@ -921,7 +1568,7 @@ onUnmounted(() => {
   .academic-info {
     font-size: 0.85rem;
   }
-  
+
   .academic-link {
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
@@ -997,13 +1644,19 @@ onUnmounted(() => {
   cursor: default;
 }
 
-.unity-tag, .mobile-tag {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(50, 50, 50, 0.6));
+.unity-tag,
+.mobile-tag {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.6),
+    rgba(50, 50, 50, 0.6)
+  );
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
 }
 
-.unity-tag:hover, .mobile-tag:hover {
+.unity-tag:hover,
+.mobile-tag:hover {
   transform: translateY(-2px);
   border-color: #cc0000;
   box-shadow: 0 4px 12px rgba(204, 0, 0, 0.3);
@@ -1057,7 +1710,11 @@ onUnmounted(() => {
 }
 
 .highlight-cert {
-  background: linear-gradient(135deg, rgba(204, 0, 0, 0.2), rgba(255, 215, 0, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(204, 0, 0, 0.2),
+    rgba(255, 215, 0, 0.1)
+  );
   border: 1px solid rgba(204, 139, 0, 0.5);
   font-weight: 600;
 }
@@ -1071,26 +1728,26 @@ onUnmounted(() => {
     padding: 0.8rem;
     margin: 1rem 0;
   }
-  
+
   .section-subtitle {
     font-size: 1rem;
   }
-  
+
   .tag {
     font-size: 0.8rem;
     padding: 0.3rem 0.8rem;
   }
-  
+
   .certifications-grid {
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: 0.6rem;
   }
-  
+
   .cert-item {
     font-size: 0.85rem;
     padding: 0.4rem 0.6rem;
   }
-  
+
   .achievement-note span:last-child {
     font-size: 0.85rem;
   }
@@ -1100,11 +1757,11 @@ onUnmounted(() => {
   .certifications-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .tech-tags {
     gap: 0.6rem;
   }
-  
+
   .tag {
     font-size: 0.75rem;
     padding: 0.25rem 0.7rem;
@@ -1115,26 +1772,26 @@ onUnmounted(() => {
   .description-container {
     padding: 0.5rem;
   }
-  
+
   .experience-highlight {
     padding: 0.8rem 1rem;
     margin: 1rem 0;
   }
-  
+
   .subtitle {
     font-size: 1.1rem;
   }
-  
+
   .experience-list li {
     font-size: 0.95rem;
     padding-left: 1.2rem;
   }
-  
+
   .call-to-action {
     padding: 0.8rem;
     font-size: 0.95rem;
   }
-  
+
   .intro-text .description:first-child {
     font-size: 1.1rem;
   }
@@ -1144,12 +1801,12 @@ onUnmounted(() => {
   .experience-highlight {
     padding: 0.6rem 0.8rem;
   }
-  
+
   .experience-list li {
     font-size: 0.9rem;
     margin-bottom: 0.6rem;
   }
-  
+
   .call-to-action {
     font-size: 0.9rem;
   }
@@ -1174,7 +1831,7 @@ onUnmounted(() => {
 
 .skills-grid-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(1, 5fr);
   gap: 1.5rem;
   max-width: 1200px;
   margin: 0 auto 3rem auto;
@@ -1188,26 +1845,72 @@ onUnmounted(() => {
   border: 1px solid;
   border-image: linear-gradient(135deg, red 20%, #05f 100%) 1;
   transition: all 0.3s ease;
+  /* width: fit-content;
+  justify-self: center; */
+}
+
+.sub-skills-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sub-skill-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(204, 0, 0, 1);
+  /* width: 21%;
+  margin-left: 10px;
+  margin-right: 10px; */
 }
 
 .skill-card:hover {
   transform: translateY(-3px);
   border: 3px solid;
-  border-image: linear-gradient(135deg, rgb(204, 139, 0) 0%, white 50%, rgb(204, 139, 0) 100%) 1;
+  border-image: linear-gradient(
+      135deg,
+      rgb(204, 139, 0) 0%,
+      white 50%,
+      rgb(204, 139, 0) 100%
+    )
+    1;
   box-shadow: 0 8px 40px rgb(204, 139, 0);
 }
 
 .skill-card h3 {
-  margin: 0 0 1rem 0;
+  margin: 0 1.5rem 0 /*1rem*/ 0;
   font-size: 1.2rem;
   color: #cc0000;
-  text-align: center;
-  border-bottom: 1px solid rgba(204, 0, 0, 1.0);
+  /* text-align: center; */
+  /* border-bottom: 1px solid rgba(204, 0, 0, 1); */
   padding-bottom: 0.5rem;
 }
 
-.skill-card:hover h3 {
-  background: linear-gradient(135deg, rgb(204, 139, 0) 0%, white 50%, rgb(204, 139, 0) 100%);
+.sub-skill-section h3 {
+  margin-top: 0px !important;
+  padding-bottom: 0px;
+}
+
+.skill-card h2 {
+  margin: 0 0 1rem 0;
+  /* font-size: 1.2rem; */
+  color: #cc0000;
+  text-align: center;
+  border-bottom: 1px solid rgba(204, 0, 0, 1);
+  padding-bottom: 0.5rem;
+}
+
+.skill-card:hover h3,
+.skill-card:hover h2 {
+  background: linear-gradient(
+    135deg,
+    rgb(204, 139, 0) 0%,
+    white 50%,
+    rgb(204, 139, 0) 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1215,9 +1918,17 @@ onUnmounted(() => {
   border-bottom-color: rgb(204, 139, 0);
 }
 
+.skill-card:hover .sub-skill-section {
+  border-bottom-color: rgb(204, 139, 0);
+}
+
 .tech-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); */
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
   gap: 0.8rem;
 }
 
@@ -1233,6 +1944,9 @@ onUnmounted(() => {
   transition: all 0.3s ease;
   text-align: center;
   min-height: 85px;
+  max-width: fit-content;
+  min-width: 100px;
+  justify-self: center;
 }
 
 .tech-item:hover {
@@ -1280,7 +1994,13 @@ onUnmounted(() => {
   padding: 0.5rem 2rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.15);
-  border-image: linear-gradient(135deg, rgb(204, 139, 0) 0%, white 50%, rgb(204, 139, 0) 100%) 1;
+  border-image: linear-gradient(
+      135deg,
+      rgb(204, 139, 0) 0%,
+      white 50%,
+      rgb(204, 139, 0) 100%
+    )
+    1;
   backdrop-filter: blur(10px);
   border-radius: 5px;
   left: 50%;
@@ -1294,7 +2014,7 @@ onUnmounted(() => {
 }
 
 .timeline::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 15px;
   top: 0;
@@ -1443,25 +2163,25 @@ onUnmounted(() => {
     gap: 2rem;
     margin-bottom: 2rem;
   }
-  
+
   .left-column {
     order: 1;
   }
-  
+
   .right-column {
     order: 2;
   }
-  
+
   .profile-image {
     width: 150px;
     height: 150px;
   }
-  
+
   .skills-grid-container {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
-  
+
   .experience-section-title {
     font-size: 2rem;
   }
@@ -1471,93 +2191,93 @@ onUnmounted(() => {
   .section {
     padding: 1.5rem;
   }
-  
+
   .section-title {
     font-size: 2.5rem;
   }
-  
+
   .experience-list {
     margin-left: 1rem;
   }
-  
+
   .experience-list li {
     font-size: 1rem;
     margin-bottom: 0.3rem;
   }
-  
+
   .download-buttons {
     flex-direction: row;
     max-width: 100%;
     gap: 1rem;
   }
-  
+
   .download-btn {
     flex: 1;
   }
-  
+
   .skill-card {
     padding: 1rem;
   }
-  
+
   .skill-card h3 {
     font-size: 1rem;
   }
-  
+
   .tech-grid {
     grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
     gap: 0.6rem;
   }
-  
+
   .tech-item {
     padding: 0.6rem 0.4rem;
     min-height: 75px;
   }
-  
+
   .tech-logo {
     width: 28px;
     height: 28px;
   }
-  
+
   .tech-name {
     font-size: 0.65rem;
   }
-  
+
   .experience-header {
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+
   .experience-role {
     font-size: 1.2rem;
   }
-  
+
   .experience-meta {
     flex-direction: column;
     gap: 0.3rem;
   }
-  
+
   .timeline {
     padding-left: 20px;
   }
-  
+
   .timeline::before {
     left: 5px;
   }
-  
+
   .timeline-badge {
     left: -20px;
     width: 25px;
     height: 25px;
   }
-  
+
   .badge-icon {
     font-size: 0.8rem;
   }
-  
+
   .timeline-content {
     margin-left: 15px;
   }
-  
+
   .experience-card {
     padding: 1rem;
   }
@@ -1568,7 +2288,7 @@ onUnmounted(() => {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  
+
   .experience-section-title {
     font-size: 1.8rem;
   }
@@ -1578,50 +2298,50 @@ onUnmounted(() => {
   .section {
     padding: 1rem;
   }
-  
+
   .section-title {
     font-size: 2rem;
   }
-  
+
   .about-content {
     gap: 1rem;
   }
-  
+
   .download-buttons {
     flex-direction: column;
   }
-  
+
   .skill-card {
     padding: 0.8rem;
   }
-  
+
   .tech-grid {
     grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
     gap: 0.5rem;
   }
-  
+
   .tech-item {
     padding: 0.5rem 0.3rem;
     min-height: 65px;
   }
-  
+
   .tech-logo {
     width: 24px;
     height: 24px;
   }
-  
+
   .tech-name {
     font-size: 0.6rem;
   }
-  
+
   .experience-section-title {
     font-size: 1.5rem;
   }
-  
+
   .experience-role {
     font-size: 1.1rem;
   }
-  
+
   .exp-tech-tag {
     font-size: 0.7rem;
     padding: 0.2rem 0.6rem;
@@ -1632,16 +2352,16 @@ onUnmounted(() => {
   .tech-grid {
     grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
   }
-  
+
   .tech-item {
     min-height: 60px;
   }
-  
+
   .tech-logo {
     width: 20px;
     height: 20px;
   }
-  
+
   .tech-name {
     font-size: 0.55rem;
   }

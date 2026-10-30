@@ -253,7 +253,21 @@ const handleResize = () => {
 const loadStaticProjects = () => {
   projects.value = [
     {
-      id: 'project1',
+      id: 'project',
+      title: '(Não) Foi o Ham!',
+      platform: 'PC (Windows), PC (Linux)',
+      technologies: ['Unity', 'C#'],
+      role: $t('personal.naofoioham.role'),
+      responsibilities: $t('personal.naofoioham.responsibilities'),
+      description: $t('personal.naofoioham.description'),
+      highlights: '',
+      githubUrl: 'https://github.com/Muzamba/naoFoiOHam',
+      projectUrl: 'https://rango-team.itch.io/nao-foi-o-ham',
+      carouselVertical: true,
+      media: cloudinaryUrls.personalWork.project1.media
+    },
+    {
+      id: 'project2',
       title: 'Astro Adventure 3D',
       platform: 'PC (Windows)',
       technologies: ['Unity', 'C#'],
@@ -264,10 +278,10 @@ const loadStaticProjects = () => {
       githubUrl: 'https://github.com/GabrielCAlves/Astro-Adventure-3D',
       projectUrl: 'https://gabrielcalves.itch.io/astro-adventure-3d',
       carouselVertical: true,
-      media: cloudinaryUrls.personalWork.project1.media
+      media: cloudinaryUrls.personalWork.project2.media
     },
     {
-      id: 'project2',
+      id: 'project3',
       title: 'Cook & Conquer', 
       platform: 'PC (Windows), Android',
       technologies: ['Unity', 'C#'],
@@ -278,10 +292,10 @@ const loadStaticProjects = () => {
       githubUrl: 'https://github.com/PierrotNobre/Project_RED',
       projectUrl: 'https://squadred.itch.io/cook-and-conquer',
       carouselVertical: true,
-      media: cloudinaryUrls.personalWork.project2.media
+      media: cloudinaryUrls.personalWork.project3.media
     },
     {
-      id: 'project3',
+      id: 'project4',
       title: 'Astro Obstacle', 
       platform: 'Android',
       technologies: ['Unity', 'C#'],
@@ -292,10 +306,10 @@ const loadStaticProjects = () => {
       githubUrl: 'https://github.com/GabrielCAlves/Astro-Obstacle',
       projectUrl: 'https://gabrielcalves.itch.io/astro-obstacle',
       carouselVertical: true,
-      media: cloudinaryUrls.personalWork.project3.media
+      media: cloudinaryUrls.personalWork.project4.media
     },
     {
-      id: 'project4',
+      id: 'project5',
       title: 'Lost In The Stars',
       platform: 'PC (Windows)',
       technologies: ['Unity', 'C#'],
@@ -307,10 +321,10 @@ const loadStaticProjects = () => {
       githubUrl: 'https://github.com/GabrielCAlves/Lost-In-The-Stars',
       projectUrl: 'https://gabrielcalves.itch.io/lost-in-the-stars',
       carouselVertical: true,
-      media: cloudinaryUrls.personalWork.project4.media
+      media: cloudinaryUrls.personalWork.project5.media
     },
     {
-      id: 'project5',
+      id: 'project6',
       title: 'MyPong',
       platform: 'PC (Windows)',
       technologies: ['Unity', 'C#'],
@@ -321,10 +335,10 @@ const loadStaticProjects = () => {
       githubUrl: 'https://github.com/GabrielCAlves/MyPong',
       projectUrl: 'https://gabrielcalves.itch.io/mypong',
       carouselVertical: true,
-      media: cloudinaryUrls.personalWork.project5.media
+      media: cloudinaryUrls.personalWork.project6.media
     },
     {
-      id: 'project6',
+      id: 'project7',
       title: '4Kingdoms',
       platform: 'PC (Windows)',
       technologies: ['Unity', 'C#'],
@@ -335,7 +349,7 @@ const loadStaticProjects = () => {
       githubUrl: '',
       projectUrl: 'https://gabrielcalves.itch.io/4-kingdoms',
       carouselVertical: true,
-      media: cloudinaryUrls.personalWork.project6.media
+      media: cloudinaryUrls.personalWork.project7.media
     }
   ]
 }
